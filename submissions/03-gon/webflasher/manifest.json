@@ -1,16 +1,14 @@
 {
-  "name": "Gon DustBoy PM2.5",
+  "name": "Gon DustBoy PM2.5 — WASM on ESP32",
   "version": "1.0.0",
-  "home_assistant_domain": "esphome",
   "new_install_prompt_erase": true,
   "builds": [
     {
       "chipFamily": "ESP32",
       "parts": [
-        {
-          "path": "../platformio/.pio/build/esp32dev/firmware.bin",
-          "offset": 65536
-        }
+        { "path": "firmware/bootloader.bin", "offset": 4096 },
+        { "path": "firmware/partitions.bin", "offset": 32768 },
+        { "path": "firmware/firmware.bin", "offset": 65536 }
       ]
     }
   ]
