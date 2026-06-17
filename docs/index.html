@@ -89,7 +89,8 @@
           <label class="pack"><input type="radio" name="pack" value="cat-pet"><span class="num">04</span><img class="thumb" src="preview/gifs/cat-pet/idle.gif" alt=""><span class="nm">cat-pet<small>CC0 kitten</small></span></label>
           <label class="pack sel"><input type="radio" name="pack" value="clawd" checked><span class="num">05</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">clawd<small>Claude mascot · MIT</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="sombo"><span class="num">06</span><span class="thumb" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;font-size:28px;background:#121829;border-radius:6px;">🤖</span><span class="nm">sombo<small>WASM GIF parser · wasm3</small></span></label>
-          <label class="pack"><input type="radio" name="pack" value="atom-oracle"><span class="num">07</span><span class="thumb" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;font:700 24px/1 ui-monospace,monospace;background:#10201c;color:#43d9ad;border-radius:6px;">A</span><span class="nm">atom-oracle<small>Atomic Pulse · wasm3</small></span></label>
+          <label class="pack"><input type="radio" name="pack" value="chaiklang"><span class="num">07</span><img class="thumb" src="preview/gifs/chaiklang/idle.gif" alt=""><span class="nm">chaiklang 🦁<small>Middle Switchboard · LVGL fw</small></span></label>
+          <label class="pack"><input type="radio" name="pack" value="atom-oracle"><span class="num">08</span><span class="thumb" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;font:700 24px/1 ui-monospace,monospace;background:#10201c;color:#43d9ad;border-radius:6px;">A</span><span class="nm">atom-oracle<small>Atomic Pulse · wasm3</small></span></label>
         </div>
       </div>
 
@@ -113,6 +114,13 @@
           <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm">⌨ Repo</a>
         </div>
         <p class="note">What gets flashed: the app image for your pet at <code>0x10000</code> + a shared 3 MB LittleFS at <code>0x290000</code> (holds <b>all</b> packs; only the boot default differs). Cats are <b>CC0</b>; <code>clawd</code> is <b>MIT</b>.</p>
+      </div>
+
+      <div class="panel">
+        <h2>🦁 Singhasingha — wasm3 sentinel</h2>
+        <p class="note" style="margin-top:0;">A 106-byte zero-import <code>.wasm</code> run <b>on the ESP32 via wasm3</b>. Exports <code>roar(n)=1+…+n</code> and <code>guard(a,b)=a²+b²</code>; after flash, serial @115200 prints <code>roar(10)=55 PASS · guard(3,4)=25 PASS</code>.</p>
+        <div class="install"><esp-web-install-button manifest="manifest-singhasingha.json"></esp-web-install-button></div>
+        <p class="note">Built for plain <b>ESP32</b> (<code>esp32dev</code>). Submission: <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha">03-singhasingha</a>. <span class="psi">🦁</span> <i>ฟ้าร้องก่อนฝน — สิงห์เฝ้าโค้ดก่อน production</i></p>
       </div>
     </div>
 
