@@ -1,0 +1,5 @@
+platformio/.pio/
+esphome/.esphome/
+# un-ignore the bundled web-flasher firmware (root .gitignore excludes *.bin)
+!web/flash/tonk-face.factory.bin
+!web/flash/tonk-wasm3.factory.bin
