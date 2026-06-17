@@ -56,6 +56,9 @@
     .fw .h { display:flex; align-items:baseline; gap:.5rem; flex-wrap:wrap; }
     .fw .h b { font-size:14px; } .fw .h .tag { font:600 10px/1 ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); border:1px solid var(--embers); border-radius:5px; padding:2px 5px; }
     .fw p { margin:.3rem 0 .5rem; color:var(--ash); font-size:12.5px; }
+    .fwtools { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+    .previewBtn { background:#1c2540; color:var(--chalk); border:1px solid #2c3a63; border-radius:8px; padding:.45rem .75rem; cursor:pointer; font:600 12px/1 ui-monospace,monospace; }
+    .previewBtn:hover { border-color:var(--glow); }
     .muted { color: var(--ash); font-size: 13px; }
     .foot { margin-top:2rem; color:var(--ash); font-size:12.5px; }
   </style>
@@ -129,6 +132,9 @@
       if (p.preview) preview.src = versioned(`preview/index.html?embed=1&pack=${encodeURIComponent(p.id)}`);
       else preview.src = 'about:blank';
     }
+    function packInfo(p) {
+      return [p.blurb || '', p.updated ? `updated ${p.updated}` : ''].filter(Boolean).join(' · ');
+    }
 
     async function loadPackList() {
       // Discover packs via the GitHub contents API → adding docs/packs/<id>.json needs NO index.html edit.
@@ -154,7 +160,7 @@
           `<input type="radio" name="pack" value="${p.id}" ${i===0?'checked':''} style="position:absolute;opacity:0">` +
           `<span class="num">${String(i+1).padStart(2,'0')}</span>` +
           (p.preview ? `<img class="thumb" src="${p.preview}" alt="">` : `<span class="thumb"></span>`) +
-          `<span class="nm">${p.name}<small>${p.blurb||''}</small></span>`;
+          `<span class="nm">${p.name}<small>${packInfo(p)}</small></span>`;
         l.addEventListener('click', () => {
           document.querySelectorAll('.pack').forEach(x => x.classList.remove('sel'));
           l.classList.add('sel'); petButton(p); petPreview(p);
@@ -169,10 +175,15 @@
         const d = document.createElement('div');
         d.className = 'fw';
         const sub = p.submission ? ` (<a href="${p.submission}">submission</a>)` : '';
+        const previewBtn = p.preview ? '<button class="previewBtn" type="button">preview</button>' : '';
         d.innerHTML =
           `<div class="h"><b>${p.name}</b> <span class="tag">${p.tag||'ESP32'}</span></div>` +
-          `<p>${p.blurb||''}${sub}</p>` +
-          (p.manifest ? `<esp-web-install-button manifest="${versioned(p.manifest)}"></esp-web-install-button>` : '<p class="muted">manifest pending</p>');
+          `<p>${packInfo(p)}${sub}</p>` +
+          `<div class="fwtools">${previewBtn}` +
+          (p.manifest ? `<esp-web-install-button manifest="${versioned(p.manifest)}"></esp-web-install-button>` : '<p class="muted">manifest pending</p>') +
+          '</div>';
+        const btn = d.querySelector('.previewBtn');
+        if (btn) btn.addEventListener('click', () => petPreview(p));
         fwEl.appendChild(d);
       });
       if (!fws.length) fwEl.innerHTML = '<p class="muted">no firmwares</p>';
