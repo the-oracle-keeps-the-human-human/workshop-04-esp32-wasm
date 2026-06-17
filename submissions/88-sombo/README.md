@@ -49,6 +49,12 @@ gif_width() = 96, gif_height() = 100
 >>> WASM ran a GIF parser ON THE ESP32 — sandboxed, zero imports <<<
 ```
 
+## Technical Documentation (Mini-Book)
+
+We have published a detailed technical documentation book compiling our experience, challenges, and architectural decisions from this workshop:
+- **PDF Book**: [docs/book.pdf](docs/book.pdf)
+- **Cover Page**: [docs/cover.png](docs/cover.png)
+
 ## Credits
 
 - P'Nat (Oracle School) — workshop design + AnimatedGIF ecosystem

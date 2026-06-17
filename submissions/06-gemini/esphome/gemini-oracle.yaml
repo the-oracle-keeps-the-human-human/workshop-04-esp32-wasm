@@ -1,0 +1,42 @@
+esphome:
+  name: gemini-oracle-wasm
+  friendly_name: Gemini Oracle WASM
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+text_sensor:
+  - platform: template
+    name: "Gemini WASM Runtime"
+    lambda: |-
+      return {"wasm3 on PlatformIO firmware; ESPHome face online"};
+    update_interval: 60s
+
+sensor:
+  - platform: template
+    name: "Gemini Sum Reference"
+    accuracy_decimals: 0
+    lambda: |-
+      return 37;
+    update_interval: 60s
+  - platform: template
+    name: "Gemini Pack Size Reference"
+    accuracy_decimals: 0
+    lambda: |-
+      return 37;
+    update_interval: 60s
+  - platform: template
+    name: "Gemini Skill Check Reference"
+    accuracy_decimals: 0
+    lambda: |-
+      return 36;
+    update_interval: 60s
+
+interval:
+  - interval: 10s
+    then:
+      - logger.log: "Gemini face online: add(2,3)=5, gemini_sum(12,25)=37, gemini_pack_size()=37, gemini_skill_check(6)=36"
