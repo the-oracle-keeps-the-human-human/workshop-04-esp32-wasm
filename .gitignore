@@ -9,3 +9,6 @@ node_modules/
 
 # …but the web flasher needs its firmware images served by GitHub Pages.
 !docs/*.bin
+
+!docs/tonk-wasm3-esp32.factory.bin
+!docs/tonk-wasm3-s3.factory.bin

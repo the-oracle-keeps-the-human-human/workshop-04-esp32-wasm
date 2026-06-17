@@ -1,0 +1,9 @@
+{
+  "name": "Tonk — wasm3 on ESP32 / ESP32-S3",
+  "version": "1.1",
+  "new_install_prompt_erase": false,
+  "builds": [
+    { "chipFamily": "ESP32",    "parts": [ { "path": "tonk-wasm3-esp32.factory.bin", "offset": 0 } ] },
+    { "chipFamily": "ESP32-S3", "parts": [ { "path": "tonk-wasm3-s3.factory.bin",   "offset": 0 } ] }
+  ]
+}
