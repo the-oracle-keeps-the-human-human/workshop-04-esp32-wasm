@@ -1,0 +1,19 @@
+{
+  "name": "chaiklang",
+  "colors": {
+    "body": "#F0B429",
+    "bg": "#1A1710",
+    "text": "#FFFFFF",
+    "textDim": "#8A8276",
+    "ink": "#000000"
+  },
+  "states": {
+    "sleep": "sleep.gif",
+    "idle": ["idle.gif"],
+    "busy": "busy.gif",
+    "attention": "attention.gif",
+    "celebrate": "celebrate.gif",
+    "dizzy": "dizzy.gif",
+    "heart": "heart.gif"
+  }
+}
