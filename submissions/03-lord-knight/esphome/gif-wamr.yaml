@@ -1,0 +1,37 @@
+# 01-lord-knight — gif-wamr on ESPHome (ESP-IDF framework)
+#
+# Same payload as the PlatformIO version: our GIF decoder runs as a sandboxed
+# WASM reactor (gifapp.wasm) on the ESP32-S3 under the WebAssembly Micro Runtime.
+# The custom `gif_wamr` external component embeds gifapp.wasm as a byte array,
+# pulls in the WAMR managed component, sets the hard-won sdkconfig knobs, and runs
+# the decode at boot — logging the decoded frame count + native RGBA pixels.
+#
+#   esphome compile gif-wamr.yaml     # the workshop deliverable
+#   esphome run     gif-wamr.yaml     # flash + watch the on-chip decode log
+#   esphome logs    gif-wamr.yaml
+
+esphome:
+  name: gif-wamr
+  friendly_name: gif-wamr
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+# OPI PSRAM @80MHz — the wasm linear memory (512 KB→2 MB) is allocated here.
+psram:
+  mode: octal
+  speed: 80MHz
+
+# the local external component (./components/gif_wamr)
+external_components:
+  - source:
+      type: local
+      path: components
+
+logger:
+  level: INFO
+
+# run our GIF decoder as WASM on the chip
+gif_wamr:
