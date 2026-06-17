@@ -5,5 +5,16 @@
   "tag": "ESP32-S3",
   "manifest": "manifest-clawd.json",
   "blurb": "Claude mascot \u00b7 MIT",
-  "preview": "preview/gifs/clawd/clawd-idle.gif"
+  "preview": "preview/gifs/clawd/clawd-idle.gif",
+  "previewDir": "clawd/",
+  "states": [
+    "clawd-idle",
+    "clawd-headphones-groove",
+    "clawd-idle-reading",
+    "clawd-typing",
+    "clawd-react-double-jump",
+    "clawd-happy",
+    "clawd-thinking",
+    "clawd-sleeping"
+  ]
 }

@@ -36,8 +36,8 @@
 </head>
 <body>
   <h1>🐾 gif-wasm — <b>pet packs</b> decoded in WebAssembly</h1>
-  <div class="sub">the ESP-IDF pet's AnimatedGIF decoder, compiled to WASM (emcc) · bufo + three CC0 cat packs + clawd
-    (the MIT Claude mascot), the same 96×100 frames the device plays from LittleFS</div>
+  <div class="sub">the ESP-IDF pet's AnimatedGIF decoder, compiled to WASM (emcc) · every pack on the flasher,
+    rendered from <code>docs/packs/*.json</code> — the same 96×100 frames the device plays from LittleFS</div>
 
   <div class="stage">
     <div class="row packs" id="packs"></div>
@@ -50,31 +50,24 @@
     </div>
   </div>
   <div class="note">Decoder = <code>gifcore.cpp</code> + vendored AnimatedGIF, built with <code>emcc</code>.
-    Drop your own <code>.gif</code> with 📂 — it decodes in the same WASM core. Cats are CC0 (see each pack's PROVENANCE).</div>
+    Drop your own <code>.gif</code> with 📂 — it decodes in the same WASM core. Packs are data-driven: each pack's
+    <code>previewDir</code> + <code>states</code> come from its <code>docs/packs/&lt;id&gt;.json</code>.</div>
 
 <script src="gifdec.js"></script>
 <script>
-// Each pack = a folder under gifs/ + the states it ships. bufo's web subset is flat (4 states).
-const PACKS = {
-  "bufo":       { dir:"",            states:["idle_0","busy","attention","celebrate"] },
-  "bongbaeng":  { dir:"bongbaeng-pet/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "bongbaeng-pet": { dir:"bongbaeng-pet/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "cat":        { dir:"cat/",        states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "cat-orange": { dir:"cat-orange/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "cat-pet":    { dir:"cat-pet/",    states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "clawd":      { dir:"clawd/",      states:["clawd-idle","clawd-headphones-groove","clawd-idle-reading","clawd-typing","clawd-react-double-jump","clawd-happy","clawd-thinking","clawd-sleeping"] },
-  "chaiklang":  { dir:"chaiklang/",  states:["sleep","idle","busy","attention","celebrate","dizzy","heart"] },
-  "lord-knight":{ dir:"clawd/",      states:["clawd-idle","clawd-headphones-groove","clawd-idle-reading","clawd-typing","clawd-react-double-jump","clawd-happy","clawd-thinking","clawd-sleeping"] },
-  "nova":      { dir:"nova/",      states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "no10":       { dir:"no10/",       states:["idle","busy","attention","celebrate"] },
-  "sombo":      { dir:"sombo-pet/",  states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "singhasingha":{ dir:"singha/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "sombo-pet":  { dir:"sombo-pet/",  states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "tonk":       { dir:"tonk/",       states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "vessel":     { dir:"vessel-pet/", states:["idle","busy","attention","celebrate"] },
-  "vessel-pet": { dir:"vessel-pet/", states:["idle","busy","attention","celebrate"] },
-  "vialumen":   { dir:"vialumen/",   states:["idle"] },
-};
+// Data-driven: a pack's preview folder + states are read from docs/packs/<id>.json
+// (previewDir + states). No hardcoded map — drop a pack json and it just works.
+const OWNER = "the-oracle-keeps-the-human-human", REPO = "workshop-04-esp32-wasm";
+const packCache = {};
+async function getPack(id){
+  if (packCache[id]) return packCache[id];
+  const r = await fetch(`../packs/${id}.json`, { cache: 'no-store' });
+  if (!r.ok) throw new Error('pack '+id+' '+r.status);
+  const p = await r.json();
+  const pk = { id, dir: p.previewDir || "", states: (p.states && p.states.length) ? p.states : ["idle"] };
+  packCache[id] = pk; return pk;
+}
+
 let M, W=0, H=0, frames=[], delays=[], idx=0, playing=true, timer=null, raf=null, curPack="bufo";
 const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
 const stat = document.getElementById("stat");
@@ -116,30 +109,39 @@ async function loadUrl(url){
   } catch(e){ setStat(`couldn't fetch ${url} — serve the folder or use 📂 open`); }
 }
 
-// state buttons for the current pack
-function buildStates(pack){
+// state buttons for a pack (pk = {dir, states})
+function buildStates(pk){
   gifsRow.innerHTML = "";
-  PACKS[pack].states.forEach((s,i)=>{
+  pk.states.forEach((s,i)=>{
     const b = document.createElement("button");
     b.textContent = s.replace("clawd-","").replace("idle_0","idle");
     b.onclick = ()=>{ [...gifsRow.children].forEach(c=>c.classList.remove("on")); b.classList.add("on");
-      loadUrl("gifs/"+PACKS[pack].dir+s+".gif"); };
+      loadUrl("gifs/"+pk.dir+s+".gif"); };
     if (i===0) b.classList.add("on");
     gifsRow.appendChild(b);
   });
 }
-// pack selector
-function selectPack(p){
-  curPack = p;
-  [...packsRow.children].forEach(c=>c.classList.toggle("on", c.textContent===p));
-  buildStates(p);
-  loadUrl("gifs/"+PACKS[p].dir+PACKS[p].states[0]+".gif");
+// pack selector — async: pulls dir+states from the pack json
+async function selectPack(id){
+  curPack = id;
+  [...packsRow.children].forEach(c=>c.classList.toggle("on", c.textContent===id));
+  try {
+    const pk = await getPack(id);
+    buildStates(pk);
+    loadUrl("gifs/"+pk.dir+pk.states[0]+".gif");
+  } catch(e){ setStat(`unknown pack: ${id}`); }
 }
-Object.keys(PACKS).forEach((p)=>{
-  const b = document.createElement("button"); b.textContent = p;
-  b.onclick = ()=>selectPack(p);
-  packsRow.appendChild(b);
-});
+// standalone (non-embed) selector — discover packs via the GitHub contents API
+async function buildPackButtons(){
+  try {
+    const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/packs`, { cache:'no-store' });
+    const files = await r.json();
+    files.filter(f=>f.name.endsWith('.json')).map(f=>f.name.replace(/\.json$/,'')).sort().forEach(id=>{
+      const b = document.createElement("button"); b.textContent = id;
+      b.onclick = ()=>selectPack(id); packsRow.appendChild(b);
+    });
+  } catch(e){ /* embed mode hides .packs anyway */ }
+}
 
 document.getElementById("file").addEventListener("change", async e=>{
   const f = e.target.files[0]; if(!f) return;
@@ -154,11 +156,10 @@ playBtn.onclick = ()=>{ playing = !playing; playBtn.textContent = playing?"⏸ p
 // ?pack=<name> auto-selects a pack; ?embed=1 strips the chrome (for the flasher).
 const Q = new URLSearchParams(location.search);
 if (Q.get("embed") !== null) document.body.classList.add("embed");
-GifModule().then(mod=>{ M = mod; setStat("wasm ready — pick a pack");
+GifModule().then(async mod=>{ M = mod; setStat("wasm ready — pick a pack");
+  if (Q.get("embed") === null) await buildPackButtons();
   const want = Q.get("pack");
-  if (!want) selectPack("bufo");
-  else if (PACKS[want]) selectPack(want);
-  else setStat(`unknown pack: ${want}`);
+  selectPack(want || "bufo");
 });
 </script>
 </body>

@@ -5,5 +5,12 @@
   "tag": "ESP32-S3",
   "manifest": "manifest-vessel.json",
   "blurb": "courier WASM \u2014 courier_relay, fleet_status, pm25_category",
-  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel"
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel",
+  "previewDir": "vessel-pet/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate"
+  ]
 }
