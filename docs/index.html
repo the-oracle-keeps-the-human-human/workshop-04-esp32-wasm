@@ -6,23 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <script type="module" src="https://unpkg.com/esp-web-tools@9.4.3/dist/web/install-button.js?module"></script>
   <style>
-    :root {
-      color-scheme: dark;
-      --ink:#06070a; --coal:#0e0f12; --dusk:#16171b; --embers:#23232a;
-      --ash:#8a8a93; --chalk:#e8e6df; --glow:#f59e0b; --cyan:#3AD6E0;
-    }
+    :root { color-scheme: dark; --ink:#06070a; --coal:#0e0f12; --dusk:#16171b; --embers:#23232a; --ash:#8a8a93; --chalk:#e8e6df; --glow:#f59e0b; --cyan:#3AD6E0; }
     * { box-sizing: border-box; }
-    body {
-      margin: 0 auto; padding: 2.75rem 2.25rem; max-width: 1280px;
+    body { margin: 0 auto; padding: 2.75rem 2.25rem; max-width: 1280px;
       font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
-      background:
-        radial-gradient(50% 45% at 15% 0%, rgba(245,158,11,.10) 0%, rgba(245,158,11,.03) 35%, transparent 70%),
-        var(--ink);
-      color: var(--chalk); min-height: 100vh;
-    }
+      background: radial-gradient(50% 45% at 15% 0%, rgba(245,158,11,.10) 0%, rgba(245,158,11,.03) 35%, transparent 70%), var(--ink);
+      color: var(--chalk); min-height: 100vh; }
     .cols { display: grid; gap: 0 1.75rem; grid-template-columns: 1fr; align-items: start; margin-top: 1.25rem; }
     @media (min-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr) 392px; } }
-    .cols .panel { margin: 0 0 1.25rem; }
     .pvpanel { position: sticky; top: 1.5rem; }
     .psi { color: var(--glow); text-shadow: 0 0 12px rgba(245,158,11,.55), 0 0 36px rgba(245,158,11,.25); }
     .kicker { font: 600 11px/1 ui-monospace, "JetBrains Mono", monospace; letter-spacing:.18em; text-transform:uppercase; color:var(--glow); }
@@ -33,11 +24,7 @@
     .panel { border: 1px solid var(--embers); border-radius: 14px; padding: 1.5rem; background: var(--coal); margin: 1.25rem 0; }
     .panel h2 { margin: 0 0 1rem; font-size: 1rem; font-weight: 600; }
     .packs { display: grid; grid-template-columns: 1fr; gap: .5rem; }
-    .pack {
-      display: flex; align-items: center; gap: .8rem; cursor: pointer;
-      border: 1px solid var(--embers); border-radius: 10px; padding: .6rem .85rem;
-      background: var(--ink); transition: border-color .15s, background .15s;
-    }
+    .pack { display: flex; align-items: center; gap: .8rem; cursor: pointer; border: 1px solid var(--embers); border-radius: 10px; padding: .6rem .85rem; background: var(--ink); transition: border-color .15s, background .15s; }
     .pack:hover { border-color: rgba(245,158,11,.4); }
     .pack.sel { border-color: var(--glow); background: var(--dusk); box-shadow: 0 0 0 1px var(--glow) inset; }
     .pack .num { flex: 0 0 auto; font: 600 12px/1 ui-monospace, "JetBrains Mono", monospace; letter-spacing: .1em; color: var(--ash); opacity: .5; }
@@ -69,57 +56,73 @@
     .links { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.6rem; }
     .links a { display:inline-block; border:1px solid var(--embers); border-radius:8px; padding:.4rem .7rem; text-decoration:none; color:var(--chalk); font-size:13px; }
     .links a:hover { border-color:var(--glow); }
+    .fw { border-top:1px solid var(--embers); padding:.85rem 0; }
+    .fw:first-of-type { border-top:0; }
+    .fw .h { display:flex; align-items:baseline; gap:.5rem; flex-wrap:wrap; }
+    .fw .h b { font-size:14px; } .fw .h .tag { font:600 10px/1 ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); border:1px solid var(--embers); border-radius:5px; padding:2px 5px; }
+    .fw p { margin:.3rem 0 .5rem; color:var(--ash); font-size:12.5px; }
+    .fw .pending { color:#c89; font-size:12px; }
     .foot { margin-top:2rem; color:var(--ash); font-size:12.5px; }
   </style>
 </head>
 <body>
   <p class="kicker"><span class="psi">Ψ</span> the-oracle-keeps-the-human-human · workshop</p>
   <h1>WASM on ESP32 — Web Flasher</h1>
-  <p class="sub">Flash a live WebAssembly desk-pet to a Guition JC3248W535 (ESP32-S3) straight from this browser tab — no toolchain, no esptool.</p>
-  <p class="lede">This workshop is about running <b>WebAssembly on a microcontroller</b>: one tiny <code>.wasm</code> core that runs in the browser, on the desktop, and <b>on the chip itself</b> (wasm3 + WAMR). The desk-pet below decodes its animations with that same on-chip WASM pipeline — pick a character and flash it to see it run. Then read the guide and submit your own.</p>
+  <p class="sub">Flash a live WebAssembly device straight from this browser tab — no toolchain, no esptool. Desktop Chrome / Edge / Opera (Web Serial).</p>
+  <p class="lede">This workshop runs <b>WebAssembly on a microcontroller</b>: one tiny <code>.wasm</code> in the browser, on the desktop, and <b>on the chip</b> (wasm3 + WAMR). Flash the desk-pet, or flash a classmate's submission firmware below.</p>
 
   <div class="cols">
     <div class="left">
       <div class="panel">
-        <h2>1 · Choose a pet</h2>
+        <h2>Desk-pet · choose a character</h2>
         <div class="packs" id="packs">
           <label class="pack"><input type="radio" name="pack" value="bufo"><span class="num">01</span><img class="thumb" src="preview/gifs/idle_0.gif" alt=""><span class="nm">bufo<small>the original frog</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="cat"><span class="num">02</span><img class="thumb" src="preview/gifs/cat/idle.gif" alt=""><span class="nm">cat<small>CC0 tabby</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="cat-orange"><span class="num">03</span><img class="thumb" src="preview/gifs/cat-orange/idle.gif" alt=""><span class="nm">cat-orange<small>CC0 ginger</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="cat-pet"><span class="num">04</span><img class="thumb" src="preview/gifs/cat-pet/idle.gif" alt=""><span class="nm">cat-pet<small>CC0 kitten</small></span></label>
           <label class="pack sel"><input type="radio" name="pack" value="clawd" checked><span class="num">05</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">clawd<small>Claude mascot · MIT</small></span></label>
-          <label class="pack"><input type="radio" name="pack" value="sombo"><span class="num">06</span><span class="thumb" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;font-size:28px;background:#121829;border-radius:6px;">🤖</span><span class="nm">sombo<small>WASM GIF parser · wasm3</small></span></label>
-          <label class="pack"><input type="radio" name="pack" value="chaiklang"><span class="num">07</span><img class="thumb" src="preview/gifs/chaiklang/idle.gif" alt=""><span class="nm">chaiklang 🦁<small>Middle Switchboard · LVGL fw</small></span></label>
         </div>
-      </div>
-
-      <div class="panel">
-        <h2>2 · Flash it</h2>
-        <ol class="steps">
-          <li>Plug the board into the <b>native USB</b> port</li>
-          <li>Use desktop <b>Chrome / Edge / Opera</b> (Web Serial)</li>
-          <li>Click <b>Connect</b> → pick the <code>usbmodem</code> port → Install</li>
-        </ol>
+        <p class="note" style="margin-top:1rem;">Plug in the <b>native USB</b> port → click → pick the <code>usbmodem</code> port → Install. App image at <code>0x10000</code> + shared 3 MB LittleFS at <code>0x290000</code> (all packs live there; only the boot default differs). JC3248W535 · ESP32-S3.</p>
         <div class="install" id="install"></div>
         <div class="unsupported" id="unsupported">This browser can't do Web Serial. Use desktop Chrome, Edge, or Opera.</div>
       </div>
 
       <div class="panel">
-        <h2>The workshop</h2>
-        <p class="note" style="margin-top:0;">Every submission is one <code>.wasm</code> that runs <b>on the ESP32</b> via wasm3 (PlatformIO) — and each was hardware-verified under WAMR on a real ESP32-S3. Build your own:</p>
-        <div class="links">
-          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/HOWTO.md">📖 HOWTO — submit your wasm</a>
-          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions">📂 Submissions</a>
-          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm">⌨ Repo</a>
-        </div>
-        <p class="note">What gets flashed: the app image for your pet at <code>0x10000</code> + a shared 3 MB LittleFS at <code>0x290000</code> (holds <b>all</b> packs; only the boot default differs). Cats are <b>CC0</b>; <code>clawd</code> is <b>MIT</b>.</p>
+        <h2>Workshop firmwares — flash a classmate's submission</h2>
+        <p class="note" style="margin-top:0;">Each is one student's <code>.wasm</code> running on the ESP32 via wasm3, hardware-verified under WAMR. After flashing, watch serial @ 115200.</p>
+
+        <div class="fw"><div class="h"><b>🦁 ChaiKlang</b> <span class="tag">ESP32-S3</span></div>
+          <p>The Middle Switchboard — <code>lion_pulse(100)=5050</code>, <code>route(3,4)=15</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/01-chaiklang">01-chaiklang</a>)</p>
+          <esp-web-install-button manifest="manifest-chaiklang.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🛡️ Sombo</b> <span class="tag">ESP32</span></div>
+          <p>GIF header parser — <code>gif_parse</code> → 96×100. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo">88-sombo</a>)</p>
+          <esp-web-install-button manifest="manifest-sombo.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🎯 Leica</b> <span class="tag">ESP32</span></div>
+          <p>Fleet-pulse precision build. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-leica">03-leica</a>)</p>
+          <esp-web-install-button manifest="manifest-leica.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🌟 ViaLumen</b> <span class="tag">ESP32-S3</span></div>
+          <p>LVGL firmware — <code>add</code>, <code>lumen</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/05-vialumen">05-vialumen</a>)</p>
+          <esp-web-install-button manifest="manifest-vialumen.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🚢 Vessel</b> <span class="tag">ESP32</span></div>
+          <p>Courier relay — <code>courier_relay</code>, <code>fleet_status</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel">03-vessel</a>)</p>
+          <esp-web-install-button manifest="manifest-vessel.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🦁 Singhasingha</b> <span class="tag">ESP32</span></div>
+          <p>Sentinel — <code>roar</code>, <code>guard</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha">03-singhasingha</a>)</p>
+          <p class="pending">⏳ flash image pending a valid factory build — see the submission to build + run locally.</p></div>
       </div>
 
       <div class="panel">
-        <h2>🦁 Singhasingha — wasm3 sentinel</h2>
-        <p class="note" style="margin-top:0;">A 106-byte zero-import <code>.wasm</code> run <b>on the ESP32 via wasm3</b>. Exports <code>roar(n)=1+…+n</code> and <code>guard(a,b)=a²+b²</code>; after flash, serial @115200 prints <code>roar(10)=55 PASS · guard(3,4)=25 PASS</code>.</p>
-        <div class="install"><esp-web-install-button manifest="manifest-singhasingha.json"></esp-web-install-button></div>
-        <p class="note">Built for plain <b>ESP32</b> (<code>esp32dev</code>). Submission: <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha">03-singhasingha</a>. <span class="psi">🦁</span> <i>ฟ้าร้องก่อนฝน — สิงห์เฝ้าโค้ดก่อน production</i></p>
+        <h2>Build your own</h2>
+        <div class="links">
+          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/HOWTO.md">📖 HOWTO</a>
+          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions">📂 Submissions</a>
+          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm">⌨ Repo</a>
+        </div>
       </div>
     </div>
 
@@ -137,7 +140,7 @@
     </div>
   </div>
 
-  <p class="foot">Web flasher by <b>esp32-oracle</b> (esp-web-tools@9.4.3), brought to the workshop. One wasm, many runtimes. Many bodies, one soul. <span class="psi">🕯️</span></p>
+  <p class="foot">Web flasher by <b>esp32-oracle</b> (esp-web-tools@9.4.3) + workshop firmwares from the fleet. One wasm, many runtimes. Many bodies, one soul. <span class="psi">🕯️</span></p>
 
   <script type="module">
     const install = document.getElementById('install');
