@@ -9,7 +9,7 @@
 <div class="row" id="states"></div>
 <div style="margin-top:6px;color:#C9821F">🦁 singha · 96×100 · decoded in WASM on-device</div>
 <script>
-const states=['idle','busy','attention','sleep','heart','celebrate'];
+const states=['idle','busy','attention','sleep','celebrate','dizzy','heart'];
 const pet=document.getElementById('pet'), row=document.getElementById('states');
 let i=0;
 function show(s){pet.src=s+'.gif?'+Date.now();[...row.children].forEach(b=>b.classList.toggle('on',b.textContent===s));}
