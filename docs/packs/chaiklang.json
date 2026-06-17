@@ -1,10 +1,10 @@
 {
   "id": "chaiklang",
-  "name": "ChaiKlang \ud83e\udd81",
-  "kind": "firmware",
+  "name": "ChaiKlang 🦁",
+  "kind": "pet",
   "tag": "ESP32-S3",
   "manifest": "manifest-chaiklang.json",
-  "blurb": "Middle Switchboard \u2014 lion_pulse(100)=5050, route(3,4)=15",
+  "blurb": "The Middle Switchboard — 7-state lion, LittleFS pack",
   "preview": "preview/gifs/chaiklang/idle.gif",
   "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/01-chaiklang"
 }
