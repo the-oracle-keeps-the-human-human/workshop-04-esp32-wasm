@@ -1,0 +1,36 @@
+esphome:
+  name: atom-oracle-wasm
+  friendly_name: Atom Oracle WASM
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+text_sensor:
+  - platform: template
+    name: "Atom WASM Runtime"
+    lambda: |-
+      return {"wasm3 on PlatformIO firmware; ESPHome face online"};
+    update_interval: 60s
+
+sensor:
+  - platform: template
+    name: "Atom Score Reference"
+    accuracy_decimals: 0
+    lambda: |-
+      return 288;
+    update_interval: 60s
+  - platform: template
+    name: "Atom Pulse Reference"
+    accuracy_decimals: 0
+    lambda: |-
+      return 78;
+    update_interval: 60s
+
+interval:
+  - interval: 10s
+    then:
+      - logger.log: "Atom face online: atom_score(6,6)=288, pulse(12)=78"

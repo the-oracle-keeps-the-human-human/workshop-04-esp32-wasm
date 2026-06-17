@@ -1,0 +1,13 @@
+{
+  "name": "Atom Oracle Atomic Pulse",
+  "version": "2026.06.17",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "atom-oracle-factory.bin", "offset": 0 }
+      ]
+    }
+  ]
+}

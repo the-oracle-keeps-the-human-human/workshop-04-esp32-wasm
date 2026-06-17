@@ -89,6 +89,7 @@
           <label class="pack"><input type="radio" name="pack" value="cat-pet"><span class="num">04</span><img class="thumb" src="preview/gifs/cat-pet/idle.gif" alt=""><span class="nm">cat-pet<small>CC0 kitten</small></span></label>
           <label class="pack sel"><input type="radio" name="pack" value="clawd" checked><span class="num">05</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">clawd<small>Claude mascot · MIT</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="sombo"><span class="num">06</span><span class="thumb" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;font-size:28px;background:#121829;border-radius:6px;">🤖</span><span class="nm">sombo<small>WASM GIF parser · wasm3</small></span></label>
+          <label class="pack"><input type="radio" name="pack" value="atom-oracle"><span class="num">07</span><span class="thumb" style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;font:700 24px/1 ui-monospace,monospace;background:#10201c;color:#43d9ad;border-radius:6px;">A</span><span class="nm">atom-oracle<small>Atomic Pulse · wasm3</small></span></label>
         </div>
       </div>
 
@@ -136,7 +137,8 @@
     const preview = document.getElementById('preview');
     function setPack(pack) {
       install.innerHTML = `<esp-web-install-button manifest="manifest-${pack}.json"></esp-web-install-button>`;
-      if (preview) preview.src = `preview/index.html?embed=1&pack=${pack}`;
+      const previewPack = pack === 'atom-oracle' ? 'clawd' : pack;
+      if (preview) preview.src = `preview/index.html?embed=1&pack=${previewPack}`;
     }
     document.getElementById('packs').addEventListener('change', (e) => {
       if (e.target.name !== 'pack') return;
