@@ -4,6 +4,6 @@
   "kind": "firmware",
   "tag": "ESP32",
   "manifest": "manifest-sombo.json",
-  "blurb": "GIF header parser \u2014 gif_parse \u2192 96\u00d7100",
+  "blurb": "Classic ESP32 only \u2014 GIF header parser. For ESP32-S3 JC3248 desk-pet, choose Sombo robot.",
   "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo"
 }

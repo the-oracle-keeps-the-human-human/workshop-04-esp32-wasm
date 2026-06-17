@@ -46,3 +46,44 @@ PY
           done
           if [ "$fail" -ne 0 ]; then echo "❌ one or more flasher manifests would ship a bad image"; exit 1; fi
           echo "✅ all flasher manifests point at valid 0xE9 images"
+
+      - name: Pack board tags must match manifest chip families
+        run: |
+          python3 - <<'PY'
+import json
+import pathlib
+import sys
+
+root = pathlib.Path("docs")
+fail = False
+for pack_path in sorted((root / "packs").glob("*.json")):
+    pack = json.loads(pack_path.read_text())
+    manifest_name = pack.get("manifest")
+    if not manifest_name:
+        continue
+    manifest_path = root / manifest_name
+    if not manifest_path.exists():
+        print(f"::error file={pack_path}::references missing manifest '{manifest_name}'")
+        fail = True
+        continue
+    manifest = json.loads(manifest_path.read_text())
+    families = {
+        str(build.get("chipFamily", "")).upper()
+        for build in manifest.get("builds", [])
+        if build.get("chipFamily")
+    }
+    tag = str(pack.get("tag", "ESP32")).upper()
+    if not families:
+        print(f"::error file={manifest_path}::manifest has no chipFamily")
+        fail = True
+    elif tag not in families:
+        found = ", ".join(sorted(families))
+        print(f"::error file={pack_path}::tag '{tag}' does not match {manifest_name} chipFamily ({found})")
+        fail = True
+    else:
+        print(f"✓ {pack_path} tag {tag} matches {manifest_name}")
+
+if fail:
+    sys.exit(1)
+print("✅ every pack tag matches its manifest chip family")
+PY

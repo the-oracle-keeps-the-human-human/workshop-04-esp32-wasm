@@ -55,7 +55,10 @@
     .fw:first-of-type { border-top:0; }
     .fw .h { display:flex; align-items:baseline; gap:.5rem; flex-wrap:wrap; }
     .fw .h b { font-size:14px; } .fw .h .tag { font:600 10px/1 ui-monospace,monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); border:1px solid var(--embers); border-radius:5px; padding:2px 5px; }
+    .fw .h .tag.classic { color:var(--glow); border-color:rgba(245,158,11,.55); }
     .fw p { margin:.3rem 0 .5rem; color:var(--ash); font-size:12.5px; }
+    .boardwarn { border:1px solid rgba(245,158,11,.45); border-radius:8px; background:rgba(245,158,11,.08); color:#d9b46f !important; padding:.55rem .7rem; }
+    .boardwarn b { color:var(--chalk); }
     .muted { color: var(--ash); font-size: 13px; }
     .foot { margin-top:2rem; color:var(--ash); font-size:12.5px; }
   </style>
@@ -111,7 +114,7 @@
 
   <script type="module">
     const OWNER = "the-oracle-keeps-the-human-human", REPO = "workshop-04-esp32-wasm";
-    const DEPLOY_VERSION = "2026-06-17-preview-pack-map";
+    const DEPLOY_VERSION = "2026-06-17-board-family-guard";
     const packsEl = document.getElementById('packs');
     const fwEl = document.getElementById('firmwares');
     const install = document.getElementById('install');
@@ -128,6 +131,18 @@
     function petPreview(p) {
       if (p.preview) preview.src = versioned(`preview/index.html?embed=1&pack=${encodeURIComponent(p.id)}`);
       else preview.src = 'about:blank';
+    }
+    function chipFamily(p) {
+      return (p.tag || 'ESP32').trim().toUpperCase();
+    }
+    function familyTag(p) {
+      const family = chipFamily(p);
+      const klass = family === 'ESP32' ? ' classic' : '';
+      return `<span class="tag${klass}">${family}</span>`;
+    }
+    function boardWarning(p) {
+      if (chipFamily(p) !== 'ESP32') return '';
+      return '<p class="boardwarn"><b>Classic ESP32 only.</b> ESP32-S3 boards will show "Your ESP32-S3 board is not supported"; choose an ESP32-S3 desk-pet instead.</p>';
     }
 
     async function loadPackList() {
@@ -170,8 +185,9 @@
         d.className = 'fw';
         const sub = p.submission ? ` (<a href="${p.submission}">submission</a>)` : '';
         d.innerHTML =
-          `<div class="h"><b>${p.name}</b> <span class="tag">${p.tag||'ESP32'}</span></div>` +
+          `<div class="h"><b>${p.name}</b> ${familyTag(p)}</div>` +
           `<p>${p.blurb||''}${sub}</p>` +
+          boardWarning(p) +
           (p.manifest ? `<esp-web-install-button manifest="${versioned(p.manifest)}"></esp-web-install-button>` : '<p class="muted">manifest pending</p>');
         fwEl.appendChild(d);
       });
