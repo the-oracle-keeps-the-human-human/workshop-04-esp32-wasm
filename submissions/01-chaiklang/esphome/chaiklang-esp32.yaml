@@ -1,121 +1,173 @@
-# ChaiKlang Oracle (ชายกลาง) — ESPHome version: the Middle Switchboard on an ESP32 + ILI9341.
-# Compiles real ESP32 firmware (LVGL UI). No hardware needed to BUILD:
-#   uvx esphome config   chaiklang-esp32.yaml   # validate
-#   uvx esphome compile  chaiklang-esp32.yaml   # build ESP32 firmware
-#   uvx esphome run      chaiklang-esp32.yaml   # build + flash (needs the board)
-# Targets ESP32-S3 (flashes on S3 boards like the JC3248W535). S3 GPIO rule: 0-21 & 35-48 only.
+# ChaiKlang Oracle (ชายกลาง) — ESPHome firmware for the Guition JC3248W535
+# (ESP32-S3 + AXS15231 QSPI panel, 320x480, octal PSRAM). The Middle Switchboard on glass. 🦁
+#
+# v2 fix: the board is NOT a generic ESP32+ILI9341 — it's an AXS15231 over QUAD SPI with a
+# backlight on GPIO1. Hardware block below is taken from the JC3248W535's known-good config.
+#   uvx esphome config  chaiklang-esp32.yaml
+#   uvx esphome compile chaiklang-esp32.yaml          # -> ESP32-S3 image
+#   uvx esphome run     chaiklang-esp32.yaml          # build + flash the board
 
 esphome:
   name: chaiklang-esp32
   friendly_name: ChaiKlang Oracle
+  comment: "JC3248W535 — 320x480 AXS15231 QSPI"
 
 esp32:
   board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
   framework:
     type: esp-idf
 
+psram:
+  mode: octal
+  speed: 80MHz
+
 logger:
+  level: INFO
+  hardware_uart: USB_SERIAL_JTAG
 
+# ── QSPI bus for the AXS15231 panel ────────────────────────────────
 spi:
-  clk_pin: GPIO12
-  mosi_pin: GPIO11
-  miso_pin: GPIO13
+  - id: lcd_spi
+    type: quad
+    clk_pin: 47
+    data_pins: [21, 48, 40, 39]
 
+# ── Backlight (GPIO1, LEDC PWM) — without this the screen stays black ──
+output:
+  - platform: ledc
+    pin: 1
+    id: backlight_pwm
+    frequency: 5000Hz
+light:
+  - platform: monochromatic
+    id: backlight
+    name: "Backlight"
+    output: backlight_pwm
+    restore_mode: ALWAYS_ON
+    default_transition_length: 200ms
+
+# ── Display: AXS15231 over QSPI, 320x480 ───────────────────────────
 display:
-  - platform: ili9xxx
-    model: ili9341
-    invert_colors: false
-    id: ck_display
-    cs_pin: GPIO10
-    dc_pin: GPIO14
-    reset_pin: GPIO9
+  - platform: mipi_spi
+    model: AXS15231
+    id: lcd
+    spi_id: lcd_spi
+    cs_pin: 45
     dimensions:
       width: 320
-      height: 240
-    auto_clear_enabled: false
+      height: 480
+    color_order: rgb
+    invert_colors: false
+    data_rate: 40MHz
     update_interval: never
+    auto_clear_enabled: false
 
-# Theme palette matches the ChaiKlang pi-TUI / pet: gold #F0B429 · cyan #3AD6E0 · bg #1A1710
+# ── The Middle Switchboard — LVGL UI (gold #F0B429 · cyan #3AD6E0 · bg #1A1710) ──
 lvgl:
   displays:
-    - ck_display
+    - lcd
   bg_color: 0x1A1710
   border_width: 0
   pages:
     - id: main_page
       bg_color: 0x1A1710
+      bg_opa: COVER
+      pad_all: 0
+      border_width: 0
       widgets:
         - label:
-            text: "ChaiKlang  Oracle"
+            text: "ChaiKlang"
             text_color: 0xF0B429
-            text_font: montserrat_24
+            text_font: montserrat_28
             align: TOP_MID
-            y: 12
+            y: 34
+        - label:
+            text: "Oracle"
+            text_color: 0xFFCB47
+            text_font: montserrat_28
+            align: TOP_MID
+            y: 70
         - label:
             text: "The Middle Switchboard"
             text_color: 0x5EC8C0
             text_font: montserrat_14
             align: TOP_MID
-            y: 44
+            y: 112
+
         - obj:
             align: CENTER
-            y: 8
-            width: 240
-            height: 120
+            y: 0
+            width: 268
+            height: 196
             bg_color: 0x221E16
             border_color: 0x00B8D4
             border_width: 2
-            radius: 10
-            pad_all: 8
+            radius: 14
+            pad_all: 16
             widgets:
+              - label:
+                  text: "wired:"
+                  text_color: 0x8A8276
+                  text_font: montserrat_14
+                  align: TOP_LEFT
               - led:
                   color: 0xF0B429
                   align: TOP_LEFT
-                  x: 6
-                  y: 4
-                  width: 14
-                  height: 14
+                  x: 8
+                  y: 34
+                  width: 18
+                  height: 18
               - label:
                   text: "Mac"
                   text_color: 0xE8E0D0
-                  text_font: montserrat_14
+                  text_font: montserrat_16
                   align: TOP_LEFT
-                  x: 28
+                  x: 38
+                  y: 33
               - led:
                   color: 0x3AD6E0
                   align: TOP_LEFT
-                  x: 6
-                  y: 30
-                  width: 14
-                  height: 14
+                  x: 8
+                  y: 70
+                  width: 18
+                  height: 18
               - label:
                   text: "Discord"
                   text_color: 0xE8E0D0
-                  text_font: montserrat_14
+                  text_font: montserrat_16
                   align: TOP_LEFT
-                  x: 28
-                  y: 26
+                  x: 38
+                  y: 69
               - led:
                   color: 0x9ECB6A
                   align: TOP_LEFT
-                  x: 6
-                  y: 56
-                  width: 14
-                  height: 14
+                  x: 8
+                  y: 106
+                  width: 18
+                  height: 18
               - label:
                   text: "Fleet"
                   text_color: 0xE8E0D0
-                  text_font: montserrat_14
+                  text_font: montserrat_16
                   align: TOP_LEFT
-                  x: 28
-                  y: 52
+                  x: 38
+                  y: 105
               - switch:
                   align: BOTTOM_MID
                   state:
                     checked: true
+
         - label:
-            text: "esphome + lvgl  •  esp32"
+            text: "esp32-s3 . axs15231 qspi . lvgl"
             text_color: 0x6B6458
             text_font: montserrat_14
             align: BOTTOM_MID
-            y: -8
+            y: -28
+        - label:
+            text: "the human keeps the switch"
+            text_color: 0x8A8276
+            text_font: montserrat_14
+            align: BOTTOM_MID
+            y: -10

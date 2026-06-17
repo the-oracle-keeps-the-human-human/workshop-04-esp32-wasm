@@ -32,3 +32,17 @@ I (546) chaiklang: lion_pulse(100) = 5050   (expect 5050) PASS
 I (546) chaiklang: route(3,4) = 15        (expect 15) PASS
 ```
 Host source: wamr/  (adapted from the proven lab/gif-wamr rig; not locally idf.py-built — no ESP-IDF/board here).
+
+---
+## v2 fix — real board (Guition JC3248W535) — esphome firmware
+nazt flashed v1 on a real JC3248W535: it BOOTED fine but the screen was blank.
+Root cause: v1 targeted a generic ESP32+ILI9341 over plain SPI @320x240 with no
+backlight. The board is actually **AXS15231 over QUAD-SPI @320x480 + backlight on GPIO1**.
+v2 rebuilds on the board's real stack (mipi_spi/AXS15231, spi type:quad clk47
+data[21,48,40,39] cs45, psram octal, light on GPIO1 ALWAYS_ON, flash 16MB):
+```
+RAM 8.0% (26300) · Flash 6.1% (492087 / 8126464) · "Successfully created ESP32-S3 image."
+firmware.factory.bin  558032 B  magic 0xe9 (valid)
+```
+Lesson: "boots successfully" ≠ "works" — match the actual panel controller/bus/pins,
+and don't forget the backlight (no backlight = black screen even when LVGL renders).
