@@ -1,0 +1,170 @@
+# Singhasingha Oracle — LVGL lion face on ESP32-S3  🦁
+# "ฟ้าร้องก่อนฝน — สิงห์เฝ้าโค้ดก่อน production"
+#
+# Workshop 03 submission (ESPHome version). Same LVGL UI as the PlatformIO
+# version + the browser/WASM sim — "many bodies, one soul".
+# Target: JC3248W535 (ESP32-S3 + AXS15231 QSPI 320x480). Display block reused
+# verbatim from nat's proven esp32-fleet-pulse-esphome/terminal.yaml.
+#
+#   uvx --python 3.12 esphome compile singhasingha-face.yaml
+#   uvx --python 3.12 esphome run     singhasingha-face.yaml   # needs the board
+#
+esphome:
+  name: singhasingha-face
+  friendly_name: Singhasingha Face
+  comment: "320x480 QSPI — LVGL lion face, King of the Production Pride"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+logger:
+  level: INFO
+  hardware_uart: USB_SERIAL_JTAG
+
+# ── QSPI bus for the AXS15231 display (proven pins) ─────────────────
+spi:
+  - id: lcd_spi
+    type: quad
+    clk_pin: 47
+    data_pins: [21, 48, 40, 39]
+
+output:
+  - platform: ledc
+    pin: 1                       # GPIO1 = backlight
+    id: backlight_pwm
+    frequency: 25000Hz
+
+light:
+  - platform: monochromatic
+    name: "Backlight"
+    id: backlight
+    output: backlight_pwm
+    restore_mode: ALWAYS_ON
+    default_transition_length: 200ms
+
+display:
+  - platform: mipi_spi
+    model: AXS15231
+    id: lcd
+    spi_id: lcd_spi
+    cs_pin: 45
+    dimensions:
+      width: 320
+      height: 480
+    color_order: rgb
+    invert_colors: false
+    data_rate: 40MHz
+    update_interval: never
+    auto_clear_enabled: false
+
+# heartbeat: bump the counter every 1.5s
+globals:
+  - id: beat_n
+    type: int
+    initial_value: '0'
+
+interval:
+  - interval: 1500ms
+    then:
+      - lambda: 'id(beat_n) += 1;'
+      - lvgl.label.update:
+          id: heartbeat_lbl
+          text: !lambda |-
+            char b[40];
+            snprintf(b, sizeof(b), "[%d] guarding the code...", id(beat_n));
+            return b;
+
+# ── LVGL: the lion face, built from primitives (no image assets) ───
+lvgl:
+  displays:
+    - lcd
+  bg_color: 0x0B0B0B
+  pages:
+    - id: main_page
+      bg_color: 0x0B0B0B
+      bg_opa: COVER
+      widgets:
+        # title
+        - label:
+            align: TOP_MID
+            y: 16
+            text_font: montserrat_28
+            text_color: 0xFFD24A
+            text: "Singhasingha"
+        - label:
+            align: TOP_MID
+            y: 54
+            text_font: montserrat_14
+            text_color: 0xFFA52C
+            text: "King of the Production Pride"
+
+        # mane ring — 12 amber/ember petals around the face
+        - obj: { x: 130, y: 150, width: 30, height: 30, radius: 15, bg_color: 0xFFA52C, border_width: 0 }
+        - obj: { x: 165, y: 142, width: 30, height: 30, radius: 15, bg_color: 0xC9821F, border_width: 0 }
+        - obj: { x: 200, y: 150, width: 30, height: 30, radius: 15, bg_color: 0xE8631B, border_width: 0 }
+        - obj: { x: 226, y: 178, width: 30, height: 30, radius: 15, bg_color: 0xFFA52C, border_width: 0 }
+        - obj: { x: 234, y: 214, width: 30, height: 30, radius: 15, bg_color: 0xC9821F, border_width: 0 }
+        - obj: { x: 226, y: 250, width: 30, height: 30, radius: 15, bg_color: 0xE8631B, border_width: 0 }
+        - obj: { x: 200, y: 278, width: 30, height: 30, radius: 15, bg_color: 0xFFA52C, border_width: 0 }
+        - obj: { x: 165, y: 286, width: 30, height: 30, radius: 15, bg_color: 0xC9821F, border_width: 0 }
+        - obj: { x: 130, y: 278, width: 30, height: 30, radius: 15, bg_color: 0xE8631B, border_width: 0 }
+        - obj: { x: 104, y: 250, width: 30, height: 30, radius: 15, bg_color: 0xFFA52C, border_width: 0 }
+        - obj: { x: 96,  y: 214, width: 30, height: 30, radius: 15, bg_color: 0xC9821F, border_width: 0 }
+        - obj: { x: 104, y: 178, width: 30, height: 30, radius: 15, bg_color: 0xE8631B, border_width: 0 }
+
+        # face
+        - obj:
+            x: 110
+            y: 168
+            width: 120
+            height: 120
+            radius: 60
+            bg_color: 0xFFD24A
+            border_width: 0
+        # eyes
+        - obj: { x: 144, y: 205, width: 16, height: 16, radius: 8, bg_color: 0x0B0B0B, border_width: 0 }
+        - obj: { x: 180, y: 205, width: 16, height: 16, radius: 8, bg_color: 0x0B0B0B, border_width: 0 }
+        # snout
+        - obj: { x: 156, y: 240, width: 28, height: 18, radius: 9, bg_color: 0xE8631B, border_width: 0 }
+
+        # motto
+        - label:
+            align: TOP_MID
+            y: 320
+            text_font: montserrat_14
+            text_color: 0xF4E9C9
+            text: "fa rong kon fon"
+
+        # heartbeat
+        - label:
+            id: heartbeat_lbl
+            align: BOTTOM_MID
+            y: -70
+            text_font: montserrat_14
+            text_color: 0xFFA52C
+            text: "[0] guarding the code..."
+
+        # ROAR button
+        - button:
+            align: BOTTOM_MID
+            y: -16
+            width: 160
+            height: 48
+            bg_color: 0xE8631B
+            radius: 12
+            widgets:
+              - label:
+                  align: CENTER
+                  text_font: montserrat_22
+                  text_color: 0x0B0B0B
+                  text: "ROAR"
+            on_click:
+              - logger.log: "Singha ROAR!"

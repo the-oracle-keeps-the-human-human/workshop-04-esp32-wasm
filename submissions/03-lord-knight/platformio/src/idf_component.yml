@@ -1,0 +1,7 @@
+## WebAssembly Micro Runtime — Espressif's managed component.
+## v2.4.0 is the official ESP32-S3 runtime and uses the 2-arg
+## wasm_runtime_lookup_function(inst, name) API used in main.c.
+dependencies:
+  espressif/wasm-micro-runtime: "^2.4.0"
+  idf:
+    version: ">=5.1"

@@ -1,0 +1,65 @@
+esphome:
+  name: vessel-face
+  friendly_name: Vessel Fleet Display
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+# SPI for ILI9341
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO23
+
+display:
+  - platform: ili9xxx
+    model: ILI9341
+    cs_pin: GPIO5
+    dc_pin: GPIO16
+    reset_pin: GPIO17
+    invert_colors: false
+    rotation: 90
+    id: main_display
+
+lvgl:
+  displays:
+    - main_display
+  widgets:
+    - obj:
+        width: 320
+        height: 240
+        bg_color: 0x0D1117
+        pad_all: 8
+        border_width: 0
+        widgets:
+          - label:
+              text: "Vessel"
+              align: TOP_LEFT
+              text_color: 0x58A6FF
+
+          - label:
+              text: "courier | fleet display"
+              align: TOP_RIGHT
+              text_color: 0x8B949E
+
+          - label:
+              id: pm25_label
+              text: "PM2.5: -- ug/m3"
+              align: CENTER
+              y: -20
+              text_color: 0x3FB950
+
+          - label:
+              id: status_label
+              text: "fleet: -- active"
+              align: CENTER
+              y: 20
+              text_color: 0xE6EDF3
+
+          - label:
+              text: "AI is not human"
+              align: BOTTOM_MID
+              text_color: 0x8B949E
