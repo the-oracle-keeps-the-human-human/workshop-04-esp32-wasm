@@ -1,0 +1,12 @@
+{
+  "id": "<id>",
+  "name": "<Name> 🦖",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-<id>.json",
+  "preview": "preview/gifs/<id>/idle.gif",
+  "previewDir": "<id>/",
+  "states": ["idle", "busy", "attention", "celebrate", "dizzy", "sleep", "heart"],
+  "blurb": "<one line — stage / type>",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/NN-<yourname>"
+}
