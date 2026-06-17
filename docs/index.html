@@ -81,6 +81,7 @@
           <label class="pack"><input type="radio" name="pack" value="cat-orange"><span class="num">03</span><img class="thumb" src="preview/gifs/cat-orange/idle.gif" alt=""><span class="nm">cat-orange<small>CC0 ginger</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="cat-pet"><span class="num">04</span><img class="thumb" src="preview/gifs/cat-pet/idle.gif" alt=""><span class="nm">cat-pet<small>CC0 kitten</small></span></label>
           <label class="pack sel"><input type="radio" name="pack" value="clawd" checked><span class="num">05</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">clawd<small>Claude mascot · MIT</small></span></label>
+          <label class="pack"><input type="radio" name="pack" value="vialumen"><span class="num">06</span><img class="thumb" src="preview/gifs/vialumen/idle.png" alt="✦" style="background:#0D1117;"><span class="nm">ViaLumen<small>LVGL stars UI · Oracle</small></span></label>
         </div>
         <p class="note" style="margin-top:1rem;">Plug in the <b>native USB</b> port → click → pick the <code>usbmodem</code> port → Install. App image at <code>0x10000</code> + shared 3 MB LittleFS at <code>0x290000</code> (all packs live there; only the boot default differs). JC3248W535 · ESP32-S3.</p>
         <div class="install" id="install"></div>
@@ -145,9 +146,18 @@
   <script type="module">
     const install = document.getElementById('install');
     const preview = document.getElementById('preview');
+    const NO_GIF_PACKS = new Set(['vialumen']);
     function setPack(pack) {
       install.innerHTML = `<esp-web-install-button manifest="manifest-${pack}.json"></esp-web-install-button>`;
-      if (preview) preview.src = `preview/index.html?embed=1&pack=${pack}`;
+      if (preview) {
+        if (NO_GIF_PACKS.has(pack)) {
+          preview.src = 'about:blank';
+          preview.style.background = '#0D1117';
+          preview.title = 'LVGL UI — no GIF preview';
+        } else {
+          preview.src = `preview/index.html?embed=1&pack=${pack}`;
+        }
+      }
     }
     document.getElementById('packs').addEventListener('change', (e) => {
       if (e.target.name !== 'pack') return;
