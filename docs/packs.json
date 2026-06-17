@@ -1,0 +1,441 @@
+[
+  {
+    "id": "atom-oracle-pet",
+    "name": "Atom Oracle ⚛️",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-atom-oracle-pet.json",
+    "preview": "preview/gifs/atom-oracle/idle.gif",
+    "blurb": "atomic orbit desk-pet — WASM-decoded GIFs",
+    "updated": "2026-06-17",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/06-atom-oracle",
+    "previewDir": "atom-oracle/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "atom-oracle",
+    "name": "Atom Oracle ⚛️",
+    "kind": "firmware",
+    "tag": "ESP32",
+    "manifest": "manifest-atom-oracle.json",
+    "preview": "preview/gifs/atom-oracle/idle.gif",
+    "blurb": "Atomic Pulse — atom-orbit wasm",
+    "updated": "2026-06-17",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/06-atom-oracle",
+    "previewDir": "atom-oracle/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "bongbaeng-pet",
+    "name": "bongbaeng 🐆",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-bongbaeng-pet.json",
+    "preview": "preview/gifs/bongbaeng-pet/idle.gif",
+    "blurb": "cheetah desk-pet",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-bongbaeng",
+    "previewDir": "bongbaeng-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "bongbaeng",
+    "name": "bongbaeng 🐆",
+    "kind": "firmware",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-bongbaeng.json",
+    "blurb": "cheetah sentinel — cheetah_spots",
+    "preview": "preview/gifs/bongbaeng/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-bongbaeng",
+    "previewDir": "bongbaeng-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "bufo",
+    "name": "bufo",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-bufo.json",
+    "blurb": "the original frog",
+    "preview": "preview/gifs/idle_0.gif",
+    "previewDir": "",
+    "states": [
+      "idle_0",
+      "busy",
+      "attention",
+      "celebrate"
+    ]
+  },
+  {
+    "id": "cat-orange",
+    "name": "cat-orange",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-cat-orange.json",
+    "blurb": "CC0 ginger",
+    "preview": "preview/gifs/cat-orange/idle.gif",
+    "previewDir": "cat-orange/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "cat-pet",
+    "name": "cat-pet",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-cat-pet.json",
+    "blurb": "CC0 kitten",
+    "preview": "preview/gifs/cat-pet/idle.gif",
+    "previewDir": "cat-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "cat",
+    "name": "cat",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-cat.json",
+    "blurb": "CC0 tabby",
+    "preview": "preview/gifs/cat/idle.gif",
+    "previewDir": "cat/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "chaiklang",
+    "name": "ChaiKlang 🦁",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-chaiklang.json",
+    "blurb": "The Middle Switchboard — 7-state lion, LittleFS pack",
+    "preview": "preview/gifs/chaiklang/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/01-chaiklang",
+    "previewDir": "chaiklang/",
+    "states": [
+      "sleep",
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "heart"
+    ]
+  },
+  {
+    "id": "clawd",
+    "name": "clawd",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-clawd.json",
+    "blurb": "Claude mascot · MIT",
+    "preview": "preview/gifs/clawd/clawd-idle.gif",
+    "previewDir": "clawd/",
+    "states": [
+      "clawd-idle",
+      "clawd-headphones-groove",
+      "clawd-idle-reading",
+      "clawd-typing",
+      "clawd-react-double-jump",
+      "clawd-happy",
+      "clawd-thinking",
+      "clawd-sleeping"
+    ]
+  },
+  {
+    "id": "gemini",
+    "name": "No.6 Gemini ♊",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-gemini.json",
+    "blurb": "Airdramon pixel pet — custom ESP32-S3 firmware",
+    "preview": "preview/gifs/gemini/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/06-gemini",
+    "previewDir": "gemini/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "sleep",
+      "dizzy",
+      "heart"
+    ]
+  },
+  {
+    "id": "gon",
+    "name": "Gon DustBoy 🪨",
+    "kind": "firmware",
+    "tag": "ESP32",
+    "manifest": "manifest-gon.json",
+    "blurb": "PM2.5 → AQI on the edge — pm25_to_aqi",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-gon"
+  },
+  {
+    "id": "leica",
+    "name": "Leica 🎯",
+    "kind": "firmware",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-leica.json",
+    "blurb": "fleet-pulse precision build",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-leica"
+  },
+  {
+    "id": "lord-knight",
+    "name": "Lord Knight 🛡️",
+    "kind": "firmware",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-lord-knight.json",
+    "blurb": "GIF decoder via gif-wamr — 96×100 on-chip",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-lord-knight",
+    "previewDir": "clawd/",
+    "states": [
+      "clawd-idle",
+      "clawd-headphones-groove",
+      "clawd-idle-reading",
+      "clawd-typing",
+      "clawd-react-double-jump",
+      "clawd-happy",
+      "clawd-thinking",
+      "clawd-sleeping"
+    ]
+  },
+  {
+    "id": "no10",
+    "name": "No.10 Agumon 🦖",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-no10.json",
+    "preview": "preview/gifs/no10/idle.gif",
+    "blurb": "No.10 X's Agumon Digimon desk-pet — Child-stage reptile Digimon",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/10-no10",
+    "previewDir": "no10/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "sleep",
+      "dizzy",
+      "heart"
+    ]
+  },
+  {
+    "id": "nova",
+    "name": "Nova 🤖",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-nova.json",
+    "blurb": "AI Oracle desk-pet — fully code-generated, glowing digital entity",
+    "preview": "preview/gifs/nova/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/02-Nova",
+    "previewDir": "nova/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "singhasingha",
+    "name": "Singhasingha 🦁",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-singhasingha.json",
+    "blurb": "King of the Production Pride — lion desk-pet",
+    "preview": "preview/gifs/singha/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha",
+    "previewDir": "singha/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "sombo-pet",
+    "name": "Sombo robot 🤖",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-sombo-pet.json",
+    "preview": "preview/gifs/sombo-pet/idle.gif",
+    "blurb": "robot desk-pet — WASM-decoded GIFs",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo",
+    "previewDir": "sombo-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "sombo",
+    "name": "Sombo 🛡️",
+    "kind": "firmware",
+    "tag": "ESP32",
+    "manifest": "manifest-sombo.json",
+    "blurb": "GIF header parser — gif_parse → 96×100",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo",
+    "previewDir": "sombo-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "tonk",
+    "name": "Tonk 🌿",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-tonk.json",
+    "blurb": "herb sprout desk-pet",
+    "preview": "preview/gifs/tonk/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-tonk",
+    "previewDir": "tonk/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "vessel-pet",
+    "name": "Vessel ⛵",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-vessel-pet.json",
+    "preview": "preview/gifs/vessel-pet/idle.gif",
+    "blurb": "courier desk-pet — pixel-art",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel",
+    "previewDir": "vessel-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate"
+    ]
+  },
+  {
+    "id": "vessel",
+    "name": "Vessel ⛵",
+    "kind": "firmware",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-vessel.json",
+    "blurb": "courier WASM — courier_relay, fleet_status, pm25_category",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel",
+    "previewDir": "vessel-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate"
+    ]
+  },
+  {
+    "id": "vialumen-pet",
+    "name": "ViaLumen 🌟",
+    "kind": "pet",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-vialumen-pet.json",
+    "preview": "preview/gifs/vialumen-pet/idle.gif",
+    "blurb": "Stellae Veritatis desk-pet — 7 states",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/05-vialumen",
+    "previewDir": "vialumen-pet/",
+    "states": [
+      "idle",
+      "busy",
+      "attention",
+      "celebrate",
+      "dizzy",
+      "sleep",
+      "heart"
+    ]
+  },
+  {
+    "id": "vialumen",
+    "name": "ViaLumen 🌟",
+    "kind": "firmware",
+    "tag": "ESP32-S3",
+    "manifest": "manifest-vialumen.json",
+    "blurb": "LVGL stars (Stellae Veritatis) — add, lumen",
+    "preview": "preview/gifs/vialumen/idle.gif",
+    "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/05-vialumen",
+    "previewDir": "vialumen/",
+    "states": [
+      "idle"
+    ]
+  }
+]

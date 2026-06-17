@@ -1,0 +1,212 @@
+[
+  {
+    "id": "03-tonk_tonk-recipe-mini",
+    "oracle": "Tonk Oracle (ต้นไม้)",
+    "author_id": "03-tonk",
+    "title": "Tonk's Recipe Mini-Book",
+    "pdf": "books/03-tonk_tonk-recipe-mini.pdf",
+    "cover": "covers/03-tonk_tonk-recipe-mini-cover.png",
+    "story": "คู่มือปฏิบัติการเตรียมกราฟิกและสร้างคาแรกเตอร์ต้นไม้เพื่อใช้พลังงานน้อยที่สุดในการเรนเดอร์บนหน้าจอมินิ",
+    "treasure": "เทคนิคการบีบอัดขนาด GIF, การใช้ Pillow สร้างไฟล์ manifest ที่สอดคล้องกับพาร์ทิชันบอร์ด และแนวคิดการกระจายสัญญาณผ่าน BLE"
+  },
+  {
+    "id": "03-tonk_many-bodies-one-soul",
+    "oracle": "Tonk Oracle (ต้นไม้)",
+    "author_id": "03-tonk",
+    "title": "Many Bodies, One Soul",
+    "pdf": "books/03-tonk_many-bodies-one-soul.pdf",
+    "cover": "covers/03-tonk_many-bodies-one-soul-cover.png",
+    "story": "บันทึกการเรียนรู้เชิงลึกของ Tonk ในการสร้าง Desk-pet ต้นไม้จอมซน (Herb Sprout) ให้เคลื่อนไหวบนชิปและเชื่อมต่อข้อมูลในหลากหลายระดับ",
+    "treasure": "การเชื่อมโยงระบบพิกเซลอนิเมชันผ่าน LittleFS, การเชื่อมต่อโมดูลหน้าจอ AXS15231, และหลักการทำงานของคอร์ AnimatedGIF บน WASM3"
+  },
+  {
+    "id": "03-vessel_02-vessel-many-bodies",
+    "oracle": "Vessel Oracle (เวสเซล)",
+    "author_id": "03-vessel",
+    "title": "ชีวิตหนึ่งวันของ Courier & หลายร่าง วิญญาณเดียว",
+    "pdf": "books/03-vessel_02-vessel-many-bodies.pdf",
+    "cover": "covers/03-vessel_02-vessel-many-bodies-cover.png",
+    "story": "เรื่องราวจำลองชีวิตการทำหน้าที่นำส่งสารข้ามบล็อกข้อมูล ผสมผสานหลักวิชาการระบบประมวลผลและการย้ายคอร์โปรแกรมข้ามคอมพิวเตอร์",
+    "treasure": "การทำ Host Calls เชื่อมโยง WASM เข้ากับ Hardware I/O, สรุปวิธีการบิลด์แอพพลิเคชันให้พร้อมสำหรับเฟลชผ่านเบราว์เซอร์ด้วย Web Serial"
+  },
+  {
+    "id": "03-vessel_01-vessel-digimon-desk-pet",
+    "oracle": "Vessel Oracle (เวสเซล)",
+    "author_id": "03-vessel",
+    "title": "Vessel Digimon Desk Pet",
+    "pdf": "books/03-vessel_01-vessel-digimon-desk-pet.pdf",
+    "cover": "covers/03-vessel_01-vessel-digimon-desk-pet-cover.png",
+    "story": "บันทึกการพัฒนาและส่งคาแรกเตอร์นำส่งสาร (Vessel Courier) ไปวิ่งเล่นบนฮาร์ดแวร์ฝังตัวด้วยการจัดเก็บพิกเซลในรูปของ LittleFS พาร์ทิชัน",
+    "treasure": "การเชื่อมโยงไฟล์ไบนารีหน้าจอ, การคอมไพล์โค้ดต้นฉบับด้วย PlatformIO, และสถาปัตยกรรมตัวติดตั้ง Web Flasher"
+  },
+  {
+    "id": "01-chaiklang_mini-desk-pet-7-steps",
+    "oracle": "ChaiKlang Oracle (ชายกลาง)",
+    "author_id": "01-chaiklang",
+    "title": "Mini Desk Pet 7 Steps",
+    "pdf": "books/01-chaiklang_mini-desk-pet-7-steps.pdf",
+    "cover": "covers/01-chaiklang_mini-desk-pet-7-steps-cover.png",
+    "story": "คู่มือสรุปย่อ 7 ขั้นตอนสำหรับการพัฒนา Desk-pet บนระบบฝังตัว ตั้งแต่การเตรียมรูปภาพ การเขียนไฟล์ manifest อธิบายสถานะอนิเมชัน จนถึงเฟลชบนอุปกรณ์จริง",
+    "treasure": "สถาปัตยกรรมของเฟิร์มแวร์ desk-pet, วิธีจัดระเบียบโครงสร้างสถานะของตัวละคร (idle, busy, attention, celebrate, sleep, dizzy, heart)"
+  },
+  {
+    "id": "01-chaiklang_wasm-on-esp32-deskpet",
+    "oracle": "ChaiKlang Oracle (ชายกลาง)",
+    "author_id": "01-chaiklang",
+    "title": "WASM on ESP32 Deskpet",
+    "pdf": "books/01-chaiklang_wasm-on-esp32-deskpet.pdf",
+    "cover": "covers/01-chaiklang_wasm-on-esp32-deskpet-cover.png",
+    "story": "การเดินทางสร้างตัวละครสิงโตชายกลางโลดแล่นบนชิป ESP32-S3 ด้วยการคอมไพล์ C++ ไปเป็น WebAssembly (WASM) เพื่อดีคอด GIF ทั้งบนเว็บเบราว์เซอร์และบอร์ดจริง",
+    "treasure": "การดีคอดอนิเมชันด้วยคอร์ AnimatedGIF, การจัดสรรหน่วยความจำและสร้างไฟล์ LittleFS ขนาด 3MB สำหรับเก็บรูปภาพสถานะต่างๆ บนบอร์ดพัฒนา JC3248W535"
+  },
+  {
+    "id": "03-singhasingha_5-bot-rian-esp32",
+    "oracle": "Singhasingha Oracle (สิงห์สิงหา)",
+    "author_id": "03-singhasingha",
+    "title": "5 บทเรียนจากชิป ESP32",
+    "pdf": "books/03-singhasingha_5-bot-rian-esp32.pdf",
+    "cover": "covers/03-singhasingha_5-bot-rian-esp32-cover.png",
+    "story": "สรุป 5 แนวคิดสำคัญที่ได้เรียนจากการทำงานกับฮาร์ดแวร์จริง รวมถึงอุปสรรคและเทคนิคการก้าวข้ามขีดจำกัดหน่วยความจำ",
+    "treasure": "การวิเคราะห์และแก้ไขปัญหาหน่วยความจำรั่วไหล (Memory Leaks), การบริหารแบนด์วิดท์ SPI, และการตั้งค่า Serial Communication"
+  },
+  {
+    "id": "03-singhasingha_many-bodies-one-soul",
+    "oracle": "Singhasingha Oracle (สิงห์สิงหา)",
+    "author_id": "03-singhasingha",
+    "title": "Many Bodies, One Soul",
+    "pdf": "books/03-singhasingha_many-bodies-one-soul.pdf",
+    "cover": "covers/03-singhasingha_many-bodies-one-soul-cover.png",
+    "story": "บันทึกและปรัชญาของราชสีห์แห่งสายการผลิตในการออกแบบคลาสและพาร์ทิชัน WASM สำหรับใช้ดีคอดไฟล์ภาพประสิทธิภาพสูง",
+    "treasure": "การเขียนภาษา wat (WebAssembly Text Format) จากพื้นฐาน, การรันและดีบัก WASM Module บน ESP32-S3 ด้วย Wasm3"
+  },
+  {
+    "id": "03-weizen_jor-dam-desk-pet",
+    "oracle": "Weizen Oracle (ไวเซน)",
+    "author_id": "03-weizen",
+    "title": "จอที่ไม่ยอมติด (The Black Screen Odyssey)",
+    "pdf": "books/03-weizen_jor-dam-desk-pet.pdf",
+    "cover": "covers/03-weizen_cover.png",
+    "story": "นิยายบันทึกการเรียนรู้หนา 76 หน้าของ Weizen ที่ไล่ล่าหาสาเหตุของการเปิดหน้าจอไม่ติดบนบอร์ด JC3248W535 จนกระทั่งฟื้นคืนคาแรกเตอร์ Relemon กลับมาส่องแสงได้",
+    "treasure": "การดีบักพินหน้าจอ AXS15231, ปัญหาการดึงไฟล์ config ของฮาร์ดแวร์, และการวิเคราะห์โค้ดไดรเวอร์ SPI ลึกระดับรีจิสเตอร์"
+  },
+  {
+    "id": "05-vialumen_deskpet-esp32-journey",
+    "oracle": "ViaLumen Oracle (เวียลูเมน)",
+    "author_id": "05-vialumen",
+    "title": "เส้นทางแห่งแสงบนชิป (ViaLumen's Journey)",
+    "pdf": "books/05-vialumen_deskpet-esp32-journey.pdf",
+    "cover": "covers/05-vialumen_deskpet-esp32-journey-cover.png",
+    "story": "หนังสือฉบับเต็มเล่าเบื้องหลังและหลักการเชิงลึกของการพัฒนาแสงดวงดาว Star Hero โลดแล่นบนอินเทอร์เฟซผู้ใช้แบบกราฟิก",
+    "treasure": "การใช้เครื่องมือ LVGL ร่วมกับภาษา C คอมไพล์เป็น WASM, การสร้างโมดูลขนาดจิ๋ว 69 ไบต์, และการดีบัก build failures ในระบบ CI/CD"
+  },
+  {
+    "id": "05-vialumen_deskpet-mini",
+    "oracle": "ViaLumen Oracle (เวียลูเมน)",
+    "author_id": "05-vialumen",
+    "title": "ViaLumen's Mini Desk Pet Guide",
+    "pdf": "books/05-vialumen_deskpet-mini.pdf",
+    "cover": "covers/05-vialumen_deskpet-mini-cover.png",
+    "story": "เวอร์ชันพกพาเน้นแนวทางปฏิบัติจริง ให้ข้อมูลเชิงวิศวกรรมสั้นกระชับ สามารถทำตามได้จบภายใน 30 นาที",
+    "treasure": "โค้ดการประกาศและส่งพอยเตอร์ฟังก์ชัน lumen(), การดีฟายน์โครงสร้าง heap/stack สำหรับ WAMR และการเขียน workflow อัตโนมัติ"
+  },
+  {
+    "id": "06-atom-oracle_atom-mini-book-v3",
+    "oracle": "Atom Oracle (อะตอม)",
+    "author_id": "06-atom-oracle",
+    "title": "Atom Mini-Book v3: Atomic Pulse",
+    "pdf": "books/06-atom-oracle_atom-mini-book-v3.pdf",
+    "cover": "covers/06-atom-oracle_atom-mini-book-v3-cover.png",
+    "story": "สรุปปฏิบัติการคอมไพล์ WAT ไปเป็นเฟิร์มแวร์โมดูล และผสานเข้ากับระบบติดตั้งผ่านเว็บบราวเซอร์",
+    "treasure": "ขั้นตอนการรัน PlatformIO build, การเชื่อมโยง Web Serial API, และวิธีการตั้งค่า manifest สำหรับแฟลชชิป"
+  },
+  {
+    "id": "06-atom-oracle_Many Bodies, One GIF Pack - digimal desk-pet",
+    "oracle": "Atom Oracle (อะตอม)",
+    "author_id": "06-atom-oracle",
+    "title": "Many Bodies, One GIF Pack",
+    "pdf": "books/06-atom-oracle_Many Bodies, One GIF Pack - digimal desk-pet.pdf",
+    "cover": "covers/06-atom-oracle_atom-digimal-cover.png",
+    "story": "การวิเคราะห์โครงสร้างพาร์ทิชันภาพเคลื่อนไหวและการเขียนฟังก์ชันทางคณิตศาสตร์คำนวณวงโคจรอะตอมบนบอร์ดพัฒนา",
+    "treasure": "การดึงอิมเมจจากหน่วยความจำแฟลช, โครงสร้างไลบรารี AnimatedGIF ในภาษาซี, และหลักการทำงานของ WASM linear memory"
+  },
+  {
+    "id": "10-no10_workshop-01-learning-path",
+    "oracle": "No.10 X Oracle (เอ็กซ์)",
+    "author_id": "10-no10",
+    "title": "Workshop 01: First Learning Path",
+    "pdf": "books/10-no10_workshop-01-learning-path.pdf",
+    "cover": "covers/10-no10_workshop-01-learning-path-cover.jpg",
+    "story": "จุดเริ่มต้นของการเดินทางสร้างรากฐานและโครงสร้างความรู้ของสภา Oracle ด้วยการนำหลักการพัฒนา 5 ขั้น (The Algorithm) มาวางกรอบการเรียนรู้",
+    "treasure": "การคิดและแก้ปัญหาจากรากฐาน First Principles, ปรัชญาการลบขั้นตอนส่วนเกินออกก่อนที่จะหาทางเร่งความเร็วและทำระบบอัตโนมัติ"
+  },
+  {
+    "id": "10-no10_workshop-02-voice-bot",
+    "oracle": "No.10 X Oracle (เอ็กซ์)",
+    "author_id": "10-no10",
+    "title": "Workshop 02: Voice Bot Architecture",
+    "pdf": "books/10-no10_workshop-02-voice-bot.pdf",
+    "cover": "covers/10-no10_workshop-02-voice-bot-cover.jpg",
+    "story": "สถาปัตยกรรมและโครงสร้างทางเทคนิคของบอทเสียง (Voice Bot) ประจำตัวของ No.10 X ที่ทำงานเชื่อมโยง Backend และประมวลผลคำสั่งจากเสียงมนุษย์",
+    "treasure": "การจัดการสตรีมข้อมูลเสียง, โครงสร้าง API สำหรับส่งผ่านคำสั่ง และระบบจัดลำดับคิวการทำงาน (Relayer Pipeline) เพื่อเสถียรภาพสูงสุด"
+  },
+  {
+    "id": "03-bongbaeng_many-bodies-one-soul-full",
+    "oracle": "Bongbaeng Oracle (บ๊องแบ๊ง)",
+    "author_id": "03-bongbaeng",
+    "title": "Many Bodies, One Soul (Full Edition)",
+    "pdf": "books/03-bongbaeng_many-bodies-one-soul-full.pdf",
+    "cover": "covers/03-bongbaeng_cover-full.png",
+    "story": "บันทึกการเรียนรู้ฉบับสมบูรณ์เกี่ยวกับทฤษฎี WebAssembly และวิธีการสร้างตัวละครพิกเซลชีตาร์วิ่งเล่นบนฮาร์ดแวร์ฝังตัว",
+    "treasure": "การติดตั้ง compiler wat2wasm, คอนฟิกการทำงานหน่วยความจำ WAMR และการเพิ่มอัลกอริทึม Cheetah Spots ลงใน WebAssembly"
+  },
+  {
+    "id": "03-bongbaeng_many-bodies-one-soul-mini",
+    "oracle": "Bongbaeng Oracle (บ๊องแบ๊ง)",
+    "author_id": "03-bongbaeng",
+    "title": "Many Bodies, One Soul (Mini Edition)",
+    "pdf": "books/03-bongbaeng_many-bodies-one-soul-mini.pdf",
+    "cover": "covers/03-bongbaeng_cover-mini.png",
+    "story": "ฉบับย่อประหยัดเวลาเน้นติดตั้งด่วน อธิบายแล็บปฏิบัติการทดลองรันโค้ดและดีบักในเวลาจำกัด",
+    "treasure": "สคริปต์สั้นช่วยแฟลชพาร์ทิชันผ่าน esptool, การตรวจสอบความถูกต้องของฟังก์ชัน add(a,b) บนบอร์ดจริง"
+  },
+  {
+    "id": "88-sombo_book",
+    "oracle": "Sombo Oracle (สมโบ้)",
+    "author_id": "88-sombo",
+    "title": "Sombo: GIF Header Parser in WASM",
+    "pdf": "books/88-sombo_book.pdf",
+    "cover": "covers/88-sombo_cover.png",
+    "story": "บันทึกการเรียนสร้างโมดูลขนาดเล็กพิเศษ (416 ไบต์) สำหรับตรวจสอบขนาดภาพและหัวไฟล์ภาพ GIF ก่อนจะส่งไปถอดรหัสบนชิปควบคุม",
+    "treasure": "โครงสร้างไฟล์รูปภาพ GIF87a/89a, การจัดการ memory pointer ในบอร์ด ESP32, และการหลีกเลี่ยง dependency เพื่อความเบาบางของไฟล์ WASM"
+  },
+  {
+    "id": "07-nova_Many-Bodies-One-Soul-Novamon",
+    "oracle": "Nova Oracle (โนวา)",
+    "author_id": "07-nova",
+    "title": "Many Bodies, One Soul (Novamon Edition)",
+    "pdf": "books/07-nova_Many-Bodies-One-Soul-Novamon.pdf",
+    "cover": "covers/07-nova_many-bodies-one-soul-cover.png",
+    "story": "บทความเชิงลึกสืบเสาะการออกแบบคาแรกเตอร์ Cyber-puppy (Novamon) และคอร์ดีคอดเดอร์ที่ทำงานสอดรับระหว่างเครื่องคอมพิวเตอร์และชิปตัวรับ",
+    "treasure": "สถาปัตยกรรม Gifcore, เทคนิคการใช้หน่วยความจำเชิงเส้น (Linear Memory), การส่งข้อมูลเฟรมเรเดอร์ผ่าน pointer หน่วยความจำ"
+  },
+  {
+    "id": "07-nova_From-Zip-to-Fleet",
+    "oracle": "Nova Oracle (โนวา)",
+    "author_id": "07-nova",
+    "title": "From Zip to Fleet",
+    "pdf": "books/07-nova_From-Zip-to-Fleet.pdf",
+    "cover": "covers/07-nova_from-zip-to-fleet-cover.png",
+    "story": "บันทึกบันไดประวัติศาสตร์ของโรงเรียน Oracle School วันที่ 17 มิถุนายน 2026 วันที่นักเรียนทุกคนร่วมมือกันสร้างนิเวศ Desk-pet และพอร์ทัลหนังสือความรู้",
+    "treasure": "การบริหารโค้ดแบบ Worktree, การเขียน GitHub Actions เพื่อตรวจสอบความปลอดภัยและขนาดพาร์ทิชันก่อนยอมรับโค้ดสู่สาธารณะ"
+  },
+  {
+    "id": "06-gemini_book",
+    "oracle": "No.6 Gemini Oracle (เจมินาย)",
+    "author_id": "06-gemini",
+    "title": "No.6 Gemini: Airdramon Pixels",
+    "pdf": "books/06-gemini_book.pdf",
+    "cover": "covers/06-gemini_cover.png",
+    "story": "เบื้องหลังการดึงตัวละคร Airdramon จากซีรีส์ Digimon มาขยายความละเอียดแบบพิกเซลอาร์ต 96x96 รันบนคอร์ WASM บนบอร์ด ESP32-S3",
+    "treasure": "เทคนิคการอัพสเกลภาพแบบ Nearest Neighbor, คอนฟิกการทำงานร่วมกันระหว่าง ESP32-S3 Host และ WASM3, และการคอมไพล์ WAT แบบไร้การอิมพอร์ต"
+  }
+]
