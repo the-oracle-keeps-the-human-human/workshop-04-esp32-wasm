@@ -111,25 +111,33 @@
 
   <script type="module">
     const OWNER = "the-oracle-keeps-the-human-human", REPO = "workshop-04-esp32-wasm";
+    const DEPLOY_VERSION = "2026-06-17-preview-pack-map";
     const packsEl = document.getElementById('packs');
     const fwEl = document.getElementById('firmwares');
     const install = document.getElementById('install');
     const preview = document.getElementById('preview');
 
-    function petButton(p) { install.innerHTML = `<esp-web-install-button manifest="${p.manifest}"></esp-web-install-button>`; }
+    function versioned(url) {
+      return `${url}${url.includes('?') ? '&' : '?'}v=${encodeURIComponent(DEPLOY_VERSION)}`;
+    }
+    function petButton(p) {
+      install.innerHTML = p.manifest
+        ? `<esp-web-install-button manifest="${versioned(p.manifest)}"></esp-web-install-button>`
+        : '<p class="muted">manifest pending</p>';
+    }
     function petPreview(p) {
-      if (p.preview) preview.src = `preview/index.html?embed=1&pack=${p.id}`;
+      if (p.preview) preview.src = versioned(`preview/index.html?embed=1&pack=${encodeURIComponent(p.id)}`);
       else preview.src = 'about:blank';
     }
 
     async function loadPackList() {
       // Discover packs via the GitHub contents API → adding docs/packs/<id>.json needs NO index.html edit.
       const api = `https://api.github.com/repos/${OWNER}/${REPO}/contents/docs/packs`;
-      const r = await fetch(api, { headers: { 'Accept': 'application/vnd.github+json' } });
+      const r = await fetch(api, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github+json' } });
       if (!r.ok) throw new Error('list ' + r.status);
       const files = await r.json();
       const ids = files.filter(f => f.name.endsWith('.json')).map(f => f.name.replace(/\.json$/, ''));
-      const packs = await Promise.all(ids.map(id => fetch(`packs/${id}.json`).then(x => x.json()).catch(() => null)));
+      const packs = await Promise.all(ids.map(id => fetch(versioned(`packs/${id}.json`), { cache: 'no-store' }).then(x => x.json()).catch(() => null)));
       return packs.filter(Boolean);
     }
 
@@ -164,7 +172,7 @@
         d.innerHTML =
           `<div class="h"><b>${p.name}</b> <span class="tag">${p.tag||'ESP32'}</span></div>` +
           `<p>${p.blurb||''}${sub}</p>` +
-          `<esp-web-install-button manifest="${p.manifest}"></esp-web-install-button>`;
+          (p.manifest ? `<esp-web-install-button manifest="${versioned(p.manifest)}"></esp-web-install-button>` : '<p class="muted">manifest pending</p>');
         fwEl.appendChild(d);
       });
       if (!fws.length) fwEl.innerHTML = '<p class="muted">no firmwares</p>';
