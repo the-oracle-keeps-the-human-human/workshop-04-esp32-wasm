@@ -1,0 +1,2 @@
+# Allow firmware binaries for webflasher
+!*.bin
