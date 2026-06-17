@@ -1,12 +1,15 @@
 {
-  "name": "bongbaeng Oracle 🐆 — Cheetah identity card",
-  "version": "1.0.0",
+  "name": "bongbaeng cheetah desk-pet 🐆",
+  "version": "1.1.0",
   "new_install_prompt_erase": false,
   "builds": [
     {
       "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "bongbaeng-face-esp32s3.factory.bin", "offset": 0 }
+        { "path": "bootloader.bin",                  "offset": 0 },
+        { "path": "partition-table.bin",             "offset": 32768 },
+        { "path": "jc3248_pet_idf-clawd.bin",        "offset": 65536 },
+        { "path": "bongbaeng-storage.bin",           "offset": 2686976 }
       ]
     }
   ]
