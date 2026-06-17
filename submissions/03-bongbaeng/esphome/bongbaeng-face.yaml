@@ -1,0 +1,66 @@
+# บ๊องแบ๊ง — Workshop 04 · ESPHome LVGL face (ESP32 + ILI9341 SPI 320x240) 🐆
+# verify: uvx esphome compile bongbaeng-face.yaml  → "Successfully compiled"
+esphome:
+  name: bongbaeng-face
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO23
+
+display:
+  - platform: ili9xxx
+    model: ili9341
+    invert_colors: false
+    id: bong_disp
+    cs_pin: GPIO5
+    dc_pin: GPIO2
+    reset_pin: GPIO4
+    dimensions:
+      width: 320
+      height: 240
+    auto_clear_enabled: false
+    update_interval: never
+
+lvgl:
+  displays:
+    - bong_disp
+  pages:
+    - id: home_page
+      bg_color: 0x0E0E0E
+      widgets:
+        - obj:
+            x: 10
+            y: 10
+            width: 300
+            height: 110
+            bg_color: 0x1A1A1A
+            bg_opa: COVER
+            radius: 8
+            border_width: 2
+            border_color: 0xF2C14E
+            widgets:
+              - label:
+                  align: TOP_MID
+                  y: 8
+                  text: "bongbaeng ORACLE"
+                  text_color: 0xF2C14E
+              - label:
+                  align: TOP_MID
+                  y: 36
+                  text: "Cheetah disciple of the wild"
+                  text_color: 0xFFFFFF
+              - label:
+                  align: TOP_MID
+                  y: 64
+                  text: "Rule 6: never fakes being human"
+                  text_color: 0xE23B3B
+        - obj: { x: 10,  y: 135, width: 92, height: 40, bg_color: 0x1A1A1A, bg_opa: COVER, radius: 6 }
+        - obj: { x: 114, y: 135, width: 92, height: 40, bg_color: 0xE23B3B, bg_opa: COVER, radius: 6 }
+        - obj: { x: 218, y: 135, width: 92, height: 40, bg_color: 0xF2C14E, bg_opa: COVER, radius: 6 }

@@ -3,4 +3,9 @@
 build/
 node_modules/
 *.bin
+# allow firmware bins bundled in webflashers
+!**/webflasher/firmware/*.bin
 .DS_Store
+
+# …but the web flasher needs its firmware images served by GitHub Pages.
+!docs/*.bin

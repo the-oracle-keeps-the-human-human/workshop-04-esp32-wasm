@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vessel Courier WASM — Web Flasher</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      background: #0D1117;
+      color: #E6EDF3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card {
+      max-width: 540px;
+      width: 100%;
+      background: #161B22;
+      border: 1px solid #30363D;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .icon { font-size: 2rem; }
+    h1 { font-size: 1.25rem; color: #58A6FF; }
+    .subtitle { font-size: 0.8rem; color: #8B949E; margin-top: 2px; }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-right: 6px;
+      font-weight: 600;
+    }
+    .badge-green { background: #0D4428; color: #3FB950; border: 1px solid #1B6B2F; }
+    .badge-blue  { background: #0C2D6B; color: #58A6FF; border: 1px solid #1158C7; }
+    .badges { margin-bottom: 1.5rem; }
+    .wasm-info {
+      background: #0D1117;
+      border: 1px solid #21262D;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .wasm-info h3 { color: #3FB950; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .fn-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px solid #21262D;
+      font-size: 0.8rem;
+    }
+    .fn-row:last-child { border-bottom: none; }
+    .fn-name { color: #58A6FF; }
+    .fn-desc { color: #8B949E; }
+    .install-section {
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .install-section p {
+      color: #8B949E;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+    }
+    esp-web-install-button {
+      --esp-tools-button-color: #238636;
+      --esp-tools-button-text-color: #fff;
+      --esp-tools-button-border-radius: 8px;
+    }
+    .serial-output {
+      background: #0D1117;
+      border: 1px solid #21262D;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      display: none;
+    }
+    .serial-output h3 { color: #8B949E; margin-bottom: 0.5rem; font-size: 0.85rem; }
+    .serial-log {
+      color: #3FB950;
+      min-height: 80px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #21262D;
+      font-size: 0.7rem;
+      color: #8B949E;
+      display: flex;
+      justify-content: space-between;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+      background: #3FB950;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="icon">⛵</div>
+      <div>
+        <h1>Vessel Courier WASM</h1>
+        <div class="subtitle">ESP32 Fleet Display + WASM Courier Functions</div>
+      </div>
+    </div>
+
+    <div class="badges">
+      <span class="badge badge-green">PlatformIO ✓</span>
+      <span class="badge badge-blue">wasm3 on-chip</span>
+      <span class="badge badge-green">144 bytes WASM</span>
+      <span class="badge badge-blue">Zero imports</span>
+    </div>
+
+    <div class="wasm-info">
+      <h3>vessel.wasm — 3 courier exports</h3>
+      <div class="fn-row">
+        <span class="fn-name">courier_relay(len)</span>
+        <span class="fn-desc">relay pass-through</span>
+      </div>
+      <div class="fn-row">
+        <span class="fn-name">fleet_status(total)</span>
+        <span class="fn-desc">active oracles (×¾)</span>
+      </div>
+      <div class="fn-row">
+        <span class="fn-name">pm25_category(pm25×10)</span>
+        <span class="fn-desc">AQI 0–4 (DustBoy)</span>
+      </div>
+    </div>
+
+    <div class="install-section">
+      <esp-web-install-button manifest="manifest.json">
+        <button slot="activate" style="
+          background:#238636; color:#fff; border:none;
+          padding: 10px 24px; border-radius:8px;
+          font-size:1rem; cursor:pointer; font-family:inherit;
+        ">
+          ⚡ Flash to ESP32
+        </button>
+        <span slot="unsupported">
+          WebSerial not supported. Use Chrome/Edge.
+        </span>
+        <span slot="not-allowed">
+          Must be served over HTTPS to use WebSerial.
+        </span>
+      </esp-web-install-button>
+      <p>Connect ESP32 via USB. Chrome / Edge required (WebSerial API).</p>
+    </div>
+
+    <div class="serial-output" id="serialOut">
+      <h3><span class="status-dot"></span>Serial Monitor</h3>
+      <div class="serial-log" id="log">Waiting for device...</div>
+    </div>
+
+    <div class="footer">
+      <span>⛵ Vessel — AI ไม่ใช่คน | Workshop 04</span>
+      <span>Flash 25.2% · RAM 6.6%</span>
+    </div>
+  </div>
+
+  <script>
+    // Show serial output section after flash starts
+    document.querySelector('esp-web-install-button')
+      ?.addEventListener('state-changed', (e) => {
+        if (e.detail?.state !== 'idle') {
+          document.getElementById('serialOut').style.display = 'block';
+        }
+      });
+  </script>
+</body>
+</html>
