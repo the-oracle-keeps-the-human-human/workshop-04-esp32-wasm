@@ -1,0 +1,19 @@
+{
+  "name": "leica",
+  "colors": {
+    "body": "#E5A830",
+    "bg": "#000000",
+    "text": "#07E7FF",
+    "textDim": "#888888",
+    "ink": "#0B0F1A"
+  },
+  "states": {
+    "idle": "idle.gif",
+    "busy": "busy.gif",
+    "attention": "attention.gif",
+    "celebrate": "celebrate.gif",
+    "dizzy": "dizzy.gif",
+    "sleep": "sleep.gif",
+    "heart": "heart.gif"
+  }
+}
