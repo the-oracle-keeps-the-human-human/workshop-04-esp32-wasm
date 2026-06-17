@@ -82,7 +82,8 @@
           <label class="pack"><input type="radio" name="pack" value="cat-orange"><span class="num">03</span><img class="thumb" src="preview/gifs/cat-orange/idle.gif" alt=""><span class="nm">cat-orange<small>CC0 ginger</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="cat-pet"><span class="num">04</span><img class="thumb" src="preview/gifs/cat-pet/idle.gif" alt=""><span class="nm">cat-pet<small>CC0 kitten</small></span></label>
           <label class="pack sel"><input type="radio" name="pack" value="clawd" checked><span class="num">05</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">clawd<small>Claude mascot · MIT</small></span></label>
-          <label class="pack"><input type="radio" name="pack" value="tonk"><span class="num">06</span><img class="thumb" src="preview/gifs/tonk/idle.gif" alt=""><span class="nm">tonk<small>herb sprout · wasm3 · ESP32 + S3</small></span></label>
+          <label class="pack"><input type="radio" name="pack" value="chaiklang"><span class="num">06</span><img class="thumb" src="preview/gifs/chaiklang/idle.gif" alt=""><span class="nm">chaiklang 🦁<small>Middle Switchboard · LVGL fw · upd 2026-06-17</small></span></label>
+                    <label class="pack"><input type="radio" name="pack" value="tonk"><span class="num">07</span><img class="thumb" src="preview/gifs/tonk/idle.gif" alt=""><span class="nm">tonk<small>herb sprout · wasm3 · ESP32 + S3</small></span></label>
         </div>
         <p class="note" style="margin-top:1rem;">Plug in the <b>native USB</b> port → click → pick the <code>usbmodem</code> port → Install. App image at <code>0x10000</code> + shared 3 MB LittleFS at <code>0x290000</code> (all packs live there; only the boot default differs). JC3248W535 · ESP32-S3.</p>
         <div class="install" id="install"></div>
@@ -109,13 +110,25 @@
           <p>LVGL firmware — <code>add</code>, <code>lumen</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/05-vialumen">05-vialumen</a>)</p>
           <esp-web-install-button manifest="manifest-vialumen.json"></esp-web-install-button></div>
 
-        <div class="fw"><div class="h"><b>🚢 Vessel</b> <span class="tag">ESP32</span></div>
-          <p>Courier relay — <code>courier_relay</code>, <code>fleet_status</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel">03-vessel</a>)</p>
+        <div class="fw"><div class="h"><b>⛵ Vessel</b> <span class="tag">ESP32-S3</span></div>
+          <p>Courier WASM — <code>courier_relay</code>, <code>fleet_status</code>, <code>pm25_category</code>. 144 bytes · 0 imports. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel">03-vessel</a>)</p>
           <esp-web-install-button manifest="manifest-vessel.json"></esp-web-install-button></div>
 
+        <div class="fw"><div class="h"><b>🪨 Gon DustBoy</b> <span class="tag">ESP32</span></div>
+          <p>PM2.5 → AQI on the edge — <code>pm25_to_aqi</code>. wasm3. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-gon">03-gon</a>)</p>
+          <esp-web-install-button manifest="manifest-gon.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🐆 bongbaeng</b> <span class="tag">ESP32-S3</span></div>
+          <p>Cheetah sentinel — <code>cheetah_spots</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-bongbaeng">03-bongbaeng</a>)</p>
+          <esp-web-install-button manifest="manifest-bongbaeng.json"></esp-web-install-button></div>
+
+        <div class="fw"><div class="h"><b>🛡️ Lord Knight</b> <span class="tag">ESP32-S3</span></div>
+          <p>GIF decoder via gif-wamr — decodes 96×100 on-chip. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-lord-knight">03-lord-knight</a>)</p>
+          <esp-web-install-button manifest="manifest-lord-knight.json"></esp-web-install-button></div>
+
         <div class="fw"><div class="h"><b>🦁 Singhasingha</b> <span class="tag">ESP32</span></div>
-          <p>Sentinel — <code>roar</code>, <code>guard</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha">03-singhasingha</a>)</p>
-          <p class="pending">⏳ flash image pending a valid factory build — see the submission to build + run locally.</p></div>
+          <p>Sentinel — <code>roar</code>, <code>guard</code>. Multi-part image (fixed in #34). (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha">03-singhasingha</a>)</p>
+          <esp-web-install-button manifest="manifest-singhasingha.json"></esp-web-install-button></div>
       </div>
 
       <div class="panel">
