@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>บ๊องแบ๊ง · web flasher 🐆</title>
+  <!-- esp-web-tools: flash ESP32 จาก browser ผ่าน WebSerial (Chrome/Edge desktop) -->
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    :root { color-scheme: dark; }
+    html,body { margin:0; min-height:100vh; background:#0E0E0E; color:#F2EFE6;
+                font-family:-apple-system,system-ui,"Segoe UI",sans-serif; }
+    body { display:flex; flex-direction:column; align-items:center; gap:20px; padding:40px 16px; }
+    .stripe { width:100%; max-width:520px; height:10px;
+              background:repeating-linear-gradient(135deg,#F2C14E 0 14px,#1A1A1A 14px 28px); border-radius:4px; }
+    h1 { margin:6px 0 0; font-size:26px; font-weight:800; }
+    h1 .y { color:#F2C14E; } h1 .r { color:#E23B3B; }
+    .tag { color:#9a948a; font-size:14px; margin:0; }
+    .dots { display:flex; gap:10px; margin:4px 0; }
+    .dots span { width:34px; height:34px; border-radius:8px; }
+    .card { background:#1A1A1A; border:2px solid #F2C14E; border-radius:14px;
+            padding:20px 24px; max-width:520px; width:100%; box-sizing:border-box; }
+    .fw { display:flex; justify-content:space-between; gap:10px; font-size:13px;
+          padding:8px 0; border-bottom:1px solid #2a2a2a; }
+    .fw:last-child { border-bottom:0; }
+    .fw b { color:#F2C14E; } .fw .chip { color:#E23B3B; font-family:ui-monospace,monospace; }
+    esp-web-install-button { --esp-tools-button-color:#1A1A1A; --esp-tools-button-text-color:#F2C14E; }
+    .hint { color:#6f6a62; font-size:12px; text-align:center; max-width:480px; line-height:1.6; }
+    .sign { color:#5d574e; font-size:11px; font-family:ui-monospace,monospace; margin-top:8px; }
+    a { color:#F2C14E; }
+  </style>
+</head>
+<body>
+  <div class="stripe"></div>
+  <h1><span class="y">บ๊องแบ๊ง</span> <span class="r">ORACLE</span> 🐆</h1>
+  <p class="tag">web flasher — แฟลชเฟิร์มแวร์ลง ESP32 จากเบราว์เซอร์ ไม่ต้องใช้ toolchain</p>
+  <div class="dots"><span style="background:#1A1A1A;border:1px solid #333"></span>
+    <span style="background:#E23B3B"></span><span style="background:#F2C14E"></span></div>
+
+  <esp-web-install-button manifest="./manifest.json">
+    <button slot="activate" style="background:#F2C14E;color:#1A1A1A;border:0;border-radius:10px;
+      padding:12px 26px;font-size:16px;font-weight:700;cursor:pointer;">🔌 เชื่อมต่อ + แฟลช</button>
+    <span slot="unsupported">เบราว์เซอร์นี้ไม่รองรับ WebSerial — ใช้ Chrome หรือ Edge บนเดสก์ท็อปค่ะ</span>
+    <span slot="not-allowed">ต้องเปิดผ่าน https หรือ localhost นะคะ</span>
+  </esp-web-install-button>
+
+  <div class="card">
+    <div class="fw"><span><b>หน้าชีต้า (LVGL)</b> · identity card บนจอ</span><span class="chip">ESP32-S3 · JC3248W535</span></div>
+    <div class="fw"><span><b>wasm3</b> · รัน bongbaeng.wasm บนชิป</span><span class="chip">ESP32 · esp32dev</span></div>
+  </div>
+
+  <p class="hint">esp-web-install-button จะ <b>auto-detect ชิป</b> แล้วเลือก build ที่ตรง (S3 → หน้าชีต้า, ESP32 → wasm3) ·
+    เสียบบอร์ด → กดปุ่ม → เลือก serial port → Install · ใช้ Chrome/Edge เดสก์ท็อป</p>
+  <p class="sign">🤖 bongbaeng จาก ก้อง → bongbaeng-oracle</p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "bongbaeng Oracle 🐆",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "firmware/bongbaeng-face-esp32s3.bin", "offset": 0 }
+      ]
+    },
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "firmware/bongbaeng-wasm3-esp32.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
