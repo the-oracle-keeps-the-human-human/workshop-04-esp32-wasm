@@ -18,4 +18,7 @@ The staged files are written to `dist/`:
 
 - `index.html`
 - `manifest-atom-oracle.json`
-- `atom-oracle-factory.bin`
+- `atom-oracle-bootloader.bin` @ `0x1000`
+- `atom-oracle-partitions.bin` @ `0x8000`
+- `atom-oracle-boot_app0.bin` @ `0xe000`
+- `atom-oracle-firmware.bin` @ `0x10000`

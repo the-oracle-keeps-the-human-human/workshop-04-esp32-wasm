@@ -65,20 +65,33 @@ Result:
 
 ```text
 staged submissions/06-atom-oracle/webflasher/dist
-atom-oracle-factory.bin 417760
+atom-oracle-bootloader.bin 23552
+atom-oracle-partitions.bin 3072
+atom-oracle-boot_app0.bin 8192
+atom-oracle-firmware.bin 352224
 index.html 3398
-manifest-atom-oracle.json 248
+manifest-atom-oracle.json 452
 ```
 
-The staged firmware and Pages firmware are byte-identical:
+The staged firmware parts and Pages firmware parts are byte-identical:
 
 ```text
-5c755731aa309862a6f48f302515bfd05940608ebb9f68546322a779679623cb  submissions/06-atom-oracle/webflasher/dist/atom-oracle-factory.bin
-5c755731aa309862a6f48f302515bfd05940608ebb9f68546322a779679623cb  docs/atom-oracle-factory.bin
+a227e3ab93f15f1155efb3144810cc06ff7a259e9bc9b4542417afcc6c238214  atom-oracle-bootloader.bin
+148b959cbff1c38aa8e1d5c0ba9d612c54997b945e56a63f41223eef650653a1  atom-oracle-partitions.bin
+f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0  atom-oracle-boot_app0.bin
+90c38b8db238f5f9edaa19db704087985625edfe65492c0253ae7beab9c62d71  atom-oracle-firmware.bin
 ```
 
 `docs/index.html` adds `atom-oracle` under Workshop firmwares and points the
-install button at `docs/manifest-atom-oracle.json`.
+install button at `docs/manifest-atom-oracle.json`. The manifest flashes
+separate PlatformIO parts instead of a padded factory image:
+
+```text
+0x1000  atom-oracle-bootloader.bin  starts with 0xe9
+0x8000  atom-oracle-partitions.bin
+0xe000  atom-oracle-boot_app0.bin
+0x10000 atom-oracle-firmware.bin    starts with 0xe9
+```
 
 ## ESPHome firmware
 

@@ -2,12 +2,17 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+REPO="$(cd "$ROOT/../.." && pwd)"
 BUILD="$ROOT/platformio/.pio/build/esp32dev"
 DIST="$ROOT/webflasher/dist"
+PAGES="$REPO/docs"
 
-FACTORY="$BUILD/firmware.factory.bin"
+BOOTLOADER="$BUILD/bootloader.bin"
+PARTITIONS="$BUILD/partitions.bin"
+BOOT_APP0="${PLATFORMIO_CORE_DIR:-$HOME/.platformio}/packages/framework-arduinoespressif32/tools/partitions/boot_app0.bin"
+FIRMWARE="$BUILD/firmware.bin"
 
-for file in "$FACTORY"; do
+for file in "$BOOTLOADER" "$PARTITIONS" "$BOOT_APP0" "$FIRMWARE"; do
   if [[ ! -f "$file" ]]; then
     echo "missing $file"
     echo "run: cd $ROOT/platformio && uvx --from platformio platformio run"
@@ -17,7 +22,10 @@ done
 
 mkdir -p "$DIST"
 cp "$ROOT/webflasher/index.html" "$DIST/index.html"
-cp "$FACTORY" "$DIST/atom-oracle-factory.bin"
+cp "$BOOTLOADER" "$DIST/atom-oracle-bootloader.bin"
+cp "$PARTITIONS" "$DIST/atom-oracle-partitions.bin"
+cp "$BOOT_APP0" "$DIST/atom-oracle-boot_app0.bin"
+cp "$FIRMWARE" "$DIST/atom-oracle-firmware.bin"
 
 cat > "$DIST/manifest-atom-oracle.json" <<'JSON'
 {
@@ -28,12 +36,21 @@ cat > "$DIST/manifest-atom-oracle.json" <<'JSON'
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "atom-oracle-factory.bin", "offset": 0 }
+        { "path": "atom-oracle-bootloader.bin", "offset": 4096 },
+        { "path": "atom-oracle-partitions.bin", "offset": 32768 },
+        { "path": "atom-oracle-boot_app0.bin", "offset": 57344 },
+        { "path": "atom-oracle-firmware.bin", "offset": 65536 }
       ]
     }
   ]
 }
 JSON
+
+cp "$DIST/manifest-atom-oracle.json" "$PAGES/manifest-atom-oracle.json"
+cp "$DIST/atom-oracle-bootloader.bin" "$PAGES/atom-oracle-bootloader.bin"
+cp "$DIST/atom-oracle-partitions.bin" "$PAGES/atom-oracle-partitions.bin"
+cp "$DIST/atom-oracle-boot_app0.bin" "$PAGES/atom-oracle-boot_app0.bin"
+cp "$DIST/atom-oracle-firmware.bin" "$PAGES/atom-oracle-firmware.bin"
 
 python3 - <<'PY' "$DIST/manifest-atom-oracle.json"
 import json
