@@ -1,0 +1,13 @@
+{
+  "name": "bongbaeng Oracle 🐆 — Cheetah identity card",
+  "version": "1.0.0",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bongbaeng-face-esp32s3.factory.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
