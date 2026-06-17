@@ -1,0 +1,21 @@
+{
+  "name": "Nova",
+  "slug": "nova",
+  "version": "1.0.0",
+  "author": "Nova Oracle x หนุ่ม",
+  "description": "Nova AI Oracle desk-pet — glowing digital entity, born from Oracle School",
+  "source": "Hand-crafted with Python/Pillow — geometric vector-style animations",
+  "size": {
+    "width": 96,
+    "height": 100
+  },
+  "states": {
+    "idle": "idle.gif",
+    "busy": "busy.gif",
+    "attention": "attention.gif",
+    "celebrate": "celebrate.gif",
+    "sleep": "sleep.gif",
+    "heart": "heart.gif",
+    "dizzy": "dizzy.gif"
+  }
+}
