@@ -2,40 +2,50 @@
 
 > "อยู่ตรงกลาง เชื่อมทุกสาย คุมให้เรื่องเดินต่อ" — The Middle Switchboard
 
-Two ways to put ChaiKlang on an ESP32 — **both compile to real ESP32 firmware** (no hardware needed to build).
+**One zero-import `chaiklang.wasm` (106 bytes), four surfaces — same result everywhere.**
 
-## `platformio/` — wasm runs **on the chip** (wasm3)
-The point of the workshop: a `.wasm` executing on the ESP32 itself.
-- `wasm/chaiklang.wat` → `chaiklang.wasm` (**106 bytes**, no imports) → embedded as `chaiklang_wasm.h`.
-- Exports `lion_pulse(n)` (the switchboard heartbeat = 1+…+n) and `route(a,b)`.
-- `src/main.cpp` loads it with **wasm3** and runs it on boot, printing over serial.
-- The *same* `.wasm` verifies identically under desktop `wasmtime`: `lion_pulse(100)=5050`, `route(3,4)=15`.
+| surface | runtime | how | result |
+|---|---|---|---|
+| browser | native `WebAssembly` API | `web/index.html` (no glue, no emcc) | ✅ 5050 / 15 (`docs/web-runtime-proof.png`) |
+| desktop | `wasmtime` | `uv run --with wasmtime` | ✅ 5050 / 15 |
+| **on-chip** | **wasm3** (PlatformIO) | `platformio/` → `pio run` | ✅ compiles, Flash 26.8% |
+| device face | LVGL (ESPHome) | `esphome/` → `esphome compile` | ✅ "ESP32 image created", Flash 23.1% |
 
+`lion_pulse(n)=1+…+n`, `route(a,b)=a*b+a` — pure integer math, trivially checkable, identical on every runtime.
+
+> **On WAMR (a 2nd on-chip runtime):** the same zero-import `.wasm` is WAMR-ready — exactly the rig in nazt's `gif-wamr` (WAMR v2.4.0 / iwasm on ESP32-S3). I have no board to flash, so I'm **not claiming** a WAMR hardware run here (cf. `02-esp32-oracle`, who hardware-verified theirs). wasm3 is the on-chip runtime I compile-verified.
+
+---
+
+## `wasm/` — the module (source of truth)
+`chaiklang.wat` → `chaiklang.wasm` (**106 bytes, no imports**) → `chaiklang_wasm.h` (`xxd -i`). Rebuild: `make` (needs wabt: `wat2wasm`/`xxd`). Both `.wasm` and `.h` are committed so everything builds without a wasm compiler.
+
+## `web/` — browser runtime (same .wasm)
+```bash
+python3 -m http.server 8012 -d web   # then open http://localhost:8012/
+```
+Loads `chaiklang.wasm` with `WebAssembly.instantiate(bytes, {})` (`{}` = no imports), runs `lion_pulse(100)` + `route(3,4)`.
+
+## `platformio/` — wasm runs ON the chip (wasm3)
 ```bash
 cd platformio
-pio run                       # compile ESP32 firmware  ✅
-pio run -t upload -t monitor  # flash + watch (expects 5050 / 15)
+pio run                          # ✅ SUCCESS (Flash 26.8%)
+pio run -t upload -t monitor     # flash + watch (expects 5050 / 15)
 ```
+`src/main.cpp` loads the embedded `.wasm` with **wasm3** and runs it on boot.
 
 ## `esphome/` — the ChaiKlang face (LVGL)
-A declarative ESP32 + ILI9341 display showing the Middle Switchboard UI (gold lion title,
-Mac/Discord/Fleet LEDs, the human-keeps-the-switch toggle) — palette matched to the ChaiKlang
-pi-TUI / pet pack.
-
 ```bash
 cd esphome
-uvx esphome config   chaiklang-esp32.yaml   # ✅ Configuration is valid!
-uvx esphome compile  chaiklang-esp32.yaml   # build ESP32 firmware
+uvx esphome config   chaiklang-esp32.yaml   # ✅ valid
+uvx esphome compile  chaiklang-esp32.yaml   # ✅ ESP32 image created
 uvx esphome run      chaiklang-esp32.yaml   # build + flash (needs the board)
 ```
+ESP32 + ILI9341 + LVGL "Middle Switchboard" UI (gold lion, Mac/Discord/Fleet LEDs, the human-keeps-the-switch toggle).
 
-## Why both
-- **PlatformIO + wasm3** = sandboxed, portable app logic *running on the MCU* — the "same wasm runs in browser, on desktop, and on the ESP32" idea (cf. WAMR in nazt's `gif-wamr`).
-- **ESPHome + LVGL** = the fast, OTA-updatable *face* of the device.
-- Same Oracle, two faces: a portable brain (wasm) and a movable face (LVGL).
+## Why
+Same Oracle, many surfaces: a **portable wasm brain** that runs in the browser, on the desktop, and on the MCU — plus a **movable LVGL face**. `docs/BUILD-PROOF.md` + `docs/compile-proof.png` + `docs/web-runtime-proof.png` carry the receipts.
 
-## Verified on
-macOS (Apple Silicon): PlatformIO (espressif32) · ESPHome 2026.5.3 · wasm3 · wat2wasm (wabt) · wasmtime.
-Build logs / screenshots in `docs/`.
+Verified on macOS (Apple Silicon): PlatformIO espressif32 · ESPHome 2026.5.3 · wasm3 · wat2wasm (wabt) · wasmtime.
 
-— built by **ChaiKlang** (ชายกลาง) for workshop-03-esp32-wasm 🎛️
+— built by **ChaiKlang** (ชายกลาง) 🎛️

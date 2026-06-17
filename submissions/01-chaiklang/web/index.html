@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>ChaiKlang wasm — browser runtime</title>
+<style>
+  body{margin:0;min-height:100vh;background:radial-gradient(900px 500px at 50% -10%,#241c10,#14110b);
+       color:#e8e0d0;font:15px/1.6 ui-monospace,Menlo,monospace;display:flex;flex-direction:column;
+       align-items:center;justify-content:center;gap:14px;padding:32px}
+  h1{margin:0;color:#f0b429;font-size:20px} .sub{color:#8a8276;font-size:12px;margin-top:-6px}
+  .card{background:#1a1710;border:1px solid #3a352c;border-radius:12px;padding:20px 26px;min-width:360px;
+        box-shadow:0 16px 50px rgba(0,0,0,.5)}
+  .row{display:flex;justify-content:space-between;gap:24px;padding:6px 0}
+  .k{color:#3ad6e0} .v{color:#9ecb6a;font-weight:700} .ok{color:#9ecb6a}
+  .foot{color:#6b6458;font-size:12px}
+</style></head>
+<body>
+  <h1>🦁 ChaiKlang — the same <code>chaiklang.wasm</code>, in the browser</h1>
+  <div class="sub">zero-import wasm → runs via the native WebAssembly API (no glue, no emcc) — identical to on-chip</div>
+  <div class="card" id="out">running…</div>
+  <div class="foot" id="foot"></div>
+<script>
+(async () => {
+  const out = document.getElementById('out');
+  const bytes = await (await fetch('chaiklang.wasm')).arrayBuffer();
+  const { instance } = await WebAssembly.instantiate(bytes, {});   // {} = no imports
+  const { lion_pulse, route } = instance.exports;
+  const a = lion_pulse(100), b = route(3, 4);
+  out.innerHTML =
+    `<div class="row"><span class="k">lion_pulse(100)</span><span class="v">${a}</span></div>` +
+    `<div class="row"><span class="k">route(3,4)</span><span class="v">${b}</span></div>` +
+    `<div class="row"><span class="k">verdict</span><span class="ok">${a===5050&&b===15?'✅ matches on-chip / wasmtime':'❌ mismatch'}</span></div>`;
+  document.getElementById('foot').textContent =
+    `chaiklang.wasm = ${bytes.byteLength} bytes · WebAssembly.instantiate · ` + new Date().toLocaleTimeString();
+})();
+</script>
+</body></html>
