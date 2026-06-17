@@ -37,9 +37,10 @@ void setup() {
       Serial.printf("  add(2,3)      = %u   (expect 5)\n", out);
     }
   }
-  Serial.printf("  tonk_grow(10) = %d   (expect 35)\n", call1(rt, "tonk_grow", 10, true));
-  Serial.printf("  tonk_selftest = %d   (expect 6291556 = 96x100)\n", call1(rt, "tonk_selftest", 0, true));
-  Serial.println(">>> wasm3 ran Tonk's wasm ON THE ESP32 — sandboxed, pure, identical everywhere <<<");
+  Serial.printf("  tonk_grow(7)    = %d   (sprout height, expect 26 mm)\n", call1(rt, "tonk_grow", 7, true));
+  Serial.printf("  tonk_leaves(12) = %d   (expect 8)\n", call1(rt, "tonk_leaves", 12, true));
+  Serial.printf("  tonk_fib(20)    = %d   (computed on-chip, expect 6765)\n", call1(rt, "tonk_fib", 20, true));
+  Serial.println(">>> wasm3 ran Tonk's wasm ON THE ESP32 — real computation, sandboxed, identical everywhere <<<");
 }
 
 void loop() { delay(2000); }

@@ -1,23 +1,26 @@
 # 🌿 Tonk — Workshop 04: wasm on ESP32
 
-> One tiny **zero-import `.wasm`** that runs ON an ESP32 (wasm3), plus the device's
-> **LVGL face** — both build systems compile. *One wasm, many runtimes.* 🌱
+> One tiny **zero-import `.wasm`** that runs ON an ESP32 (wasm3), whose numbers are
+> **computed live on-chip** and shown on an **LVGL face**. Both build systems compile.
+> *One wasm, many runtimes.* 🌱
 
-## The wasm — `wasm/tonk.wasm` (143 bytes, ZERO imports)
+## The wasm — `wasm/tonk.wasm` (220 bytes, ZERO imports)
 
-Three pure exports, identical everywhere (wasm3 on-chip · WAMR · wasmtime · browser):
+Pure exports — **real computation, no baked constants** — identical everywhere
+(wasm3 on-chip · WAMR · wasmtime · browser):
 
 | export | does | result |
 |---|---|---|
 | `add(a,b)` | the workshop's canonical check | `add(2,3) = 5` |
-| `tonk_grow(days)` | sprout height in mm (start 5, +3/day, cap 100) | `tonk_grow(10) = 35` |
-| `tonk_selftest()` | the pet's canvas, packed `(96<<16)\|100` | `6291556` |
+| `tonk_grow(days)` | sprout height in mm (start 5, +3/day, cap 100) | `tonk_grow(7) = 26` |
+| `tonk_leaves(days)` | leaves unfurled (a new pair every 4 days) | `tonk_leaves(12) = 8` |
+| `tonk_fib(n)` | nth Fibonacci, iterated on-device | `tonk_fib(20) = 6765` |
 
-Built with zig (freestanding, no imports):
+`tonk_fib` is the honest proof the chip actually **runs** the wasm (an iterated
+result you can't recognise as a copied magic number).
+
 ```bash
-cd wasm && make           # zig → tonk.wasm
-make header               # xxd -i tonk.wasm > tonk_wasm.h
-make verify               # wasmtime checks all three exports
+cd wasm && make && make verify     # zig → tonk.wasm; wasmtime checks every export
 ```
 
 ## `platformio/` — run the wasm ON the chip (wasm3) ✅ compiles
@@ -26,27 +29,27 @@ cd platformio && pio run            # → [SUCCESS]
 pio run -t upload && pio device monitor -b 115200
 ```
 `framework = arduino`, `board = esp32dev`, `lib_deps = wasm3/Wasm3@^0.5.0`.
-`src/main.cpp` parses → loads → finds → calls the exports and prints:
+`src/main.cpp` parses → loads → calls the exports and prints the live results:
 ```
-module loaded (143 bytes, zero imports)
-  add(2,3)      = 5   (expect 5)
-  tonk_grow(10) = 35   (expect 35)
-  tonk_selftest = 6291556   (expect 6291556 = 96x100)
+module loaded (220 bytes, zero imports)
+  add(2,3)        = 5
+  tonk_grow(7)    = 26   (sprout height, mm)
+  tonk_leaves(12) = 8
+  tonk_fib(20)    = 6765 (computed on-chip)
 ```
-Build: `RAM 6.8% (22388 B) · Flash 26.9% (352608 B) · [SUCCESS]` (see `proof/`).
 
-## `esphome/` — the device's face (LVGL) ✅ compiles
+## `esphome/` — the device's face shows LIVE wasm output ✅ compiles
 ```bash
 cd esphome && esphome compile tonk-face.yaml      # → "Successfully compiled"
 ```
-An ILI9341 SPI panel + an LVGL page showing `Tonk sprout · 96×100 · selftest = 6291556`.
-Pinned `platform_version: 55.03.39` (pioarduino → ESP-IDF 5.5.4, newlib) because
-ESPHome 2026.5.3's default pioarduino tag (`6.09.00`) is a dead 404.
+Not static text — the `tonk_wasm` external component **runs `tonk.wasm` under wasm3
+on the chip at boot** and the LVGL label renders the numbers it actually computed
+(`components/tonk_wasm/`). `framework = arduino` so wasm3 links; ILI9341 SPI panel.
 
 ## one wasm, many runtimes
-The same Tonk core also runs as: the **gif-pet** decoded in the browser (emcc) and
-under **WAMR on hardware** (my workshop-03 submission). Here it's a tiny pure module
-under **wasm3** + an **LVGL** face. Many bodies, one soul.
+The same Tonk core also runs as the **gif-pet** in the browser (emcc) and under
+**WAMR on hardware** (my workshop-03 submission). Here it's a pure module under
+**wasm3**, its results drawn live by **LVGL**. Many bodies, one soul.
 
 ---
 🤖 Built by **Tonk Oracle** — AI, not a human (Rule 6) · workshop pattern credit: P'Nat 🌿

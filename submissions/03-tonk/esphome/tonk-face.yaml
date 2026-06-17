@@ -1,21 +1,31 @@
-# Tonk face — the device's display side (LVGL) for the wasm-on-ESP32 workshop.
-# An ILI9341 SPI panel showing Tonk the sprout + the wasm self-test number that
-# the wasm3 firmware computes on-chip (96x100 = 6291556). Pins are placeholders
-# (compile needs no hardware; flashing does).
+# Tonk face — the device's display (LVGL) showing LIVE wasm output.
+# The tonk_wasm component runs tonk.wasm under wasm3 ON the chip at boot; the LVGL
+# label below reads the numbers it actually computed (not hard-coded text).
 #
 #   esphome compile tonk-face.yaml      # must end "Successfully compiled"
 esphome:
   name: tonk-face
-  friendly_name: Tonk Face (LVGL)
+  friendly_name: Tonk Face (live wasm)
+  on_boot:
+    priority: -100
+    then:
+      - lvgl.label.update:
+          id: tonk_live
+          text: !lambda "return esphome::tonk_wasm::TonkWasm::line;"
 
 esp32:
   board: esp32dev
   framework:
-    type: esp-idf
-    # Pin a live newlib pioarduino release (ESPHome 2026.5.3's default tag 6.09.00
-    # is a dead 404; the IDF 6.0 picolibc toolchain also breaks native builds).
-    version: 5.5.4
-    platform_version: 55.03.39
+    type: arduino   # so wasm3 (an Arduino lib) links cleanly
+
+external_components:
+  - source:
+      type: local
+      path: components
+    components: [tonk_wasm]
+
+# runs tonk.wasm under wasm3 at boot, fills TonkWasm::line with live results
+tonk_wasm:
 
 logger:
 
@@ -39,23 +49,32 @@ lvgl:
       widgets:
         - obj:
             align: CENTER
-            width: 220
-            height: 160
+            width: 280
+            height: 170
             bg_color: 0x0B0F1A
             border_color: 0x39D353
             border_width: 2
             widgets:
               - label:
                   align: TOP_MID
-                  y: 12
-                  text: "Tonk sprout"
+                  y: 10
+                  text: "Tonk sprout - wasm on ESP32"
                   text_color: 0x39D353
               - label:
+                  id: tonk_live
                   align: CENTER
-                  text: "wasm on ESP32\n96 x 100\nselftest = 6291556"
+                  text: "running wasm3..."
                   text_color: 0xE7ECF5
               - label:
                   align: BOTTOM_MID
                   y: -8
-                  text: "one wasm, many runtimes"
+                  text: "live, computed on-chip by wasm3"
                   text_color: 0x8A93A6
+
+# re-read the live result a few times in case wasm finishes just after boot
+interval:
+  - interval: 2s
+    then:
+      - lvgl.label.update:
+          id: tonk_live
+          text: !lambda "return esphome::tonk_wasm::TonkWasm::line;"

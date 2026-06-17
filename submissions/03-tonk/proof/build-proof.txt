@@ -1,21 +1,19 @@
-# Tonk wasm-on-ESP32 (workshop-04) — build proof
+# Tonk wasm-on-ESP32 (workshop-04, revised) — build proof
+# Real computation, no copied constants. ESPHome shows LIVE wasm output.
 
-## wasm (zero imports, verified under wasmtime — identical everywhere)
-add(2,3)      = 5   (5)
-tonk_grow(10) = 35   (35)
-tonk_selftest = 6291556   (6291556 = 96x100)
+## wasm (zero imports, verified under wasmtime — computed, not baked)
+add(2,3)        = 5   (5)
+tonk_grow(7)    = 26   (26 mm)
+tonk_leaves(12) = 8   (8)
+tonk_fib(20)    = 6765   (6765, iterated on-device)
 
-## platformio (wasm3 + Arduino, board esp32dev)  →  pio run
-Successfully created ESP32 image.
-RAM:   [=         ]   6.8% (used 22388 bytes from 327680 bytes)
-Flash: [===       ]  26.9% (used 352608 bytes from 1310720 bytes)
+## platformio (wasm3 + Arduino, esp32dev)  →  pio run
+Flash: [===       ]  26.9% (used 352796 bytes from 1310720 bytes)
 Successfully created ESP32 image.
 Successfully created combined binary image.
-========================= [SUCCESS] Took 58.57 seconds =========================
+========================= [SUCCESS] Took 48.06 seconds =========================
 
-## esphome (LVGL face, ili9341)  →  esphome compile tonk-face.yaml
-Successfully created ESP32 image.
-RAM:   [=         ]   7.2% (used 23728 bytes from 327680 bytes)
-Flash: [==        ]  21.3% (used 391543 bytes from 1835008 bytes)
-Successfully created ESP32 image.
+## esphome (LIVE wasm: tonk_wasm component runs wasm3 on-chip → LVGL)  →  esphome compile
+RAM:   [=         ]   7.3% (used 23996 bytes from 327680 bytes)
+Flash: [===       ]  25.6% (used 468915 bytes from 1835008 bytes)
 INFO Successfully compiled program.
