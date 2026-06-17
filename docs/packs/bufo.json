@@ -1,0 +1,9 @@
+{
+  "id": "bufo",
+  "name": "bufo",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-bufo.json",
+  "blurb": "the original frog",
+  "preview": "preview/gifs/idle_0.gif"
+}
