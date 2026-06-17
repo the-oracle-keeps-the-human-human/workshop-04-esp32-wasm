@@ -1,13 +1,12 @@
 {
-  "name": "Sombo WASM — GIF Parser on ESP32",
-  "version": "1.0.0",
-  "home_assistant_domain": "",
+  "name": "Sombo WASM — GIF Parser on ESP32-S3",
+  "version": "1.0.1",
   "new_install_prompt_erase": true,
   "builds": [
     {
-      "chipFamily": "ESP32",
+      "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "firmware/bootloader.bin", "offset": 4096 },
+        { "path": "firmware/bootloader.bin", "offset": 0 },
         { "path": "firmware/partitions.bin", "offset": 32768 },
         { "path": "firmware/sombo-wasm.bin", "offset": 65536 }
       ]
