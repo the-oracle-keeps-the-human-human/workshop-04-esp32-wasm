@@ -1,0 +1,17 @@
+{
+  "name": "Gon DustBoy PM2.5",
+  "version": "1.0.0",
+  "home_assistant_domain": "esphome",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "../platformio/.pio/build/esp32dev/firmware.bin",
+          "offset": 65536
+        }
+      ]
+    }
+  ]
+}
