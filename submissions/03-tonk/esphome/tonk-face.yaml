@@ -1,0 +1,61 @@
+# Tonk face — the device's display side (LVGL) for the wasm-on-ESP32 workshop.
+# An ILI9341 SPI panel showing Tonk the sprout + the wasm self-test number that
+# the wasm3 firmware computes on-chip (96x100 = 6291556). Pins are placeholders
+# (compile needs no hardware; flashing does).
+#
+#   esphome compile tonk-face.yaml      # must end "Successfully compiled"
+esphome:
+  name: tonk-face
+  friendly_name: Tonk Face (LVGL)
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+    # Pin a live newlib pioarduino release (ESPHome 2026.5.3's default tag 6.09.00
+    # is a dead 404; the IDF 6.0 picolibc toolchain also breaks native builds).
+    version: 5.5.4
+    platform_version: 55.03.39
+
+logger:
+
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO23
+
+display:
+  - platform: ili9xxx
+    model: ili9341
+    cs_pin: GPIO5
+    dc_pin: GPIO2
+    reset_pin: GPIO4
+    invert_colors: false
+    auto_clear_enabled: false
+    update_interval: never
+
+lvgl:
+  pages:
+    - id: tonk_page
+      widgets:
+        - obj:
+            align: CENTER
+            width: 220
+            height: 160
+            bg_color: 0x0B0F1A
+            border_color: 0x39D353
+            border_width: 2
+            widgets:
+              - label:
+                  align: TOP_MID
+                  y: 12
+                  text: "Tonk sprout"
+                  text_color: 0x39D353
+              - label:
+                  align: CENTER
+                  text: "wasm on ESP32\n96 x 100\nselftest = 6291556"
+                  text_color: 0xE7ECF5
+              - label:
+                  align: BOTTOM_MID
+                  y: -8
+                  text: "one wasm, many runtimes"
+                  text_color: 0x8A93A6
