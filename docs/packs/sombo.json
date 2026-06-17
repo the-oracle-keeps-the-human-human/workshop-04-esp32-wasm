@@ -5,5 +5,15 @@
   "tag": "ESP32",
   "manifest": "manifest-sombo.json",
   "blurb": "GIF header parser \u2014 gif_parse \u2192 96\u00d7100",
-  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo"
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo",
+  "previewDir": "sombo-pet/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate",
+    "dizzy",
+    "sleep",
+    "heart"
+  ]
 }

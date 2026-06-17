@@ -1,10 +1,17 @@
 {
   "id": "vessel-pet",
-  "name": "Vessel ⛵",
+  "name": "Vessel \u26f5",
   "kind": "pet",
   "tag": "ESP32-S3",
   "manifest": "manifest-vessel-pet.json",
   "preview": "preview/gifs/vessel-pet/idle.gif",
-  "blurb": "courier desk-pet — pixel-art",
-  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel"
+  "blurb": "courier desk-pet \u2014 pixel-art",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-vessel",
+  "previewDir": "vessel-pet/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate"
+  ]
 }

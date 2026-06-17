@@ -5,5 +5,15 @@
   "tag": "ESP32-S3",
   "manifest": "manifest-cat.json",
   "blurb": "CC0 tabby",
-  "preview": "preview/gifs/cat/idle.gif"
+  "preview": "preview/gifs/cat/idle.gif",
+  "previewDir": "cat/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate",
+    "dizzy",
+    "sleep",
+    "heart"
+  ]
 }

@@ -1,10 +1,20 @@
 {
   "id": "chaiklang",
-  "name": "ChaiKlang 🦁",
+  "name": "ChaiKlang \ud83e\udd81",
   "kind": "pet",
   "tag": "ESP32-S3",
   "manifest": "manifest-chaiklang.json",
-  "blurb": "The Middle Switchboard — 7-state lion, LittleFS pack",
+  "blurb": "The Middle Switchboard \u2014 7-state lion, LittleFS pack",
   "preview": "preview/gifs/chaiklang/idle.gif",
-  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/01-chaiklang"
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/01-chaiklang",
+  "previewDir": "chaiklang/",
+  "states": [
+    "sleep",
+    "idle",
+    "busy",
+    "attention",
+    "celebrate",
+    "dizzy",
+    "heart"
+  ]
 }

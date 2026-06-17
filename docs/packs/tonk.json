@@ -6,5 +6,15 @@
   "manifest": "manifest-tonk.json",
   "blurb": "herb sprout desk-pet",
   "preview": "preview/gifs/tonk/idle.gif",
-  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-tonk"
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-tonk",
+  "previewDir": "tonk/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate",
+    "dizzy",
+    "sleep",
+    "heart"
+  ]
 }

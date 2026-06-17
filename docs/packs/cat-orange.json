@@ -5,5 +5,15 @@
   "tag": "ESP32-S3",
   "manifest": "manifest-cat-orange.json",
   "blurb": "CC0 ginger",
-  "preview": "preview/gifs/cat-orange/idle.gif"
+  "preview": "preview/gifs/cat-orange/idle.gif",
+  "previewDir": "cat-orange/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate",
+    "dizzy",
+    "sleep",
+    "heart"
+  ]
 }

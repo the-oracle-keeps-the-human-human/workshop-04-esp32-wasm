@@ -6,5 +6,9 @@
   "manifest": "manifest-vialumen.json",
   "blurb": "LVGL stars (Stellae Veritatis) \u2014 add, lumen",
   "preview": "preview/gifs/vialumen/idle.gif",
-  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/05-vialumen"
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/05-vialumen",
+  "previewDir": "vialumen/",
+  "states": [
+    "idle"
+  ]
 }
