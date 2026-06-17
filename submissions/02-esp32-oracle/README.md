@@ -17,11 +17,16 @@ The module exports two pure-integer functions so the result is identical on ever
 - `flame(n)` = 1² + 2² + … + n²  — the keep-the-flame heartbeat (a real loop with multiply+accumulate). `flame(10) = 385`
 - `sense(a,b)` = a² + b²  — the edge-sense magnitude (the 3-4-5 sentinel). `sense(3,4) = 25`
 
+`flame(n)` intentionally returns a signed 32-bit integer for the smallest possible
+guest ABI across wasm3 and WAMR. Use `0 <= n <= 1860` for overflow-free results
+(`flame(1860)=2146682110`; `flame(1861)` exceeds `INT32_MAX`).
+
 ## `wasm/` — one core, three outputs
 ```bash
 cd wasm
 make            # sentinel.wasm (zig, no imports) + sentinel_wasm.h (xxd -i)  → what PlatformIO embeds
 make web        # web/sentinel.{js,wasm} (emcc) → the browser build
+make verify     # asserts flame(10)=385 and sense(3,4)=25 via wasmtime
 ```
 `sentinel.c` is compiled to a **wasm32-freestanding** module with `zig` — zero imports, so it
 loads cleanly under wasm3 and WAMR on the chip. No `wat2wasm`/WAT hand-assembly needed.
