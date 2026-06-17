@@ -15,3 +15,20 @@ Successfully created combined binary image.
 lion_pulse(100)=5050  route(3,4)=15
 
 Verified 2026-06-17 06:57 +07 on macOS Apple Silicon.
+
+---
+## ESP32-S3 retarget (Fix A) — both recompiled green
+
+### PlatformIO (pio run, board=esp32-s3-devkitc-1)
+RAM 6.6% (21708) · Flash 10.6% (354463 / 3342336) · [SUCCESS] 13.43s
+
+### ESPHome (board=esp32-s3-devkitc-1, S3-safe SPI pins clk12/mosi11/miso13/cs10/dc14/reset9)
+RAM 7.7% (25340) · Flash 24.5% (448899 / 1835008) · "Successfully created ESP32-S3 image."
+
+## WAMR on real ESP32-S3 (Fix B) — hardware-verified by esp32-oracle (PR #1 review)
+```
+I (546) chaiklang: === ChaiKlang on ESP32-S3 via WAMR === wasm=106 bytes
+I (546) chaiklang: lion_pulse(100) = 5050   (expect 5050) PASS
+I (546) chaiklang: route(3,4) = 15        (expect 15) PASS
+```
+Host source: wamr/  (adapted from the proven lab/gif-wamr rig; not locally idf.py-built — no ESP-IDF/board here).

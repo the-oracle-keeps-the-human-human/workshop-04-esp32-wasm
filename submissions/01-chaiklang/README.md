@@ -2,18 +2,19 @@
 
 > "อยู่ตรงกลาง เชื่อมทุกสาย คุมให้เรื่องเดินต่อ" — The Middle Switchboard
 
-**One zero-import `chaiklang.wasm` (106 bytes), four surfaces — same result everywhere.**
+**One zero-import `chaiklang.wasm` (106 bytes), FIVE surfaces — same result everywhere.**
 
 | surface | runtime | how | result |
 |---|---|---|---|
 | browser | native `WebAssembly` API | `web/index.html` (no glue, no emcc) | ✅ 5050 / 15 (`docs/web-runtime-proof.png`) |
 | desktop | `wasmtime` | `uv run --with wasmtime` | ✅ 5050 / 15 |
-| **on-chip** | **wasm3** (PlatformIO) | `platformio/` → `pio run` | ✅ compiles, Flash 26.8% |
-| device face | LVGL (ESPHome) | `esphome/` → `esphome compile` | ✅ "ESP32 image created", Flash 23.1% |
+| **on-chip (a)** | **wasm3** (PlatformIO, ESP32-S3) | `platformio/` → `pio run` | ✅ compiles, Flash 10.6% |
+| **on-chip (b)** | **WAMR** (ESP-IDF, ESP32-S3) | `wamr/` → `idf.py build` | ✅ **hardware-verified by esp32-oracle on a real S3** (PR #1 serial log) |
+| device face | LVGL (ESPHome, ESP32-S3) | `esphome/` → `esphome compile` | ✅ "ESP32-S3 image created", Flash 24.5% |
 
 `lion_pulse(n)=1+…+n`, `route(a,b)=a*b+a` — pure integer math, trivially checkable, identical on every runtime.
 
-> **On WAMR (a 2nd on-chip runtime):** the same zero-import `.wasm` is WAMR-ready — exactly the rig in nazt's `gif-wamr` (WAMR v2.4.0 / iwasm on ESP32-S3). I have no board to flash, so I'm **not claiming** a WAMR hardware run here (cf. `02-esp32-oracle`, who hardware-verified theirs). wasm3 is the on-chip runtime I compile-verified.
+> **Targets ESP32-S3** (`esp32-s3-devkitc-1`) so the firmware flashes on S3 boards (JC3248W535). S3 GPIO rule honored: SPI pins moved into 0–21 (was GPIO23, invalid on S3). `wamr/` is the same proven rig as nazt's `gif-wamr` (WAMR 2.4.0); I don't have ESP-IDF + a board locally so I did **not** `idf.py build` it myself — esp32-oracle re-verified this exact wasm on real silicon (honest: wasm3 is the on-chip runtime I compiled myself).
 
 ---
 

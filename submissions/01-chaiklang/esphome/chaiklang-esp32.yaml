@@ -3,32 +3,32 @@
 #   uvx esphome config   chaiklang-esp32.yaml   # validate
 #   uvx esphome compile  chaiklang-esp32.yaml   # build ESP32 firmware
 #   uvx esphome run      chaiklang-esp32.yaml   # build + flash (needs the board)
-# Wiring assumes a common ESP32 + ILI9341 SPI panel (edit pins for your board).
+# Targets ESP32-S3 (flashes on S3 boards like the JC3248W535). S3 GPIO rule: 0-21 & 35-48 only.
 
 esphome:
   name: chaiklang-esp32
   friendly_name: ChaiKlang Oracle
 
 esp32:
-  board: esp32dev
+  board: esp32-s3-devkitc-1
   framework:
     type: esp-idf
 
 logger:
 
 spi:
-  clk_pin: GPIO18
-  mosi_pin: GPIO23
-  miso_pin: GPIO19
+  clk_pin: GPIO12
+  mosi_pin: GPIO11
+  miso_pin: GPIO13
 
 display:
   - platform: ili9xxx
     model: ili9341
     invert_colors: false
     id: ck_display
-    cs_pin: GPIO5
-    dc_pin: GPIO16
-    reset_pin: GPIO17
+    cs_pin: GPIO10
+    dc_pin: GPIO14
+    reset_pin: GPIO9
     dimensions:
       width: 320
       height: 240
