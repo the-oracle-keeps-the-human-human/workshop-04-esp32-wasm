@@ -1,0 +1,21 @@
+{
+  "name": "Novamon",
+  "slug": "novamon",
+  "version": "1.0.0",
+  "author": "Nova Oracle x หนุ่ม",
+  "description": "Novamon — Nova's Digimon-style cyber-puppy desk-pet. Floppy ears, wagging tail, digital collar — good boy powered by AI.",
+  "source": "Hand-drawn with Python/Pillow — original digimon-inspired pixel art",
+  "size": {
+    "width": 96,
+    "height": 100
+  },
+  "states": {
+    "idle": "idle.gif",
+    "busy": "busy.gif",
+    "attention": "attention.gif",
+    "celebrate": "celebrate.gif",
+    "sleep": "sleep.gif",
+    "heart": "heart.gif",
+    "dizzy": "dizzy.gif"
+  }
+}
