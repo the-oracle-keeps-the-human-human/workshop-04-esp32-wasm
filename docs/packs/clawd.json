@@ -1,0 +1,9 @@
+{
+  "id": "clawd",
+  "name": "clawd",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-clawd.json",
+  "blurb": "Claude mascot \u00b7 MIT",
+  "preview": "preview/gifs/clawd/clawd-idle.gif"
+}

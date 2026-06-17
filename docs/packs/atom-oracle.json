@@ -1,0 +1,9 @@
+{
+  "id": "atom-oracle",
+  "name": "Atom Oracle \u269b\ufe0f",
+  "kind": "firmware",
+  "tag": "ESP32",
+  "manifest": "manifest-atom-oracle.json",
+  "blurb": "Atomic Pulse \u2014 atom-orbit wasm",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/06-atom-oracle"
+}

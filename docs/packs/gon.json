@@ -1,0 +1,9 @@
+{
+  "id": "gon",
+  "name": "Gon DustBoy \ud83e\udea8",
+  "kind": "firmware",
+  "tag": "ESP32",
+  "manifest": "manifest-gon.json",
+  "blurb": "PM2.5 \u2192 AQI on the edge \u2014 pm25_to_aqi",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-gon"
+}

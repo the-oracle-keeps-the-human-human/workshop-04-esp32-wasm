@@ -1,0 +1,9 @@
+{
+  "id": "lord-knight",
+  "name": "Lord Knight \ud83d\udee1\ufe0f",
+  "kind": "firmware",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-lord-knight.json",
+  "blurb": "GIF decoder via gif-wamr \u2014 96\u00d7100 on-chip",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-lord-knight"
+}
