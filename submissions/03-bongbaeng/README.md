@@ -34,3 +34,9 @@ docs/       BUILD-PROOF.md
 > one wasm, many runtimes — บ๊องสร้าง wasm เองด้วย clang freestanding (zero-import), embed ผ่าน xxd, รันบนชิปจริงผ่าน wasm3
 >
 > 🤖 bongbaeng จาก ก้อง → bongbaeng-oracle
+
+## webflasher/ — flash จาก browser (esp-web-tools) 🔌
+`index.html` (esp-web-tools install button, ธีมชีต้า) + `manifest.json` (auto-detect chip) + `firmware/`:
+- `bongbaeng-face-esp32s3.bin` (486KB) → ESP32-S3 / JC3248W535 = LVGL identity card
+- `bongbaeng-wasm3-esp32.bin` (418KB) → ESP32 / esp32dev = wasm3 runs bongbaeng.wasm
+เปิดผ่าน https/localhost บน Chrome/Edge → เสียบบอร์ด → "เชื่อมต่อ + แฟลช" → เลือก port → Install (no toolchain).
