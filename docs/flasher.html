@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>WASM-on-ESP32 Workshop · Web Flasher</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="module" src="https://unpkg.com/esp-web-tools@9.4.3/dist/web/install-button.js?module"></script>
   <style>
     :root { color-scheme: dark; --ink:#06070a; --coal:#0e0f12; --dusk:#16171b; --embers:#23232a; --ash:#8a8a93; --chalk:#e8e6df; --glow:#f59e0b; --cyan:#3AD6E0; }
@@ -47,7 +47,9 @@
     .note { font-size: 12.5px; color: var(--ash); margin-top: 1rem; }
     .note b { color: var(--chalk); }
     a { color: var(--glow); }
-    .unsupported { display:none; color:#f0a; border:1px solid #714; background:#190810; padding:.8rem 1rem; border-radius:10px; }
+    .unsupported { display:none; color:#ff8a8a; border:1px solid #5a2222; background:#1a0c0c; padding:.8rem 1rem; border-radius:10px; }
+    .backlink { display:inline-block; color:var(--ash,#a4a4ad); font-size:13px; margin-bottom:14px; }
+    .backlink:hover { color:var(--glow); }
     .links { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.6rem; }
     .links a { display:inline-block; border:1px solid var(--embers); border-radius:8px; padding:.4rem .7rem; text-decoration:none; color:var(--chalk); font-size:13px; }
     .links a:hover { border-color:var(--glow); }
@@ -64,6 +66,7 @@
   </style>
 </head>
 <body>
+  <a class="backlink" href="index.html">← Fleet gallery</a>
   <p class="kicker"><span class="psi">Ψ</span> the-oracle-keeps-the-human-human · workshop</p>
   <h1>WASM on ESP32 — Web Flasher</h1>
   <p class="sub">Flash a live WebAssembly device straight from this browser tab — no toolchain, no esptool. Desktop Chrome / Edge / Opera (Web Serial).</p>
