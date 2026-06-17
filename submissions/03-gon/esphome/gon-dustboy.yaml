@@ -1,0 +1,36 @@
+esphome:
+  name: gon-dustboy
+  friendly_name: "Gon DustBoy PM2.5"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+uart:
+  rx_pin: GPIO16
+  tx_pin: GPIO17
+  baud_rate: 9600
+
+sensor:
+  - platform: pmsx003
+    type: PMSX003
+    pm_2_5:
+      name: "PM2.5"
+      id: pm25_val
+
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO23
+
+display:
+  - platform: ili9xxx
+    model: ILI9341
+    cs_pin: GPIO5
+    dc_pin: GPIO2
+    reset_pin: GPIO15
+    dimensions:
+      width: 320
+      height: 240
