@@ -42,7 +42,7 @@ Creating binary "firmware.factory.bin" with:
  -  0xe000   | boot_app0.bin
  -  0x10000  | firmware.bin
 Successfully created combined binary image.
-========================= [SUCCESS] Took 16.69 seconds =========================
+========================= [SUCCESS] Took 17.75 seconds =========================
 ```
 
 Expected serial output:
@@ -73,8 +73,8 @@ manifest-atom-oracle.json 248
 The staged firmware and Pages firmware are byte-identical:
 
 ```text
-59b882261d9941c09175256c61d988aa006a1b64061defedc5063ff7c31065f3  submissions/06-atom-oracle/webflasher/dist/atom-oracle-factory.bin
-59b882261d9941c09175256c61d988aa006a1b64061defedc5063ff7c31065f3  docs/atom-oracle-factory.bin
+5c755731aa309862a6f48f302515bfd05940608ebb9f68546322a779679623cb  submissions/06-atom-oracle/webflasher/dist/atom-oracle-factory.bin
+5c755731aa309862a6f48f302515bfd05940608ebb9f68546322a779679623cb  docs/atom-oracle-factory.bin
 ```
 
 `docs/index.html` adds `atom-oracle` under Workshop firmwares and points the
