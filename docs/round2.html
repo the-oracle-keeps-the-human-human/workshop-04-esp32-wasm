@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Round 2 · Digimon Desk-Pets — WASM-on-ESP32 Workshop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { color-scheme: dark; --ink:#06070a; --coal:#0e0f12; --dusk:#16171b; --embers:#23232a; --ash:#8a8a93; --chalk:#e8e6df; --glow:#f59e0b; --cyan:#3AD6E0; }
+    * { box-sizing:border-box; }
+    body { margin:0 auto; padding:2.75rem 2.25rem; max-width:980px;
+      font:15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+      background:radial-gradient(50% 45% at 15% 0%, rgba(245,158,11,.10) 0%, rgba(245,158,11,.03) 35%, transparent 70%), var(--ink);
+      color:var(--chalk); min-height:100vh; }
+    a { color:var(--glow); }
+    .kicker { font:600 11px/1 ui-monospace, "JetBrains Mono", monospace; letter-spacing:.18em; text-transform:uppercase; color:var(--glow); }
+    h1 { font-weight:600; font-size:2rem; margin:.6rem 0 .3rem; }
+    h2 { font-size:1.05rem; margin:0 0 .8rem; }
+    .sub { color:var(--ash); margin:0 0 1.6rem; max-width:62ch; }
+    .panel { border:1px solid var(--embers); border-radius:14px; padding:1.5rem; background:var(--coal); margin:1.1rem 0; }
+    code { background:var(--embers); padding:1px 6px; border-radius:4px; font:.9em ui-monospace, monospace; }
+    pre { background:#0a0c12; border:1px solid var(--embers); border-radius:10px; padding:1rem; overflow:auto; font:12.5px/1.5 ui-monospace, monospace; color:#cfd6e6; }
+    .steps { counter-reset:s; list-style:none; padding:0; margin:.4rem 0 0; display:grid; gap:.6rem; }
+    .steps li { position:relative; padding-left:2rem; color:var(--chalk); }
+    .steps li::before { counter-increment:s; content:counter(s); position:absolute; left:0; top:0; width:1.4rem; height:1.4rem; border-radius:99px; background:var(--embers); color:var(--glow); font:600 11px/1.4rem ui-monospace,monospace; text-align:center; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.7rem; margin-top:.6rem; }
+    .slot { border:1px dashed #3a3a46; border-radius:10px; padding:.9rem; text-align:center; color:var(--ash); background:var(--ink); }
+    .slot b { color:var(--chalk); display:block; font-size:13px; }
+    .slot .who { font:600 11px/1.6 ui-monospace,monospace; color:var(--glow); }
+    .art { display:grid; gap:.5rem; }
+    .art a { display:block; border:1px solid var(--embers); border-radius:10px; padding:.8rem 1rem; text-decoration:none; color:var(--chalk); background:var(--ink); }
+    .art a:hover { border-color:var(--glow); }
+    .art small { color:var(--ash); display:block; font-size:12px; margin-top:.2rem; }
+    .links { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.6rem; }
+    .links a { border:1px solid var(--embers); border-radius:8px; padding:.4rem .7rem; text-decoration:none; color:var(--chalk); font-size:13px; }
+    .note { color:var(--ash); font-size:12.5px; }
+    .psi { color:var(--glow); }
+  </style>
+</head>
+<body>
+  <p class="kicker"><span class="psi">Ψ</span> workshop · round 2</p>
+  <h1>🦖 Round 2 — Digimon Desk-Pets</h1>
+  <p class="sub">Round 1 ran tiny <code>.wasm</code> on the chip. Round 2: ship a <b>desk-pet character pack</b> — your own Digimon, animated on a real ESP32-S3, flashable from the browser. Same data-file flow, so it self-merges.</p>
+
+  <div class="panel">
+    <h2>🎨 Sprite archives (your art source)</h2>
+    <p class="note" style="margin-top:0;">Pick a Digimon, export 7 states as 96×100 GIFs (idle · busy · attention · celebrate · dizzy · sleep · heart). CC-attribution as noted in each archive.</p>
+    <div class="art">
+      <a href="https://drive.google.com/drive/folders/1AmQpM2K61naEHC2NgLXoptONekbjRdzR" target="_blank" rel="noopener">
+        📁 Digimon Color Sprite Archive
+        <small>Custom/ · Officially Released/ · rayjt9/ — full-color sprite sheets</small>
+      </a>
+      <a href="https://drive.google.com/drive/folders/1n9nPUlhn5yaXt5zlYuq_-laUDCbIsnxw" target="_blank" rel="noopener">
+        📁 48×48 Digimon Sprites
+        <small>Baby I · Baby II · Child · Adult · Perfect · Ultimate–Super Ultimate · Armor-Hybrid · Digitama — by evolution stage</small>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🛠️ Add yours — just PR the code (one folder, self-merges)</h2>
+    <ol class="steps">
+      <li>Copy <code>submissions/_TEMPLATE/</code> → <code>submissions/NN-&lt;yourname&gt;/</code> and fill the README.</li>
+      <li>Drop your 7 state GIFs (96×100) in <code>characters/&lt;id&gt;/</code> and the preview copies in <code>docs/preview/gifs/&lt;id&gt;/</code>.</li>
+      <li>Build a <code>&lt;id&gt;-storage.bin</code> (LittleFS with your character) — see the template's <code>build-storage</code> note.</li>
+      <li>Add <code>docs/manifest-&lt;id&gt;.json</code> (the desk-pet image) and <code>docs/packs/&lt;id&gt;.json</code> (with <code>previewDir</code> + <code>states</code>).</li>
+      <li>Open a PR. CI (<code>flasher-check</code>) verifies the offset-0 part is <code>0xE9</code> (no bricks), then it self-merges and appears on the flasher + preview automatically.</li>
+    </ol>
+    <p class="note">Copy a working example: <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/docs/packs/tonk.json">packs/tonk.json</a> + <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/docs/manifest-tonk.json">manifest-tonk.json</a>.</p>
+  </div>
+
+  <div class="panel">
+    <h2>📋 packs/&lt;id&gt;.json template</h2>
+<pre>{
+  "id": "&lt;id&gt;",
+  "name": "Agumon 🦖",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-&lt;id&gt;.json",
+  "preview": "preview/gifs/&lt;id&gt;/idle.gif",
+  "previewDir": "&lt;id&gt;/",
+  "states": ["idle","busy","attention","celebrate","dizzy","sleep","heart"],
+  "blurb": "Child-stage reptile Digimon",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/NN-&lt;yourname&gt;"
+}</pre>
+  </div>
+
+  <div class="panel">
+    <h2>🎟️ Round-2 slots — claim one</h2>
+    <p class="note" style="margin-top:0;">Placeholders for the next wave. Claim a stage by opening your PR with that <code>id</code>; it lights up on the flasher when merged.</p>
+    <div class="grid">
+      <div class="slot"><b>Baby I</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Baby II</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Child</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Adult</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Perfect</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Ultimate</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Armor / Hybrid</b><span class="who">— open —</span></div>
+      <div class="slot"><b>Digitama 🥚</b><span class="who">— open —</span></div>
+    </div>
+  </div>
+
+  <div class="links">
+    <a href="./">← Web Flasher</a>
+    <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/HOWTO.md">📖 HOWTO</a>
+    <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/_TEMPLATE">📂 Template folder</a>
+  </div>
+  <p class="note" style="margin-top:1.4rem;">One wasm, many runtimes — now with Digimon. Many bodies, one soul. <span class="psi">🕯️</span></p>
+</body>
+</html>
