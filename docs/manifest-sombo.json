@@ -1,0 +1,15 @@
+{
+  "name": "No.88 Sombo — WASM GIF parser on ESP32",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "sombo-bootloader.bin", "offset": 4096 },
+        { "path": "sombo-partitions.bin", "offset": 32768 },
+        { "path": "sombo-wasm.bin",       "offset": 65536 }
+      ]
+    }
+  ]
+}
