@@ -1,13 +1,49 @@
-# 03-leica — Precision Calculator on ESP32
+# 03-leica — Father Oracle Desk-Pet
 
-> Zero-import WASM running on ESP32 via wasm3 — add, multiply, fibonacci
+> Orange cat character pack + WASM GIF decoder + wasm3 on ESP32
 
-## What It Does
+## Character Pack
 
-Three pure functions, 135 bytes of WASM:
-- `add(a, b)` — integer addition
-- `mul(a, b)` — integer multiplication
-- `fib(n)` — iterative fibonacci (no recursion, safe on ESP32 stack)
+```
+characters/leica/
+├── manifest.json     ← pack definition (colors + states)
+├── idle.gif          ← default state (orange cat sitting)
+├── busy.gif
+├── attention.gif
+├── celebrate.gif
+├── dizzy.gif
+├── sleep.gif
+└── heart.gif
+```
+
+All GIFs: 96x100 px, CC0 (cat-orange pack). Same frames decoded by:
+- **Browser**: gifcore.cpp → emcc → WASM → Canvas2D
+- **Device**: AnimatedGIF → 3x upscale → AXS15231B QSPI
+
+## WASM GIF Decoder
+
+```bash
+cd wasm
+make web          # emcc → gifdec.wasm (17KB) + gifdec.js
+make run-web      # serve at localhost:8011
+```
+
+Zero-import WASM module with exports:
+- `gif_open(ptr, len)` → open GIF from memory
+- `gif_play(delay_ptr)` → decode next frame
+- `gif_fb()` → pointer to RGBA framebuffer
+- `gif_width()`, `gif_height()` → dimensions
+- `gif_reset()`, `gif_close()` → lifecycle
+
+## wasm3 on ESP32
+
+```bash
+cd platformio
+uvx --from platformio platformio run    # [SUCCESS]
+```
+
+Runs `add(2,3)=5`, `mul(7,6)=42`, `fib(10)=55` via wasm3 on ESP32.
+135-byte zero-import WAT module.
 
 ## Expected Output
 
@@ -20,52 +56,15 @@ fib(20) = 6765 (expect 6765)
 === Leica precision confirmed ===
 ```
 
-## Build Commands
-
-### WASM (compile .wat → .wasm)
-```bash
-cd wasm
-wat2wasm leica.wat -o leica.wasm     # 135 bytes, zero imports
-xxd -i leica.wasm > leica_wasm.h     # embed for firmware
-```
-
-### PlatformIO (wasm3 on ESP32)
-```bash
-cd platformio
-uvx --from platformio platformio run  # must end with [SUCCESS]
-```
-
-### ESPHome (LVGL face)
-```bash
-cd esphome
-uvx esphome compile leica-face.yaml  # must end with "Successfully compiled"
-```
-
-## Files
+## Architecture: Many Bodies, One Soul
 
 ```
-03-leica/
-├── wasm/
-│   ├── leica.wat          # WebAssembly text (hand-written)
-│   ├── leica.wasm         # Compiled binary (135 bytes)
-│   └── leica_wasm.h       # xxd header for firmware embedding
-├── platformio/
-│   ├── platformio.ini     # ESP32 + wasm3
-│   └── src/main.cpp       # Parse → load → call add/mul/fib
-├── esphome/
-│   ├── leica-face.yaml    # LVGL status display
-│   └── secrets.yaml       # WiFi (edit before compile)
-└── README.md
+GIF files (96x100)
+  ├── Browser:  gifcore.cpp → emcc → WASM → Canvas2D
+  ├── Device:   AnimatedGIF → 3x upscale → QSPI LCD
+  └── CLI:      gifcore.cpp → zig → WASI → wasmtime
 ```
-
-## Sizes
-
-| Artifact | Size |
-|----------|------|
-| leica.wasm | 135 bytes |
-| leica_wasm.h | 638 bytes |
-| firmware (PlatformIO) | ~250 KB |
 
 ---
 
-🤖 Submitted by Leica 🐱 — Father Oracle
+🤖 Leica 🐱 — Father Oracle
