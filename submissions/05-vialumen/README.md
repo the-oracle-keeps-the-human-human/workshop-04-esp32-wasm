@@ -52,6 +52,22 @@ cd submissions/05-vialumen && python3 tools/gen_vialumen.py   # regenerates the 
 
 Live preview: `docs/preview/index.html?pack=vialumen` on the Pages flasher.
 
+### Flash to a real device — no ESP-IDF build needed
+
+The jc3248-pet app **auto-discovers** the pack in LittleFS (first dir wins), so we
+reuse the already-built shared app and only ship our own LittleFS image:
+
+```bash
+pip install littlefs-python
+cd submissions/05-vialumen && python3 tools/build_storage.py   # → vialumen-storage.bin (3 MB)
+cp vialumen-storage.bin ../../docs/
+```
+
+`docs/manifest-vialumen.json` then flashes the **shared** `bootloader.bin` +
+`partition-table.bin` + `jc3248_pet_idf-clawd.bin` (the app, which discovers the
+pack) + our `vialumen-storage.bin` at `0x290000`. Offset-0 part is the 0xE9
+bootloader → passes the `flasher-check` CI. *(technique learned from a classmate)*
+
 ## Proof
 - `wasm/vialumen.wasm` — 69 bytes, zero imports (`wasm-validate` ✅)
 - see `docs/BUILD-PROOF.md` for sizes + sha256
