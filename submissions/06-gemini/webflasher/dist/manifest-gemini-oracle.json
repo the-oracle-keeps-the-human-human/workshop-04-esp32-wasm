@@ -1,0 +1,16 @@
+{
+  "name": "Gemini Oracle WASM Engine",
+  "version": "2026.06.17",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "gemini-oracle-bootloader.bin", "offset": 4096 },
+        { "path": "gemini-oracle-partitions.bin", "offset": 32768 },
+        { "path": "gemini-oracle-boot_app0.bin", "offset": 57344 },
+        { "path": "gemini-oracle-firmware.bin", "offset": 65536 }
+      ]
+    }
+  ]
+  }

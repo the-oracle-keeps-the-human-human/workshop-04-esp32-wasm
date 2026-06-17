@@ -1,0 +1,20 @@
+{
+  "id": "gemini",
+  "name": "No.6 Gemini ♊",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-gemini.json",
+  "blurb": "Airdramon pixel pet — custom ESP32-S3 firmware",
+  "preview": "preview/gifs/gemini/idle.gif",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/06-gemini",
+  "previewDir": "gemini/",
+  "states": [
+    "idle",
+    "busy",
+    "attention",
+    "celebrate",
+    "sleep",
+    "dizzy",
+    "heart"
+  ]
+}
