@@ -57,13 +57,21 @@
 // Each pack = a folder under gifs/ + the states it ships. bufo's web subset is flat (4 states).
 const PACKS = {
   "bufo":       { dir:"",            states:["idle_0","busy","attention","celebrate"] },
+  "bongbaeng":  { dir:"bongbaeng-pet/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
+  "bongbaeng-pet": { dir:"bongbaeng-pet/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
   "cat":        { dir:"cat/",        states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
   "cat-orange": { dir:"cat-orange/", states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
   "cat-pet":    { dir:"cat-pet/",    states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
-  "tonk":       { dir:"tonk/",       states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
   "clawd":      { dir:"clawd/",      states:["clawd-idle","clawd-headphones-groove","clawd-idle-reading","clawd-typing","clawd-react-double-jump","clawd-happy","clawd-thinking","clawd-sleeping"] },
   "chaiklang":  { dir:"chaiklang/",  states:["sleep","idle","busy","attention","celebrate","dizzy","heart"] },
   "lord-knight":{ dir:"clawd/",      states:["clawd-idle","clawd-headphones-groove","clawd-idle-reading","clawd-typing","clawd-react-double-jump","clawd-happy","clawd-thinking","clawd-sleeping"] },
+  "no10":       { dir:"no10/",       states:["idle","busy","attention","celebrate"] },
+  "sombo":      { dir:"sombo-pet/",  states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
+  "sombo-pet":  { dir:"sombo-pet/",  states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
+  "tonk":       { dir:"tonk/",       states:["idle","busy","attention","celebrate","dizzy","sleep","heart"] },
+  "vessel":     { dir:"vessel-pet/", states:["idle","busy","attention","celebrate"] },
+  "vessel-pet": { dir:"vessel-pet/", states:["idle","busy","attention","celebrate"] },
+  "vialumen":   { dir:"vialumen/",   states:["idle"] },
 };
 let M, W=0, H=0, frames=[], delays=[], idx=0, playing=true, timer=null, raf=null, curPack="bufo";
 const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
@@ -145,7 +153,11 @@ playBtn.onclick = ()=>{ playing = !playing; playBtn.textContent = playing?"⏸ p
 const Q = new URLSearchParams(location.search);
 if (Q.get("embed") !== null) document.body.classList.add("embed");
 GifModule().then(mod=>{ M = mod; setStat("wasm ready — pick a pack");
-  const want = Q.get("pack"); selectPack(PACKS[want] ? want : "bufo"); });
+  const want = Q.get("pack");
+  if (!want) selectPack("bufo");
+  else if (PACKS[want]) selectPack(want);
+  else setStat(`unknown pack: ${want}`);
+});
 </script>
 </body>
 </html>
