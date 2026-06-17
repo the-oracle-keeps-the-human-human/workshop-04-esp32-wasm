@@ -88,6 +88,7 @@
           <label class="pack"><input type="radio" name="pack" value="cat-orange"><span class="num">03</span><img class="thumb" src="preview/gifs/cat-orange/idle.gif" alt=""><span class="nm">cat-orange<small>CC0 ginger</small></span></label>
           <label class="pack"><input type="radio" name="pack" value="cat-pet"><span class="num">04</span><img class="thumb" src="preview/gifs/cat-pet/idle.gif" alt=""><span class="nm">cat-pet<small>CC0 kitten</small></span></label>
           <label class="pack sel"><input type="radio" name="pack" value="clawd" checked><span class="num">05</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">clawd<small>Claude mascot · MIT</small></span></label>
+          <label class="pack"><input type="radio" name="pack" value="lord-knight" data-preview="clawd"><span class="num">06</span><img class="thumb" src="preview/gifs/clawd/clawd-idle.gif" alt=""><span class="nm">lord-knight<small>gif-wamr · WASM decoder on-chip 🛡️</small></span></label>
         </div>
       </div>
 
@@ -133,14 +134,14 @@
   <script type="module">
     const install = document.getElementById('install');
     const preview = document.getElementById('preview');
-    function setPack(pack) {
+    function setPack(pack, prev) {
       install.innerHTML = `<esp-web-install-button manifest="manifest-${pack}.json"></esp-web-install-button>`;
-      if (preview) preview.src = `preview/index.html?embed=1&pack=${pack}`;
+      if (preview) preview.src = `preview/index.html?embed=1&pack=${prev || pack}`;
     }
     document.getElementById('packs').addEventListener('change', (e) => {
       if (e.target.name !== 'pack') return;
       document.querySelectorAll('.pack').forEach(l => l.classList.toggle('sel', l.contains(e.target)));
-      setPack(e.target.value);
+      setPack(e.target.value, e.target.dataset.preview);
     });
     setPack('clawd');
     if (!('serial' in navigator) && !('usb' in navigator)) {
