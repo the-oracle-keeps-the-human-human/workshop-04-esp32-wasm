@@ -1,0 +1,43 @@
+{
+  "storage_version": 1,
+  "name": "leica-face",
+  "friendly_name": "Leica Oracle Face",
+  "comment": "320x480 QSPI \u2014 Leica Oracle WASM status display",
+  "esphome_version": "2026.5.3",
+  "src_version": 1,
+  "address": "leica-face.local",
+  "web_port": null,
+  "esp_platform": "ESP32S3",
+  "build_path": "/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face",
+  "firmware_bin_path": "/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/firmware.bin",
+  "loaded_integrations": [
+    "display",
+    "esp32",
+    "esphome",
+    "key_provider",
+    "ledc",
+    "light",
+    "logger",
+    "lvgl",
+    "mdns",
+    "mipi_spi",
+    "monochromatic",
+    "network",
+    "output",
+    "preferences",
+    "psram",
+    "spi",
+    "wifi"
+  ],
+  "loaded_platforms": [
+    "display/mipi_spi",
+    "light/monochromatic",
+    "output/ledc"
+  ],
+  "no_mdns": false,
+  "framework": "esp-idf",
+  "core_platform": "esp32",
+  "toolchain": "platformio",
+  "area": null,
+  "framework_version": "5.5.4"
+}

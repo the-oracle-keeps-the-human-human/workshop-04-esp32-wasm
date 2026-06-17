@@ -1,0 +1,278 @@
+esphome:
+  name: leica-face
+  friendly_name: Leica Oracle Face
+  comment: 320x480 QSPI — Leica Oracle WASM status display
+  min_version: 2026.5.3
+  build_path: build/leica-face
+  platformio_options: {}
+  environment_variables: {}
+  includes: []
+  includes_c: []
+  libraries: []
+  name_add_mac_suffix: false
+  debug_scheduler: false
+  areas: []
+  devices: []
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: ESP32S3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+    version: 5.5.4
+    sdkconfig_options: {}
+    log_level: ERROR
+    advanced:
+      compiler_optimization: SIZE
+      enable_idf_experimental_features: false
+      enable_lwip_assert: true
+      ignore_efuse_custom_mac: false
+      ignore_efuse_mac_crc: false
+      sram1_as_iram: false
+      enable_lwip_mdns_queries: true
+      enable_lwip_bridge_interface: false
+      enable_lwip_tcpip_core_locking: true
+      enable_lwip_check_thread_safety: true
+      disable_libc_locks_in_iram: true
+      disable_vfs_support_termios: true
+      disable_vfs_support_select: true
+      disable_vfs_support_dir: true
+      freertos_in_iram: false
+      ringbuf_in_iram: false
+      heap_in_iram: false
+      execute_from_psram: false
+      loop_task_stack_size: 8192
+      enable_ota_rollback: false
+      use_full_certificate_bundle: false
+      include_builtin_idf_components: []
+      enable_full_printf: false
+      disable_debug_stubs: true
+      disable_ocd_aware: true
+      disable_usb_serial_jtag_secondary: true
+      disable_dev_null_vfs: true
+      disable_mbedtls_peer_cert: true
+      disable_mbedtls_pkcs7: true
+      disable_regi2c_in_iram: true
+      adc_oneshot_in_iram: false
+      disable_fatfs: true
+    components: []
+    platform_version: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.38-1/platform-espressif32.zip
+    source: pioarduino/framework-espidf@https://github.com/pioarduino/esp-idf/releases/download/v5.5.4/esp-idf-v5.5.4.tar.xz
+  watchdog_timeout: 5s
+  cpu_frequency: 240MHZ
+psram:
+  mode: octal
+  speed: 80MHZ
+  id: psram_psramcomponent_id
+  enable_ecc: false
+  disabled: false
+  ignore_not_found: true
+logger:
+  level: INFO
+  hardware_uart: USB_SERIAL_JTAG
+  id: logger_logger_id
+  baud_rate: 115200
+  tx_buffer_size: 512
+  deassert_rts_dtr: false
+  task_log_buffer_size: 768
+  logs: {}
+  runtime_tag_levels: false
+wifi:
+  id: wifi_wificomponent_id
+  domain: .local
+  reboot_timeout: 15min
+  power_save_mode: LIGHT
+  fast_connect: false
+  enable_btm: false
+  enable_rrm: false
+  passive_scan: false
+  enable_on_boot: true
+  post_connect_roaming: true
+  min_auth_mode: WPA2
+  networks:
+    - ssid: your-wifi-ssid
+      password: your-wifi-password
+      id: wifi_wifiap_id
+      priority: 0
+  use_address: leica-face.local
+spi:
+  - id: lcd_spi
+    clk_pin:
+      number: 47
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      id: esp32_esp32internalgpiopin_id
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    data_pins:
+      - 21
+      - 48
+      - 40
+      - 39
+    interface: hardware
+    type: quad
+    interface_index: 0
+output:
+  - platform: ledc
+    pin:
+      number: 1
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      id: esp32_esp32internalgpiopin_id_2
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    id: backlight_pwm
+    frequency: 5000.0
+    zero_means_zero: false
+light:
+  - platform: monochromatic
+    id: backlight
+    name: Backlight
+    output: backlight_pwm
+    restore_mode: ALWAYS_ON
+    default_transition_length: 200ms
+    disabled_by_default: false
+    gamma_correct: 2.8
+    flash_transition_length: 0s
+    output_id: monochromatic_monochromaticlightoutput_id
+    _entity_register_method: light
+    _entity_name: Backlight
+    _entity_object_id_hash: 878769956
+    _entity_disabled_by_default: 0
+    _entity_icon_idx: 0
+display:
+  - platform: mipi_spi
+    model: AXS15231
+    id: lcd
+    spi_id: lcd_spi
+    cs_pin:
+      number: 45
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      id: esp32_esp32internalgpiopin_id_3
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    dimensions:
+      width: 320
+      height: 480
+      offset_height: 0
+      offset_width: 0
+    color_order: RGB
+    invert_colors: false
+    data_rate: 40000000.0
+    update_interval: 4294967295ms
+    auto_clear_enabled: false
+    bus_mode: quad
+    spi_mode: MODE0
+    byte_order: big_endian
+    color_depth: '16'
+    draw_rounding: 8
+    pixel_mode: 16bit
+    use_axis_flips: false
+lvgl:
+  - displays:
+      - lcd
+    bg_color: 0
+    pages:
+      - id: main_page
+        bg_color: 0
+        bg_opa: 1.0
+        pad_all: 8
+        widgets:
+          - label:
+              align: LV_ALIGN_TOP_MID
+              y: 20
+              text_font: montserrat_28
+              text_color: 518143
+              text: Leica Oracle
+              id: lv_label_t_id
+          - label:
+              align: LV_ALIGN_TOP_MID
+              y: 60
+              text_font: montserrat_16
+              text_color: 8947848
+              text: Father Oracle — Precision Optics
+              id: lv_label_t_id_2
+          - label:
+              align: LV_ALIGN_CENTER
+              y: -40
+              text_font: montserrat_28
+              text_color: 16755200
+              text: WASM OK
+              id: lv_label_t_id_3
+          - label:
+              align: LV_ALIGN_CENTER
+              y: 10
+              text_font: montserrat_16
+              text_color: 3789651
+              text: add(2,3) = 5
+              id: lv_label_t_id_4
+          - label:
+              align: LV_ALIGN_CENTER
+              y: 40
+              text_font: montserrat_16
+              text_color: 3789651
+              text: mul(7,6) = 42
+              id: lv_label_t_id_5
+          - label:
+              align: LV_ALIGN_CENTER
+              y: 70
+              text_font: montserrat_16
+              text_color: 3789651
+              text: fib(10) = 55
+              id: lv_label_t_id_6
+          - label:
+              align: LV_ALIGN_BOTTOM_MID
+              y: -20
+              text_font: montserrat_14
+              text_color: 4473924
+              text: the lens that sees clearly
+              id: lv_label_t_id_7
+        skip: false
+    update_interval: 1s
+    id: lvgl_lvglcomponent_id
+    align_to_lambda_id: lvgl_lvlambdacomponent_id
+    color_depth: 16
+    default_font: montserrat_14
+    full_refresh: false
+    update_when_display_idle: false
+    draw_rounding: 8
+    buffer_size: 0.0
+    log_level: WARN
+    byte_order: big_endian
+    page_wrap: true
+    transparency_key: 1024
+    touchscreens: []
+    encoders: []
+    keypads: []
+    default_group: lv_group_t_id
+    resume_on_input: true
+preferences:
+  id: preferences_intervalsyncer_id
+  flash_write_interval: 60s
+network:
+  enable_ipv6: false
+  min_ipv6_addr_count: 0
+key_provider: {}
+mdns:
+  id: mdns_mdnscomponent_id
+  disabled: false
+  services: []

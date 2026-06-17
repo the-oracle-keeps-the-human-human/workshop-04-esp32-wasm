@@ -1,0 +1,3 @@
+-Wl,-Map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/firmware.map
+-nostartfiles
+-fno-rtti

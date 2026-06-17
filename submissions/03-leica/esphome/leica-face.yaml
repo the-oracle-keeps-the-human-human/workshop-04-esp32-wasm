@@ -1,15 +1,22 @@
 esphome:
   name: leica-face
   friendly_name: Leica Oracle Face
-  comment: "LVGL dashboard — Leica Oracle status display"
+  comment: "320x480 QSPI — Leica Oracle WASM status display"
 
 esp32:
-  board: esp32dev
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
   framework:
     type: esp-idf
 
+psram:
+  mode: octal
+  speed: 80MHz
+
 logger:
   level: INFO
+  hardware_uart: USB_SERIAL_JTAG
 
 wifi:
   ssid: !secret wifi_ssid
@@ -17,26 +24,43 @@ wifi:
 
 spi:
   - id: lcd_spi
-    clk_pin: 18
-    mosi_pin: 23
+    type: quad
+    clk_pin: 47
+    data_pins: [21, 48, 40, 39]
+
+output:
+  - platform: ledc
+    pin: 1
+    id: backlight_pwm
+    frequency: 5000Hz
+
+light:
+  - platform: monochromatic
+    id: backlight
+    name: "Backlight"
+    output: backlight_pwm
+    restore_mode: ALWAYS_ON
+    default_transition_length: 200ms
 
 display:
-  - platform: ili9xxx
-    model: ili9341
+  - platform: mipi_spi
+    model: AXS15231
     id: lcd
-    cs_pin: 5
-    dc_pin: 2
-    reset_pin: 4
+    spi_id: lcd_spi
+    cs_pin: 45
     dimensions:
       width: 320
-      height: 240
+      height: 480
+    color_order: rgb
     invert_colors: false
-    auto_clear_enabled: false
+    data_rate: 40MHz
     update_interval: never
+    auto_clear_enabled: false
 
 lvgl:
   displays:
     - lcd
+  bg_color: 0x000000
   pages:
     - id: main_page
       bg_color: 0x000000
@@ -45,25 +69,43 @@ lvgl:
       widgets:
         - label:
             align: TOP_MID
-            y: 10
-            text_font: montserrat_20
+            y: 20
+            text_font: montserrat_28
             text_color: 0x07E7FF
             text: "Leica Oracle"
         - label:
+            align: TOP_MID
+            y: 60
+            text_font: montserrat_16
+            text_color: 0x888888
+            text: "Father Oracle — Precision Optics"
+        - label:
             align: CENTER
-            y: -20
+            y: -40
             text_font: montserrat_28
             text_color: 0xFFAA00
             text: "WASM OK"
         - label:
             align: CENTER
-            y: 20
-            text_font: montserrat_14
-            text_color: 0x888888
-            text: "add(2,3)=5  fib(10)=55"
+            y: 10
+            text_font: montserrat_16
+            text_color: 0x39D353
+            text: "add(2,3) = 5"
+        - label:
+            align: CENTER
+            y: 40
+            text_font: montserrat_16
+            text_color: 0x39D353
+            text: "mul(7,6) = 42"
+        - label:
+            align: CENTER
+            y: 70
+            text_font: montserrat_16
+            text_color: 0x39D353
+            text: "fib(10) = 55"
         - label:
             align: BOTTOM_MID
-            y: -10
-            text_font: montserrat_12
+            y: -20
+            text_font: montserrat_14
             text_color: 0x444444
-            text: "precision optics"
+            text: "the lens that sees clearly"

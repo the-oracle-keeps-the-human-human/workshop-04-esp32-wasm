@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/CMakeFiles/bootloader
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/CMakeFiles/bootloader.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/CMakeFiles/bootloader-complete.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

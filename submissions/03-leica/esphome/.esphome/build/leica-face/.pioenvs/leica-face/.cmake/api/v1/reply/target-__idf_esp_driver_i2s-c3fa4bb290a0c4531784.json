@@ -1,0 +1,928 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "esp-idf/esp_driver_i2s/libesp_driver_i2s.a"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"idf_component_register",
+			"add_compile_options",
+			"add_c_compile_options",
+			"add_compile_definitions",
+			"include_directories",
+			"target_include_directories",
+			"__component_add_include_dirs",
+			"set_property",
+			"__component_set_dependencies",
+			"__component_set_all_dependencies"
+		],
+		"files" : 
+		[
+			"/Users/switchaphon/.platformio/packages/framework-espidf/tools/cmake/component.cmake",
+			"/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/CMakeLists.txt",
+			"/Users/switchaphon/.platformio/packages/framework-espidf/tools/cmake/utilities.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 494,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 479,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 481,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 281,
+				"parent" : 4
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 480,
+				"parent" : 1
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 478,
+				"parent" : 1
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 496,
+				"parent" : 1
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 323,
+				"parent" : 8
+			},
+			{
+				"command" : 10,
+				"file" : 0,
+				"line" : 527,
+				"parent" : 1
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 365,
+				"parent" : 10
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 344,
+				"parent" : 11
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 344,
+				"parent" : 11
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 344,
+				"parent" : 11
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "@\"/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/toolchain/cflags\" -fdiagnostics-color=always"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-ffunction-sections"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdata-sections"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=unused-function"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=unused-variable"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=unused-but-set-variable"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=deprecated-declarations"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=extra"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-unused-parameter"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-sign-compare"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-enum-conversion"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-gdwarf-4"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-ggdb"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Os"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-freorder-blocks"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fmacro-prefix-map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face=."
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fmacro-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf=/IDF"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf=/IDF"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face=/IDF_PROJECT"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face=/IDF_BUILD"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/xtensa=/COMPONENT_XTENSA_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_gpio=/COMPONENT_ESP_DRIVER_GPIO_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_timer=/COMPONENT_ESP_TIMER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_pm=/COMPONENT_ESP_PM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/mbedtls=/COMPONENT_MBEDTLS_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/bootloader=/COMPONENT_BOOTLOADER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esptool_py=/COMPONENT_ESPTOOL_PY_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/partition_table=/COMPONENT_PARTITION_TABLE_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_app_format=/COMPONENT_ESP_APP_FORMAT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_bootloader_format=/COMPONENT_ESP_BOOTLOADER_FORMAT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/app_update=/COMPONENT_APP_UPDATE_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_partition=/COMPONENT_ESP_PARTITION_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/efuse=/COMPONENT_EFUSE_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/bootloader_support=/COMPONENT_BOOTLOADER_SUPPORT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_mm=/COMPONENT_ESP_MM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/spi_flash=/COMPONENT_SPI_FLASH_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_system=/COMPONENT_ESP_SYSTEM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_common=/COMPONENT_ESP_COMMON_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_rom=/COMPONENT_ESP_ROM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/hal=/COMPONENT_HAL_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/log=/COMPONENT_LOG_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/heap=/COMPONENT_HEAP_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/soc=/COMPONENT_SOC_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_security=/COMPONENT_ESP_SECURITY_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support=/COMPONENT_ESP_HW_SUPPORT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos=/COMPONENT_FREERTOS_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/newlib=/COMPONENT_NEWLIB_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/pthread=/COMPONENT_PTHREAD_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/cxx=/COMPONENT_CXX_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/__pio_env=/COMPONENT___PIO_ENV_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_gptimer=/COMPONENT_ESP_DRIVER_GPTIMER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_ringbuf=/COMPONENT_ESP_RINGBUF_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_psram=/COMPONENT_ESP_PSRAM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_uart=/COMPONENT_ESP_DRIVER_UART_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/app_trace=/COMPONENT_APP_TRACE_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_event=/COMPONENT_ESP_EVENT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/nvs_flash=/COMPONENT_NVS_FLASH_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_phy=/COMPONENT_ESP_PHY_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_usb_serial_jtag=/COMPONENT_ESP_DRIVER_USB_SERIAL_JTAG_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_vfs_console=/COMPONENT_ESP_VFS_CONSOLE_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/vfs=/COMPONENT_VFS_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip=/COMPONENT_LWIP_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_netif_stack=/COMPONENT_ESP_NETIF_STACK_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_netif=/COMPONENT_ESP_NETIF_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/wpa_supplicant=/COMPONENT_WPA_SUPPLICANT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_coex=/COMPONENT_ESP_COEX_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_wifi=/COMPONENT_ESP_WIFI_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_spi=/COMPONENT_ESP_DRIVER_SPI_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_gdbstub=/COMPONENT_ESP_GDBSTUB_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/bt=/COMPONENT_BT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/console=/COMPONENT_CONSOLE_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/http_parser=/COMPONENT_HTTP_PARSER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp-tls=/COMPONENT_ESP-TLS_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_ana_cmpr=/COMPONENT_ESP_DRIVER_ANA_CMPR_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_bitscrambler=/COMPONENT_ESP_DRIVER_BITSCRAMBLER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_isp=/COMPONENT_ESP_DRIVER_ISP_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_cam=/COMPONENT_ESP_DRIVER_CAM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2c=/COMPONENT_ESP_DRIVER_I2C_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_jpeg=/COMPONENT_ESP_DRIVER_JPEG_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_ledc=/COMPONENT_ESP_DRIVER_LEDC_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_parlio=/COMPONENT_ESP_DRIVER_PARLIO_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_ppa=/COMPONENT_ESP_DRIVER_PPA_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_sdio=/COMPONENT_ESP_DRIVER_SDIO_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_sdm=/COMPONENT_ESP_DRIVER_SDM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/sdmmc=/COMPONENT_SDMMC_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_sdmmc=/COMPONENT_ESP_DRIVER_SDMMC_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_sdspi=/COMPONENT_ESP_DRIVER_SDSPI_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_tsens=/COMPONENT_ESP_DRIVER_TSENS_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hal_ieee802154=/COMPONENT_ESP_HAL_IEEE802154_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_http_server=/COMPONENT_ESP_HTTP_SERVER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_pcnt=/COMPONENT_ESP_DRIVER_PCNT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_mcpwm=/COMPONENT_ESP_DRIVER_MCPWM_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s=/COMPONENT_ESP_DRIVER_I2S_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_dac=/COMPONENT_ESP_DRIVER_DAC_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_rmt=/COMPONENT_ESP_DRIVER_RMT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_twai=/COMPONENT_ESP_DRIVER_TWAI_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/driver=/COMPONENT_DRIVER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_lcd=/COMPONENT_ESP_LCD_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/idf_test=/COMPONENT_IDF_TEST_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/ieee802154=/COMPONENT_IEEE802154_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/json=/COMPONENT_JSON_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/nvs_sec_provider=/COMPONENT_NVS_SEC_PROVIDER_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/protobuf-c=/COMPONENT_PROTOBUF-C_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/rt=/COMPONENT_RT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/tcp_transport=/COMPONENT_TCP_TRANSPORT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/touch_element=/COMPONENT_TOUCH_ELEMENT_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/framework-espidf/components/usb=/COMPONENT_USB_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/managed_components/espressif__mdns=/COMPONENT_ESPRESSIF__MDNS_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/managed_components/lvgl__lvgl=/COMPONENT_LVGL__LVGL_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/src=/COMPONENT_SRC_DIR"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdebug-prefix-map=/Users/switchaphon/.platformio/packages/toolchain-xtensa-esp-elf=/TOOLCHAIN"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fstrict-volatile-bitfields"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fno-jump-tables"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fno-tree-switch-conversion"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-std=gnu17"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-Wno-old-style-declaration"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 6,
+					"define" : "ESP_PLATFORM"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "IDF_VER=\"5.5.4\""
+				},
+				{
+					"backtrace" : 2,
+					"define" : "SOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "SOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "_GLIBCXX_HAVE_POSIX_SEMAPHORE"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "_GLIBCXX_USE_POSIX_SEMAPHORE"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "_GNU_SOURCE"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "_POSIX_READER_WRITER_LOCKS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 7,
+					"path" : "/Users/switchaphon/ghq/github.com/switchaphon/workshop-04-esp32-wasm/submissions/03-leica/esphome/.esphome/build/leica-face/.pioenvs/leica-face/config"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/newlib/platform_include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/config/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/config/include/freertos"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/config/xtensa/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/freertos/esp_additions/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/include/soc"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/include/soc/esp32s3"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/dma/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/ldo/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/debug_probe/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/mspi_timing_tuning/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/mspi_timing_tuning/tuning_scheme_impl/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/power_supply/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/port/esp32s3/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/port/esp32s3/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/mspi_timing_tuning/port/esp32s3/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_hw_support/mspi_timing_tuning/port/esp32s3/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/heap/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/heap/tlsf"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/log/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/soc/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/soc/esp32s3"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/soc/esp32s3/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/soc/esp32s3/register"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/hal/platform_port/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/hal/esp32s3/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/hal/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_rom/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_rom/esp32s3/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_rom/esp32s3/include/esp32s3"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_rom/esp32s3"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_common/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_system/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_system/port/soc"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_system/port/include/private"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/xtensa/esp32s3/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/xtensa/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/xtensa/deprecated_include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/include/apps"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/include/apps/sntp"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/lwip/src/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/port/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/port/freertos/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/port/esp32xx/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/port/esp32xx/include/arch"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/lwip/port/esp32xx/include/sys"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_gpio/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_pm/include"
+				},
+				{
+					"backtrace" : 14,
+					"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_mm/include"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "__idf_xtensa::@1daaaad7abe597e030f9"
+		}
+	],
+	"id" : "__idf_esp_driver_i2s::@5dbaceb9cb1526e2b88d",
+	"name" : "__idf_esp_driver_i2s",
+	"nameOnDisk" : "libesp_driver_i2s.a",
+	"paths" : 
+	{
+		"build" : "esp-idf/esp_driver_i2s",
+		"source" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/i2s_common.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/i2s_std.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/i2s_pdm.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/i2s_tdm.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/switchaphon/.platformio/packages/framework-espidf/components/esp_driver_i2s/i2s_platform.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}
