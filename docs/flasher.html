@@ -77,26 +77,6 @@
       <div class="panel">
         <h2>Desk-pet · choose a character</h2>
         <div class="packs" id="packs"><p class="muted">loading packs…</p></div>
-        <p class="note">Plug in the <b>native USB</b> port → click → pick the <code>usbmodem</code> port → Install. JC3248W535 · ESP32-S3.</p>
-        <div class="install" id="install"></div>
-        <div class="unsupported" id="unsupported">This browser can't do Web Serial. Use desktop Chrome, Edge, or Opera.</div>
-      </div>
-
-      <div class="panel">
-        <h2>Workshop firmwares — flash a classmate's submission</h2>
-        <p class="note" style="margin-top:0;">Each is one student's <code>.wasm</code> running on the ESP32 (wasm3), hardware-verified under WAMR. Watch serial @ 115200 after flashing.</p>
-        <div id="firmwares"><p class="muted">loading…</p></div>
-      </div>
-
-      <div class="panel">
-        <h2>Add your own</h2>
-        <p class="note" style="margin-top:0;">Drop a <code>docs/packs/&lt;name&gt;.json</code> (+ your manifest/bins) — no <code>index.html</code> edits, no conflicts. CI (<code>flasher-check</code>) verifies your offset-0 part is a real <code>0xE9</code> image so nothing bricks.</p>
-        <div class="links">
-          <a href="round2.html">🦖 Round 2 · Digimon</a>
-          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/HOWTO.md">📖 HOWTO</a>
-          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/docs/WHY-WASM.md">✨ Why WASM</a>
-          <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions">📂 Submissions</a>
-        </div>
       </div>
     </div>
 
@@ -110,7 +90,27 @@
             <div class="board">ESP32-S3 · 320×480 · WASM</div>
           </div>
         </div>
+        <div class="install" id="install"></div>
+        <p class="note">Plug in the <b>native USB</b> port → click → pick the <code>usbmodem</code> port → Install. JC3248W535 · ESP32-S3.</p>
+        <div class="unsupported" id="unsupported">This browser can't do Web Serial. Use desktop Chrome, Edge, or Opera.</div>
       </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Workshop firmwares — flash a classmate's submission</h2>
+    <p class="note" style="margin-top:0;">Each is one student's <code>.wasm</code> running on the ESP32 (wasm3), hardware-verified under WAMR. Watch serial @ 115200 after flashing.</p>
+    <div id="firmwares"><p class="muted">loading…</p></div>
+  </div>
+
+  <div class="panel">
+    <h2>Add your own</h2>
+    <p class="note" style="margin-top:0;">Drop a <code>docs/packs/&lt;name&gt;.json</code> (+ your manifest/bins) — no <code>index.html</code> edits, no conflicts. CI (<code>flasher-check</code>) verifies your offset-0 part is a real <code>0xE9</code> image so nothing bricks.</p>
+    <div class="links">
+      <a href="round2.html">🦖 Round 2 · Digimon</a>
+      <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/HOWTO.md">📖 HOWTO</a>
+      <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/blob/main/docs/WHY-WASM.md">✨ Why WASM</a>
+      <a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions">📂 Submissions</a>
     </div>
   </div>
 
