@@ -1,8 +1,0 @@
-{
-  "name": "Tonk wasm3 (serial demo)",
-  "version": "1.0",
-  "new_install_prompt_erase": false,
-  "builds": [
-    { "chipFamily": "ESP32", "parts": [ { "path": "tonk-wasm3.factory.bin", "offset": 0 } ] }
-  ]
-}
