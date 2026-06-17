@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gon DustBoy — ESP32 Web Flasher 🪨</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .rock { font-size: 3rem; margin: 1rem 0; }
+    .subtitle {
+      color: #8b949e;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+    }
+    .card h2 { color: #58a6ff; margin-bottom: 1rem; }
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      text-align: left;
+    }
+    .feature-icon { font-size: 1.5rem; }
+    esp-web-install-button {
+      margin: 1.5rem 0;
+    }
+    esp-web-install-button::part(button) {
+      background: #238636;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    esp-web-install-button::part(button):hover {
+      background: #2ea043;
+    }
+    .info {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #8b949e;
+      text-align: left;
+    }
+    .info code {
+      background: #1f2937;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', monospace;
+      color: #f0883e;
+    }
+    .wasm-info {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #1c1f26;
+      border-radius: 8px;
+      border-left: 3px solid #f0883e;
+      text-align: left;
+    }
+    .wasm-info h3 { color: #f0883e; margin-bottom: 0.5rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    td { padding: 4px 8px; border-bottom: 1px solid #21262d; }
+    td:first-child { color: #8b949e; }
+    footer {
+      margin-top: 2rem;
+      color: #484f58;
+      font-size: 0.85rem;
+    }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="rock">🪨✊</div>
+    <h1>Gon DustBoy</h1>
+    <p class="subtitle">ESP32 PM2.5 Monitor — WASM on chip</p>
+
+    <div class="card">
+      <h2>Flash to your ESP32</h2>
+      <p>Connect your ESP32 via USB and click install.<br>No software needed — works right in your browser!</p>
+
+      <esp-web-install-button manifest="manifest.json">
+        <button slot="activate">⚡ Install Gon DustBoy</button>
+        <span slot="unsupported">
+          ❌ Your browser doesn't support Web Serial.<br>
+          Use Chrome or Edge on desktop.
+        </span>
+        <span slot="not-allowed">
+          🔒 Web Serial access denied. Allow serial access and try again.
+        </span>
+      </esp-web-install-button>
+
+      <div class="info">
+        <strong>Requirements:</strong><br>
+        • Chrome 89+ or Edge 89+ (desktop only)<br>
+        • ESP32 DevKit connected via USB<br>
+        • Board: <code>esp32dev</code> (ESP32 WROOM)
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Features</h2>
+      <div class="feature">
+        <span class="feature-icon">🌫️</span>
+        <span>PM2.5 → AQI level conversion (WASM on-chip)</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">⚡</span>
+        <span>124-byte WASM module (zero imports, freestanding)</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🔧</span>
+        <span>wasm3 runtime on ESP32 (8KB stack)</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📊</span>
+        <span>Serial output: PM2.5 readings + AQI classification</span>
+      </div>
+    </div>
+
+    <div class="wasm-info">
+      <h3>WASM Module: pm25_aqi</h3>
+      <table>
+        <tr><td>Size</td><td>124 bytes</td></tr>
+        <tr><td>Imports</td><td>0 (freestanding)</td></tr>
+        <tr><td>Exports</td><td><code>pm25_to_aqi(i32) → i32</code>, <code>add(i32,i32) → i32</code></td></tr>
+        <tr><td>Runtime</td><td>wasm3 0.5.0</td></tr>
+        <tr><td>RAM</td><td>6.6% (21,748 bytes)</td></tr>
+        <tr><td>Flash</td><td>25.1% (329,473 bytes)</td></tr>
+      </table>
+    </div>
+
+    <footer>
+      <p>🤖 Gon Oracle (AI ไม่ใช่คน) — from Namhom → <a href="https://github.com/namhomp/gon-oracle">gon-oracle</a></p>
+      <p>First comes rock! 🪨✊</p>
+    </footer>
+  </div>
+</body>
+</html>
