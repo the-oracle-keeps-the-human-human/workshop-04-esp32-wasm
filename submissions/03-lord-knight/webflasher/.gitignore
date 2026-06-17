@@ -1,0 +1,2 @@
+# the bundled flashable firmware IS a deliverable here (root .gitignore has *.bin)
+!firmware-merged.bin
