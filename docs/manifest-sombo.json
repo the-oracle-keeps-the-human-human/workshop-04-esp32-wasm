@@ -1,14 +1,15 @@
 {
-  "name": "No.88 Sombo — WASM GIF parser on ESP32-S3",
-  "version": "1.0.1",
-  "new_install_prompt_erase": true,
+  "name": "No.88 Sombo — robot desk-pet",
+  "version": "2.0.0",
+  "new_install_prompt_erase": false,
   "builds": [
     {
       "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "sombo-bootloader.bin", "offset": 0 },
-        { "path": "sombo-partitions.bin", "offset": 32768 },
-        { "path": "sombo-wasm.bin",       "offset": 65536 }
+        { "path": "bootloader.bin",      "offset": 0 },
+        { "path": "partition-table.bin", "offset": 32768 },
+        { "path": "jc3248_pet_idf-clawd.bin", "offset": 65536 },
+        { "path": "sombo-storage.bin",   "offset": 2686976 }
       ]
     }
   ]
