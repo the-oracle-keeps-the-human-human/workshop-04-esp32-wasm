@@ -8,6 +8,7 @@
       "parts": [
         { "path": "sombo-bootloader.bin", "offset": 4096 },
         { "path": "sombo-partitions.bin", "offset": 32768 },
+        { "path": "sombo-boot_app0.bin",  "offset": 57344 },
         { "path": "sombo-wasm.bin",       "offset": 65536 }
       ]
     }
