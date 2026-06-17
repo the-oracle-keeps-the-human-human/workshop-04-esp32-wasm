@@ -1,16 +1,14 @@
 # ChaiKlang Oracle (ชายกลาง) — ESPHome firmware for the Guition JC3248W535
-# (ESP32-S3 + AXS15231 QSPI panel, 320x480, octal PSRAM). The Middle Switchboard on glass. 🦁
+# (ESP32-S3 + AXS15231 QSPI panel, 320x480, octal PSRAM). The lion, animated on glass. 🦁
 #
-# v2 fix: the board is NOT a generic ESP32+ILI9341 — it's an AXS15231 over QUAD SPI with a
-# backlight on GPIO1. Hardware block below is taken from the JC3248W535's known-good config.
-#   uvx esphome config  chaiklang-esp32.yaml
+# v3: the device now shows the ANIMATED ChaiKlang lion (LVGL animimg, 8 frames) — matching
+# the web flasher's live preview. Same hardware block as v2 (AXS15231 QSPI + backlight).
 #   uvx esphome compile chaiklang-esp32.yaml          # -> ESP32-S3 image
-#   uvx esphome run     chaiklang-esp32.yaml          # build + flash the board
 
 esphome:
   name: chaiklang-esp32
   friendly_name: ChaiKlang Oracle
-  comment: "JC3248W535 — 320x480 AXS15231 QSPI"
+  comment: "JC3248W535 — 320x480 AXS15231 QSPI · animated lion"
 
 esp32:
   board: esp32-s3-devkitc-1
@@ -27,14 +25,12 @@ logger:
   level: INFO
   hardware_uart: USB_SERIAL_JTAG
 
-# ── QSPI bus for the AXS15231 panel ────────────────────────────────
 spi:
   - id: lcd_spi
     type: quad
     clk_pin: 47
     data_pins: [21, 48, 40, 39]
 
-# ── Backlight (GPIO1, LEDC PWM) — without this the screen stays black ──
 output:
   - platform: ledc
     pin: 1
@@ -43,12 +39,10 @@ output:
 light:
   - platform: monochromatic
     id: backlight
-    name: "Backlight"
     output: backlight_pwm
     restore_mode: ALWAYS_ON
     default_transition_length: 200ms
 
-# ── Display: AXS15231 over QSPI, 320x480 ───────────────────────────
 display:
   - platform: mipi_spi
     model: AXS15231
@@ -64,7 +58,17 @@ display:
     update_interval: never
     auto_clear_enabled: false
 
-# ── The Middle Switchboard — LVGL UI (gold #F0B429 · cyan #3AD6E0 · bg #1A1710) ──
+# ── ChaiKlang lion frames (extracted from the same gif the flasher previews) ──
+image:
+  - { id: lion0, file: lion/f0.png, type: RGB565 }
+  - { id: lion1, file: lion/f1.png, type: RGB565 }
+  - { id: lion2, file: lion/f2.png, type: RGB565 }
+  - { id: lion3, file: lion/f3.png, type: RGB565 }
+  - { id: lion4, file: lion/f4.png, type: RGB565 }
+  - { id: lion5, file: lion/f5.png, type: RGB565 }
+  - { id: lion6, file: lion/f6.png, type: RGB565 }
+  - { id: lion7, file: lion/f7.png, type: RGB565 }
+
 lvgl:
   displays:
     - lcd
@@ -78,96 +82,29 @@ lvgl:
       border_width: 0
       widgets:
         - label:
-            text: "ChaiKlang"
+            text: "ChaiKlang Oracle"
             text_color: 0xF0B429
-            text_font: montserrat_28
+            text_font: montserrat_24
             align: TOP_MID
-            y: 34
-        - label:
-            text: "Oracle"
-            text_color: 0xFFCB47
-            text_font: montserrat_28
-            align: TOP_MID
-            y: 70
+            y: 40
+        # the animated lion — same frames as the flasher's live preview
+        - animimg:
+            id: lion_anim
+            src: [lion0, lion1, lion2, lion3, lion4, lion5, lion6, lion7]
+            duration: 1200ms
+            repeat_count: forever
+            auto_start: true
+            align: CENTER
+            y: -6
         - label:
             text: "The Middle Switchboard"
             text_color: 0x5EC8C0
-            text_font: montserrat_14
-            align: TOP_MID
-            y: 112
-
-        - obj:
-            align: CENTER
-            y: 0
-            width: 268
-            height: 196
-            bg_color: 0x221E16
-            border_color: 0x00B8D4
-            border_width: 2
-            radius: 14
-            pad_all: 16
-            widgets:
-              - label:
-                  text: "wired:"
-                  text_color: 0x8A8276
-                  text_font: montserrat_14
-                  align: TOP_LEFT
-              - led:
-                  color: 0xF0B429
-                  align: TOP_LEFT
-                  x: 8
-                  y: 34
-                  width: 18
-                  height: 18
-              - label:
-                  text: "Mac"
-                  text_color: 0xE8E0D0
-                  text_font: montserrat_16
-                  align: TOP_LEFT
-                  x: 38
-                  y: 33
-              - led:
-                  color: 0x3AD6E0
-                  align: TOP_LEFT
-                  x: 8
-                  y: 70
-                  width: 18
-                  height: 18
-              - label:
-                  text: "Discord"
-                  text_color: 0xE8E0D0
-                  text_font: montserrat_16
-                  align: TOP_LEFT
-                  x: 38
-                  y: 69
-              - led:
-                  color: 0x9ECB6A
-                  align: TOP_LEFT
-                  x: 8
-                  y: 106
-                  width: 18
-                  height: 18
-              - label:
-                  text: "Fleet"
-                  text_color: 0xE8E0D0
-                  text_font: montserrat_16
-                  align: TOP_LEFT
-                  x: 38
-                  y: 105
-              - switch:
-                  align: BOTTOM_MID
-                  state:
-                    checked: true
-
+            text_font: montserrat_16
+            align: BOTTOM_MID
+            y: -46
         - label:
-            text: "esp32-s3 . axs15231 qspi . lvgl"
+            text: "esp32-s3 . axs15231 . lvgl"
             text_color: 0x6B6458
             text_font: montserrat_14
             align: BOTTOM_MID
-            y: -28
-        - label:
-            text: "the human keeps the switch"
-            text_color: 0x8A8276
-            text_font: montserrat_14
-            align: BOTTOM_MID
-            y: -10
+            y: -16
