@@ -1,15 +1,15 @@
 {
-  "name": "Singhasingha wasm3 🦁",
+  "name": "Singhasingha desk-pet — lion 🦁",
   "version": "1.0.0",
   "new_install_prompt_erase": false,
   "builds": [
     {
       "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "singhasingha-bootloader.bin", "offset": 0 },
-        { "path": "singhasingha-partitions.bin", "offset": 32768 },
-        { "path": "singhasingha-boot_app0.bin",  "offset": 57344 },
-        { "path": "singhasingha-app.bin",        "offset": 65536 }
+        { "path": "bootloader.bin",          "offset": 0 },
+        { "path": "partition-table.bin",      "offset": 32768 },
+        { "path": "jc3248_pet_idf-clawd.bin", "offset": 65536 },
+        { "path": "singha-storage.bin",       "offset": 2686976 }
       ]
     }
   ]
