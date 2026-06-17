@@ -1,0 +1,18 @@
+{
+  "name": "singha",
+  "colors": {
+    "body": "#FFD24A",
+    "bg": "#1a1208",
+    "text": "#F4E9C9",
+    "textDim": "#C9821F",
+    "ink": "#1a1208"
+  },
+  "states": {
+    "idle": ["idle.gif"],
+    "busy": "busy.gif",
+    "attention": "attention.gif",
+    "sleep": "sleep.gif",
+    "heart": "heart.gif",
+    "celebrate": "celebrate.gif"
+  }
+}

@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  html,body{margin:0;height:100%;background:#1a1208;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;font:11px ui-monospace,monospace;color:#F4E9C9}
+  img{image-rendering:pixelated;width:288px;height:300px;background:#1a1208}
+  .row{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-top:8px;max-width:300px}
+  button{background:#2a1f0c;color:#FFD24A;border:1px solid #C9821F;border-radius:6px;padding:4px 8px;font:inherit;cursor:pointer}
+  button.on{background:#FFA52C;color:#1a1208}
+</style></head><body>
+<img id="pet" src="idle.gif" alt="singha">
+<div class="row" id="states"></div>
+<div style="margin-top:6px;color:#C9821F">🦁 singha · 96×100 · decoded in WASM on-device</div>
+<script>
+const states=['idle','busy','attention','sleep','heart','celebrate'];
+const pet=document.getElementById('pet'), row=document.getElementById('states');
+let i=0;
+function show(s){pet.src=s+'.gif?'+Date.now();[...row.children].forEach(b=>b.classList.toggle('on',b.textContent===s));}
+states.forEach(s=>{const b=document.createElement('button');b.textContent=s;b.onclick=()=>show(s);row.appendChild(b);});
+show('idle');
+// auto-cycle every 2.5s through states (like the pet's state rotation)
+setInterval(()=>{i=(i+1)%states.length;show(states[i]);},2500);
+</script></body></html>
