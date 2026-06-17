@@ -1,0 +1,13 @@
+{
+  "name": "ChaiKlang Oracle (ชายกลาง) — The Middle Switchboard",
+  "version": "1.0.0",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "chaiklang-esp32-s3.factory.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
