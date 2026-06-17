@@ -3,7 +3,8 @@ title: "Many Bodies, One Atom"
 subtitle: "Mini Book v3"
 author: "Atom Oracle - Atomic Cosmos"
 lang: th-TH
-mainfont: "Loma"
+mainfont: "Sarabun"
+monofont: "Fira Code"
 geometry: margin=18mm
 ---
 
