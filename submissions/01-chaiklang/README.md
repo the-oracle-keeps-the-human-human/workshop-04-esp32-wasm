@@ -2,51 +2,40 @@
 
 > "อยู่ตรงกลาง เชื่อมทุกสาย คุมให้เรื่องเดินต่อ" — The Middle Switchboard
 
-**One zero-import `chaiklang.wasm` (106 bytes), FIVE surfaces — same result everywhere.**
+Two things, the workshop way:
+1. a tiny **wasm that runs on the chip** (the assignment), and
+2. a **desk-pet character** (the ChaiKlang lion) for the `jc3248-pet-idf` firmware.
+
+## 1) `wasm/` + the runtimes — one zero-import `chaiklang.wasm` (106 B)
 
 | surface | runtime | how | result |
 |---|---|---|---|
-| browser | native `WebAssembly` API | `web/index.html` (no glue, no emcc) | ✅ 5050 / 15 (`docs/web-runtime-proof.png`) |
+| browser | native `WebAssembly` API | `web/index.html` (no glue) | ✅ 5050 / 15 |
 | desktop | `wasmtime` | `uv run --with wasmtime` | ✅ 5050 / 15 |
-| **on-chip (a)** | **wasm3** (PlatformIO, ESP32-S3) | `platformio/` → `pio run` | ✅ compiles, Flash 10.6% |
-| **on-chip (b)** | **WAMR** (ESP-IDF, ESP32-S3) | `wamr/` → `idf.py build` | ✅ **hardware-verified by esp32-oracle on a real S3** (PR #1 serial log) |
-| device face | LVGL (ESPHome, ESP32-S3) | `esphome/` → `esphome compile` | ✅ "ESP32-S3 image created", Flash 24.5% |
+| **on-chip (a)** | **wasm3** (PlatformIO, S3) | `platformio/` → `pio run` | ✅ compiles |
+| **on-chip (b)** | **WAMR** (ESP-IDF, S3) | `wamr/` → `idf.py build` | ✅ hardware-verified on a real S3 (PR #1) |
 
-`lion_pulse(n)=1+…+n`, `route(a,b)=a*b+a` — pure integer math, trivially checkable, identical on every runtime.
+`lion_pulse(n)=1+…+n`, `route(a,b)=a*b+a` — pure integer math, identical on every runtime.
+- `wasm/` — `chaiklang.wat` → `chaiklang.wasm` (no imports) → `chaiklang_wasm.h`. Rebuild: `make`.
+- `web/`, `platformio/`, `wamr/` — the same `.wasm`, three more places.
 
-> **Targets ESP32-S3** (`esp32-s3-devkitc-1`) so the firmware flashes on S3 boards (JC3248W535). S3 GPIO rule honored: SPI pins moved into 0–21 (was GPIO23, invalid on S3). `wamr/` is the same proven rig as nazt's `gif-wamr` (WAMR 2.4.0); I don't have ESP-IDF + a board locally so I did **not** `idf.py build` it myself — esp32-oracle re-verified this exact wasm on real silicon (honest: wasm3 is the on-chip runtime I compiled myself).
+## 2) `characters/chaiklang/` — the desk-pet character (jc3248-pet-idf)
 
----
+The ChaiKlang lion as a **desk-pet character** — the real `jc3248-pet-idf` way (**not ESPHome**):
+a folder of **own-drawn 96×100 GIFs** + `manifest.json`, decoded **on the device** by AnimatedGIF
+(bitbank2) → 3× upscale → LovyanGFX → AXS15231 QSPI, and **in the browser** by gif-wasm. *Same GIFs,
+many bodies, one soul.*
 
-## `wasm/` — the module (source of truth)
-`chaiklang.wat` → `chaiklang.wasm` (**106 bytes, no imports**) → `chaiklang_wasm.h` (`xxd -i`). Rebuild: `make` (needs wabt: `wat2wasm`/`xxd`). Both `.wasm` and `.h` are committed so everything builds without a wasm compiler.
-
-## `web/` — browser runtime (same .wasm)
 ```bash
-python3 -m http.server 8012 -d web   # then open http://localhost:8012/
+cp -r characters/chaiklang  <jc3248-pet-idf>/data/characters/chaiklang
+cd <jc3248-pet-idf> && make PACK=chaiklang     # bakes it into LittleFS; idf.py flash
 ```
-Loads `chaiklang.wasm` with `WebAssembly.instantiate(bytes, {})` (`{}` = no imports), runs `lion_pulse(100)` + `route(3,4)`.
 
-## `platformio/` — wasm runs ON the chip (wasm3)
-```bash
-cd platformio
-pio run                          # ✅ SUCCESS (Flash 26.8%)
-pio run -t upload -t monitor     # flash + watch (expects 5050 / 15)
-```
-`src/main.cpp` loads the embedded `.wasm` with **wasm3** and runs it on boot.
+> **Honest boundary:** the desk-pet firmware is `jc3248-pet-idf` (ESP-IDF v6). I don't have ESP-IDF +
+> an S3 board in my environment, so I ship the **portable character** (GIFs + manifest) and the
+> wasm-on-chip core; the firmware `.bin` (`jc3248_pet_idf-chaiklang.bin`) is built by the IDF rig
+> (`make PACK=chaiklang`). The web flasher previews these exact GIFs.
 
-## `esphome/` — the ChaiKlang face (LVGL)
-```bash
-cd esphome
-uvx esphome config   chaiklang-esp32.yaml   # ✅ valid
-uvx esphome compile  chaiklang-esp32.yaml   # ✅ ESP32 image created
-uvx esphome run      chaiklang-esp32.yaml   # build + flash (needs the board)
-```
-ESP32 + ILI9341 + LVGL "Middle Switchboard" UI (gold lion, Mac/Discord/Fleet LEDs, the human-keeps-the-switch toggle).
-
-## Why
-Same Oracle, many surfaces: a **portable wasm brain** that runs in the browser, on the desktop, and on the MCU — plus a **movable LVGL face**. `docs/BUILD-PROOF.md` + `docs/compile-proof.png` + `docs/web-runtime-proof.png` carry the receipts.
-
-Verified on macOS (Apple Silicon): PlatformIO espressif32 · ESPHome 2026.5.3 · wasm3 · wat2wasm (wabt) · wasmtime.
+*(An earlier ESPHome LVGL build was a wrong-lane detour — removed; the desk-pet way is the character pack above.)*
 
 — built by **ChaiKlang** (ชายกลาง) 🎛️
