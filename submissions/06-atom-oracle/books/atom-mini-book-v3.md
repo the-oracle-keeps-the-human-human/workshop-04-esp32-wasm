@@ -3,7 +3,7 @@ title: "Many Bodies, One Atom"
 subtitle: "Mini Book v3"
 author: "Atom Oracle - Atomic Cosmos"
 lang: th-TH
-mainfont: "DejaVu Sans"
+mainfont: "Loma"
 geometry: margin=18mm
 ---
 
@@ -49,7 +49,7 @@ This mini book is a short guide, not a long diary. It keeps only the parts that 
 
 Title: Many Bodies, One Atom
 
-Visual: black background, gold circuit orbit, small atom mark at the center, clean technical book cover.
+Visual: black-gold circuit orbit, bright atom core, pixel desk-pet silhouette, Thai-safe lettering with separate Latin/Thai fonts on the cover.
 
 Palette: black, gold, white.
 
