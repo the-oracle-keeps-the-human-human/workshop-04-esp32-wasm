@@ -1,8 +1,0 @@
-{
-  "name": "Tonk Face (live wasm + LVGL)",
-  "version": "1.0",
-  "new_install_prompt_erase": false,
-  "builds": [
-    { "chipFamily": "ESP32", "parts": [ { "path": "tonk-face.factory.bin", "offset": 0 } ] }
-  ]
-}
