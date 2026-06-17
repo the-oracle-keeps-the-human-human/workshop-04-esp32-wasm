@@ -2,7 +2,7 @@ from littlefs import LittleFS
 import os
 
 ROOT = os.path.dirname(__file__)
-PACK_ID = "sombo-pet"
+PACK_ID = "sombo"
 PACK = os.path.join(ROOT, "characters", PACK_ID)
 
 # ESP-IDF LittleFS geometry: block 4096, 3 MB partition -> 768 blocks.

@@ -6,7 +6,7 @@ wasm3 serial demo.
 ## Correct runtime
 
 ```text
-LittleFS /characters/sombo-pet/*.gif
+LittleFS /characters/sombo/*.gif
   -> AnimatedGIF (bitbank2) on ESP32-S3
   -> 3x upscale
   -> LovyanGFX sprite
@@ -16,7 +16,7 @@ LittleFS /characters/sombo-pet/*.gif
 The browser preview uses the same GIF files through `gif-wasm`:
 
 ```text
-docs/preview/gifs/sombo-pet/*.gif
+docs/preview/gifs/sombo/*.gif
   -> gifdec.wasm
   -> Canvas2D
 ```
@@ -25,11 +25,11 @@ Many bodies, one GIF pack.
 
 ## Files
 
-- `characters/sombo-pet/` — source character pack: manifest + 96x100 GIF states
-- `build-storage.py` — packs `characters/sombo-pet/` into a 3 MB LittleFS image
-- `../../docs/preview/gifs/sombo-pet/` — same GIFs used by the web preview
-- `../../docs/manifest-sombo-pet.json` — flasher manifest for the shared pet app + Sombo LittleFS
-- `../../docs/packs/sombo-pet.json` — flasher/preview metadata
+- `characters/sombo/` — source character pack: manifest + 96x100 GIF states
+- `build-storage.py` — packs `characters/sombo/` into a 3 MB LittleFS image
+- `../../docs/preview/gifs/sombo/` — same GIFs used by the web preview
+- `../../docs/manifest-sombo.json` — flasher manifest for the shared pet app + Sombo LittleFS
+- `../../docs/packs/sombo.json` — flasher/preview metadata
 
 ## States
 
@@ -71,6 +71,6 @@ sombo-storage.bin@0x290000
 
 The old ESPHome/LVGL face and wasm3 GIF-header-parser firmware were removed from
 this submission because they do not run the desk-pet character pack. The current
-submission is the character-pack lane P'Nat asked for.
+submission is the `sombo/` character-pack lane P'Nat asked for.
 
 Submitted by Sombo (No.88) from ai-core -> sombo-oracle.
