@@ -1,0 +1,122 @@
+# ESP32 Oracle (🕯️ The Sentinel) — ESPHome version: the edge-of-network face on an ESP32 + ILI9341.
+# Compiles real ESP32 firmware (LVGL UI). No hardware needed to BUILD:
+#   uvx esphome config   sentinel-esp32.yaml   # validate
+#   uvx esphome compile  sentinel-esp32.yaml   # build ESP32 firmware
+#   uvx esphome run      sentinel-esp32.yaml   # build + flash (needs the board)
+# Wiring assumes a common ESP32 + ILI9341 SPI panel (edit pins for your board).
+
+esphome:
+  name: sentinel-esp32
+  friendly_name: ESP32 Oracle Sentinel
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO23
+  miso_pin: GPIO19
+
+display:
+  - platform: ili9xxx
+    model: ili9341
+    invert_colors: false
+    id: sentinel_display
+    cs_pin: GPIO5
+    dc_pin: GPIO16
+    reset_pin: GPIO17
+    dimensions:
+      width: 320
+      height: 240
+    auto_clear_enabled: false
+    update_interval: never
+
+# Theme: 🕯️ The Sentinel — flame gold #F0B429 · edge cyan #3AD6E0 · deep bg #0E1414
+lvgl:
+  displays:
+    - sentinel_display
+  bg_color: 0x0E1414
+  border_width: 0
+  pages:
+    - id: main_page
+      bg_color: 0x0E1414
+      widgets:
+        - label:
+            text: "ESP32 Oracle"
+            text_color: 0xF0B429
+            text_font: montserrat_24
+            align: TOP_MID
+            y: 12
+        - label:
+            text: "The Sentinel"
+            text_color: 0x3AD6E0
+            text_font: montserrat_14
+            align: TOP_MID
+            y: 44
+        - obj:
+            align: CENTER
+            y: 8
+            width: 260
+            height: 120
+            bg_color: 0x131C1C
+            border_color: 0x00B8D4
+            border_width: 2
+            radius: 10
+            pad_all: 8
+            widgets:
+              - led:
+                  color: 0xF0B429
+                  align: TOP_LEFT
+                  x: 6
+                  y: 4
+                  width: 14
+                  height: 14
+              - label:
+                  text: "flame"
+                  text_color: 0xE8E0D0
+                  text_font: montserrat_14
+                  align: TOP_LEFT
+                  x: 28
+              - led:
+                  color: 0x3AD6E0
+                  align: TOP_LEFT
+                  x: 6
+                  y: 30
+                  width: 14
+                  height: 14
+              - label:
+                  text: "edge sense"
+                  text_color: 0xE8E0D0
+                  text_font: montserrat_14
+                  align: TOP_LEFT
+                  x: 28
+                  y: 26
+              - led:
+                  color: 0x9ECB6A
+                  align: TOP_LEFT
+                  x: 6
+                  y: 56
+                  width: 14
+                  height: 14
+              - label:
+                  text: "wasm on-chip"
+                  text_color: 0xE8E0D0
+                  text_font: montserrat_14
+                  align: TOP_LEFT
+                  x: 28
+                  y: 52
+              - bar:
+                  align: BOTTOM_MID
+                  width: 200
+                  height: 12
+                  value: 73
+        - label:
+            text: "esphome + lvgl  •  esp32"
+            text_color: 0x6B6458
+            text_font: montserrat_14
+            align: BOTTOM_MID
+            y: -8

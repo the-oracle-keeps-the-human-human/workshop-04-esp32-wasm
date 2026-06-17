@@ -1,0 +1,7 @@
+# Build artifacts (regenerable) — the top-level .gitignore already covers
+# .pio/, .esphome/, build/, *.bin; this adds the emcc browser demo output.
+wasm/web/
+
+# Kept on purpose (committed): wasm/sentinel.wasm + wasm/sentinel_wasm.h and
+# platformio/src/sentinel_wasm.h — the prebuilt module + embed header so
+# `pio run` builds without needing zig installed.
