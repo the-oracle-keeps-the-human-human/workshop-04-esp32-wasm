@@ -1,0 +1,92 @@
+name: compile-check
+
+# Auto-compiles every PR's submission so students get instant pass/fail and the
+# reviewer doesn't have to build each one locally. Only the submission folder
+# changed in the PR is compiled (fast + scoped). Heavy caches (PlatformIO
+# platforms/toolchains, uv wheels, ccache objects) make repeat runs quick.
+
+on:
+  pull_request:
+    paths: ["submissions/**"]
+  workflow_dispatch: {}
+
+concurrency:
+  group: compile-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Cache PlatformIO (platforms + toolchains + frameworks)
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ runner.os }}-v1
+          restore-keys: pio-${{ runner.os }}-
+
+      - name: Cache uv (esphome / platformio wheels)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: uv-${{ runner.os }}-v1
+          restore-keys: uv-${{ runner.os }}-
+
+      - name: ccache (compiler object cache)
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ccache-${{ runner.os }}
+          max-size: 500M
+
+      - name: Detect changed submissions
+        id: detect
+        run: |
+          subs=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" \
+                 | grep -E '^submissions/[^/]+/' | cut -d/ -f1-2 | sort -u || true)
+          echo "Changed submissions:"; echo "$subs"
+          { echo "subs<<EOF"; echo "$subs"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+
+      - name: Compile each changed submission (both build systems)
+        env:
+          IDF_CCACHE_ENABLE: "1"
+          PLATFORMIO_BUILD_CACHE_DIR: ${{ github.workspace }}/.pio-build-cache
+        run: |
+          fail=0
+          while IFS= read -r sub; do
+            [ -z "$sub" ] && continue
+            echo "::group::compile $sub"
+
+            # PlatformIO (wasm3 on the chip)
+            if [ -f "$sub/platformio/platformio.ini" ]; then
+              echo "▶ PlatformIO: $sub/platformio"
+              if ! ( cd "$sub/platformio" && uvx --from platformio platformio run ); then
+                echo "::error::PlatformIO compile FAILED for $sub"; fail=1
+              fi
+            fi
+
+            # ESPHome (the LVGL face) — compile every yaml in esphome/
+            if [ -d "$sub/esphome" ]; then
+              for y in "$sub"/esphome/*.yaml; do
+                [ -f "$y" ] || continue
+                echo "▶ ESPHome: $y"
+                if ! ( cd "$sub/esphome" && uvx esphome compile "$(basename "$y")" ); then
+                  echo "::error::ESPHome compile FAILED for $y"; fail=1
+                fi
+              done
+            fi
+
+            echo "::endgroup::"
+          done <<< "${{ steps.detect.outputs.subs }}"
+
+          if [ "$fail" -ne 0 ]; then
+            echo "❌ one or more targets failed to compile"; exit 1
+          fi
+          echo "✅ all changed submissions compiled"
