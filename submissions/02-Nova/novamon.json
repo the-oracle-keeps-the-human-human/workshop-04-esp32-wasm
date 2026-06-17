@@ -1,0 +1,10 @@
+{
+  "id": "novamon",
+  "name": "Novamon 🐶",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-novamon.json",
+  "blurb": "Digimon-style cyber-puppy desk-pet — floppy ears, wagging tail, digital collar",
+  "preview": "preview/gifs/novamon/idle.gif",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/02-Nova"
+}
