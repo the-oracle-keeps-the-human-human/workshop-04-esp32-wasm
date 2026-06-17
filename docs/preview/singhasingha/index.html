@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Singhasingha live preview</title>
+<style>
+  html,body{margin:0;height:100%;background:#0B0B0B;overflow:hidden}
+  .emscripten_border,.emscripten:not(canvas),#controls,#resize,#emscripten_logo,
+  span.emscripten,input,#output{display:none!important}
+  canvas{display:block;margin:0 auto;background:#0B0B0B;image-rendering:pixelated}
+  body{display:flex;align-items:center;justify-content:center}
+</style></head>
+<body>
+<canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1 width="320" height="480"></canvas>
+<script>var Module={canvas:document.getElementById('canvas'),print:function(){},printErr:function(){}};</script>
+<script async src="singha.js"></script>
+</body></html>
