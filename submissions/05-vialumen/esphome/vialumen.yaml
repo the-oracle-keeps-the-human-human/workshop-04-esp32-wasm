@@ -1,0 +1,121 @@
+# ViaLumen LVGL — runs on the ESPHome "host" platform with an SDL display,
+# so it's a native desktop simulator: no board, no flashing. `uvx esphome compile`
+# builds a binary you run on Linux; an SDL window opens with the LVGL UI.
+#
+#   uvx esphome compile vialumen.yaml      # build (needs libsdl2-dev + g++)
+#   uvx esphome run     vialumen.yaml      # build + launch the SDL window
+#
+# Theme: Stellae Veritatis — gold stars on deep space blue, cyan light.
+
+esphome:
+  name: vialumen-lvgl
+  friendly_name: ViaLumen LVGL
+
+host:
+
+logger:
+  level: INFO
+
+# ---- SDL display = the simulator window ----
+display:
+  - platform: sdl
+    id: sdl0
+    auto_clear_enabled: false
+    dimensions:
+      width: 480
+      height: 320
+
+touchscreen:
+  - platform: sdl
+    display: sdl0
+    sdl_id: sdl0
+
+# keyboard nav inside the SDL window
+binary_sensor:
+  - platform: sdl
+    sdl_id: sdl0
+    id: key_enter
+    key: SDLK_RETURN
+    on_press:
+      then:
+        - lvgl.widget.update:
+            id: star_btn
+            state:
+              pressed: true
+
+# a counter: "stars lit" — every click is a step that lights the way
+globals:
+  - id: stars_lit
+    type: int
+    restore_value: false
+    initial_value: "0"
+
+font:
+  - file: "gfonts://Roboto"
+    id: font_title
+    size: 30
+    bpp: 4
+  - file: "gfonts://Roboto"
+    id: font_body
+    size: 18
+    bpp: 4
+
+lvgl:
+  displays: sdl0
+  default_font: font_body
+  disp_bg_color: 0x0D1117
+  style_definitions:
+    - id: title_style
+      text_color: 0x2DD4FF        # cyan light
+      text_font: font_title
+    - id: gold_style
+      text_color: 0xFFD700        # gold star
+  widgets:
+    - obj:
+        align: center
+        width: 460
+        height: 300
+        bg_color: 0x0D1117
+        border_width: 1
+        border_color: 0x2DD4FF
+        pad_all: 10
+        widgets:
+          - label:
+              align: top_mid
+              y: 6
+              text: "* ViaLumen *"
+              styles: title_style
+          - label:
+              align: top_mid
+              y: 48
+              text: "Via Lucis - the path of light"
+              text_color: 0x9CA3AF
+          - label:
+              id: counter_label
+              align: center
+              y: -10
+              text: "stars lit: 0"
+              styles: gold_style
+          - button:
+              id: star_btn
+              align: bottom_mid
+              y: -16
+              width: 200
+              height: 48
+              bg_color: 0x161B22
+              border_color: 0xFFD700
+              border_width: 1
+              widgets:
+                - label:
+                    align: center
+                    text: "+ light a star"
+                    text_color: 0xFFD700
+              on_click:
+                then:
+                  - lambda: |-
+                      id(stars_lit) += 1;
+                  - lvgl.label.update:
+                      id: counter_label
+                      text:
+                        format: "stars lit: %d"
+                        args: [ "id(stars_lit)" ]
