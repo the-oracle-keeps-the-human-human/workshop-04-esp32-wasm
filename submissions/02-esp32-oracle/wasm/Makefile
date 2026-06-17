@@ -7,7 +7,7 @@
 #   make wasm       # sentinel.wasm           (zig, no imports)
 #   make web        # web/sentinel.{js,wasm}  (emcc)
 #   make header     # sentinel_wasm.h         (xxd -i)
-#   make verify     # build wasm + print exports
+#   make verify     # assert flame(10)=385 and sense(3,4)=25 via wasmtime
 #   make clean
 #
 # Toolchains: zig 0.16 (wasm32-freestanding), emcc 5.x (browser), xxd.
@@ -40,8 +40,7 @@ web/sentinel.js: sentinel.c
 	@ls -l web/sentinel.js web/sentinel.wasm
 
 verify: sentinel.wasm
-	@echo "built sentinel.wasm ($$(wc -c < sentinel.wasm) bytes)"
-	@command -v wasm-objdump >/dev/null 2>&1 && wasm-objdump -x sentinel.wasm | grep -A4 Export || echo "(install wabt for wasm-objdump; exports: flame, sense)"
+	uv run --with wasmtime python verify.py sentinel.wasm
 
 clean:
 	rm -f sentinel.wasm sentinel_wasm.h web/sentinel.js web/sentinel.wasm

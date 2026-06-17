@@ -1,0 +1,5 @@
+.pio/
+.esphome/
+build/
+*.log
+.DS_Store

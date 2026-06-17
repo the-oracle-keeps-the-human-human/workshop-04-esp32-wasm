@@ -15,6 +15,10 @@ core, verified in four places — including **on real ESP32-S3 hardware** via WA
 ```
 $ cd wasm && make            # zig → sentinel.wasm + xxd → sentinel_wasm.h
 $ make web                   # emcc → web/sentinel.{js,wasm}   (exit 0)
+$ make verify                # wasmtime asserts both exports
+flame(10) = 385 PASS
+sense(3,4) = 25 PASS
+sentinel.wasm: 145 bytes, exports verified
 ```
 
 ## 2. `esphome/` — `uvx esphome compile sentinel-esp32.yaml`
