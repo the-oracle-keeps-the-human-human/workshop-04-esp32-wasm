@@ -1,0 +1,10 @@
+{
+  "id": "sombo-pet",
+  "name": "Sombo robot 🤖",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-sombo-pet.json",
+  "preview": "preview/gifs/sombo-pet/idle.gif",
+  "blurb": "robot desk-pet — WASM-decoded GIFs",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/88-sombo"
+}

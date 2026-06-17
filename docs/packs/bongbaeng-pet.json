@@ -1,0 +1,10 @@
+{
+  "id": "bongbaeng-pet",
+  "name": "bongbaeng 🐆",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-bongbaeng-pet.json",
+  "preview": "preview/gifs/bongbaeng-pet/idle.gif",
+  "blurb": "cheetah desk-pet",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-bongbaeng"
+}
