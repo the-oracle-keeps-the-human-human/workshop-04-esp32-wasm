@@ -114,6 +114,11 @@
         <div class="fw"><div class="h"><b>🦁 Singhasingha</b> <span class="tag">ESP32</span></div>
           <p>Sentinel — <code>roar</code>, <code>guard</code>. (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha">03-singhasingha</a>)</p>
           <p class="pending">⏳ flash image pending a valid factory build — see the submission to build + run locally.</p></div>
+
+        <div class="fw"><div class="h"><b>🛡️ Lord Knight</b> <span class="tag">ESP32-S3</span></div>
+          <p>gif-wamr — a real GIF decoder running as sandboxed WASM on-chip (WAMR 2.4.0); <code>gifapp_run</code> → 2 frames, 96×100. The canvas animates that exact decoder in your browser (same wasm core). (<a href="https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-lord-knight">03-lord-knight</a>)</p>
+          <canvas id="lk-prev" width="96" height="100" style="width:144px;height:150px;image-rendering:pixelated;background:#0a0d14;border:1px solid var(--embers);border-radius:8px;display:block;margin:.2rem 0 .6rem"></canvas>
+          <esp-web-install-button manifest="manifest-lord-knight.json"></esp-web-install-button></div>
       </div>
 
       <div class="panel">
@@ -158,6 +163,37 @@
     if (!('serial' in navigator) && !('usb' in navigator)) {
       document.getElementById('unsupported').style.display = 'block';
     }
+  </script>
+
+  <!-- Lord Knight animated preview: the SAME gif-wasm core (preview/gifdec.js) decoding clawd onto a canvas -->
+  <script src="preview/gifdec.js"></script>
+  <script>
+  (function () {
+    const cv = document.getElementById('lk-prev');
+    if (!cv || typeof GifModule !== 'function') return;
+    const ctx = cv.getContext('2d');
+    let frames = [], delays = [], i = 0;
+    GifModule().then(async (M) => {
+      try {
+        const r = await fetch('preview/gifs/clawd/clawd-headphones-groove.gif');
+        const b = new Uint8Array(await r.arrayBuffer());
+        const p = M._malloc(b.length); M.HEAPU8.set(b, p);
+        if (M._gif_open(p, b.length) !== 0) { M._free(p); return; }
+        const W = M._gif_width(), H = M._gif_height(); cv.width = W; cv.height = H;
+        const dp = M._malloc(4);
+        for (let n = 0; n < 10000; n++) {
+          const rr = M._gif_play(dp); if (rr < 0) break;
+          const fb = M._gif_fb(); const im = ctx.createImageData(W, H);
+          im.data.set(M.HEAPU8.subarray(fb, fb + W * H * 4)); frames.push(im);
+          const d = M.HEAPU8[dp] | (M.HEAPU8[dp+1]<<8) | (M.HEAPU8[dp+2]<<16) | (M.HEAPU8[dp+3]<<24);
+          delays.push(Math.max(40, d || 90)); if (rr === 0) break;
+        }
+        M._free(dp); M._gif_close(); M._free(p);
+        (function tick() { if (!frames.length) return; ctx.putImageData(frames[i], 0, 0);
+          const d = delays[i]; i = (i + 1) % frames.length; setTimeout(tick, d); })();
+      } catch (e) {}
+    });
+  })();
   </script>
 </body>
 </html>
