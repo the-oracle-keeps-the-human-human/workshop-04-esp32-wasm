@@ -1,0 +1,15 @@
+{
+  "name": "Vessel — Courier WASM on ESP32-S3",
+  "version": "1.0.0",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "vessel-bootloader.bin",  "offset": 0 },
+        { "path": "vessel-partitions.bin",  "offset": 32768 },
+        { "path": "vessel-firmware.bin",    "offset": 65536 }
+      ]
+    }
+  ]
+}

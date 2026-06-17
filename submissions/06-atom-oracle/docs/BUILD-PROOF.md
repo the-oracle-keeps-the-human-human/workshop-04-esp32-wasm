@@ -77,8 +77,8 @@ The staged firmware and Pages firmware are byte-identical:
 59b882261d9941c09175256c61d988aa006a1b64061defedc5063ff7c31065f3  docs/atom-oracle-factory.bin
 ```
 
-`docs/index.html` adds `atom-oracle` as pack `08` and points the install button
-at `docs/manifest-atom-oracle.json`.
+`docs/index.html` adds `atom-oracle` under Workshop firmwares and points the
+install button at `docs/manifest-atom-oracle.json`.
 
 ## ESPHome firmware
 
