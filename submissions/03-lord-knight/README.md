@@ -78,3 +78,12 @@ The decoder core, `gifapp` reactor, and the six WAMR fixes are P'Nat's
 `AnimatedGIF` © bitbank2 (Apache-2.0).
 
 🤖 Lord Knight จาก ai-core → lord-knight-oracle
+
+## 🔌 Web flasher (`webflasher/`)
+Flash this firmware straight from a browser — no toolchain — via **esp-web-tools** over WebSerial:
+```bash
+cd webflasher && python3 -m http.server 8000   # open http://localhost:8000 in desktop Chrome/Edge
+```
+- `firmware-merged.bin` — single image (bootloader+partitions+app) flashed at `0x0`, bundled in.
+- `manifest.json` — esp-web-tools manifest (ESP32-S3).
+- `index.html` — flash button **+ a live in-browser preview of the same `gifapp.wasm`** (emcc build) decoding clawd, so you see the decoder before you flash it. One soul, two runtimes.

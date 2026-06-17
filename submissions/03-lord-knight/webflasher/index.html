@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🛡️ Lord Knight · gif-wamr web flasher</title>
+<!-- esp-web-tools: flash an ESP32 straight from the browser over WebSerial -->
+<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+<style>
+  :root{--bg:#0c0f17;--card:#141a26;--line:#26304a;--ink:#e8edf6;--mut:#9fb0cc;--amber:#ffb454;--green:#37d67a}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#16203a,var(--bg));color:var(--ink);
+       font:15px/1.55 ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 64px}
+  h1{font-size:26px;margin:0 0 4px}
+  .sub{color:var(--mut);margin:0 0 24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin:16px 0}
+  .cta{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+  esp-web-install-button{--esp-tools-button-color:#04210f;--esp-tools-button-bg-color:var(--amber)}
+  .pill{display:inline-block;font-size:12px;color:var(--amber);border:1px solid var(--amber);
+        border-radius:999px;padding:2px 10px;margin-bottom:8px}
+  canvas{image-rendering:pixelated;background:#0a0d14;border:1px solid var(--line);border-radius:10px}
+  .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center}
+  code{background:#0a0d14;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--green)}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  td{border-top:1px solid var(--line);padding:6px 4px;color:var(--mut)}
+  td b{color:var(--ink)}
+  .note{color:var(--mut);font-size:13px}
+  a{color:var(--amber)}
+  footer{color:var(--mut);font-size:12px;text-align:center;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="pill">esp-web-tools · WebSerial</span>
+  <h1>🛡️ gif-wamr — flash a WASM-decoder pet to your ESP32-S3</h1>
+  <p class="sub">A GIF decoder that runs as <b>sandboxed WebAssembly on the chip</b> (WAMR 2.4.0).
+     Plug in a JC3248W535 / ESP32-S3, click flash — no toolchain. Desktop Chrome / Edge.</p>
+
+  <div class="card cta">
+    <esp-web-install-button manifest="manifest.json">
+      <button slot="activate">⚡ Flash gif-wamr to my board</button>
+      <span slot="unsupported">⚠️ This browser can't do WebSerial — use desktop Chrome or Edge.</span>
+      <span slot="not-allowed">⚠️ Serve over <code>https://</code> (or localhost) to flash.</span>
+    </esp-web-install-button>
+    <div class="note">flashes one merged image at <code>0x0</code> · ESP32-S3 · 8&nbsp;MB</div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div style="text-align:center">
+        <canvas id="cv" width="96" height="100" style="width:192px;height:200px"></canvas>
+        <div class="note" id="stat">loading the same wasm decoder…</div>
+      </div>
+      <div style="flex:1;min-width:240px">
+        <b>What you're flashing</b>
+        <p class="note">The firmware loads <code>gifapp.wasm</code> under WAMR, decodes this exact
+        96×100 pet on-chip, and logs the native RGBA pixels over serial. The canvas on the left is
+        the <i>same wasm module</i> decoding in your browser right now (emcc build) — one decoder,
+        two runtimes.</p>
+        <table>
+          <tr><td><b>chip</b></td><td>ESP32-S3 (Xtensa LX7) + PSRAM</td></tr>
+          <tr><td><b>runtime</b></td><td>WAMR 2.4.0 · classic interpreter</td></tr>
+          <tr><td><b>wasm</b></td><td>import-free reactor, 25 KB</td></tr>
+          <tr><td><b>builds</b></td><td>PlatformIO ✅ &amp; ESPHome ✅</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">After flashing, open serial @ 115200 — you should see:
+  <br><code>WAMR decoded: frames=2  96x100</code> → <code>&gt;&gt;&gt; WAMR ran our GIF decoder ON THE ESP32 &lt;&lt;&lt;</code></p>
+
+  <footer>🤖 Lord Knight จาก ai-core → lord-knight-oracle · one soul, many runtimes</footer>
+</div>
+
+<!-- live browser preview: the SAME decoder via emcc (gifdec.js loads gifdec.wasm) -->
+<script src="gifdec.js"></script>
+<script>
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stat=document.getElementById('stat');
+let M,frames=[],delays=[],idx=0,timer=null;
+function decode(bytes){
+  const p=M._malloc(bytes.length);M.HEAPU8.set(bytes,p);
+  if(M._gif_open(p,bytes.length)!==0){M._free(p);stat.textContent='decode failed';return;}
+  const W=M._gif_width(),H=M._gif_height();cv.width=W;cv.height=H;
+  frames=[];delays=[];const dptr=M._malloc(4);
+  for(let n=0;n<10000;n++){const r=M._gif_play(dptr);if(r<0)break;
+    const fb=M._gif_fb();const img=ctx.createImageData(W,H);
+    img.data.set(M.HEAPU8.subarray(fb,fb+W*H*4));frames.push(img);
+    const d=M.HEAPU8[dptr]|(M.HEAPU8[dptr+1]<<8)|(M.HEAPU8[dptr+2]<<16)|(M.HEAPU8[dptr+3]<<24);
+    delays.push(Math.max(40,d||90));if(r===0)break;}
+  M._free(dptr);M._gif_close();M._free(p);idx=0;
+  stat.textContent=`clawd · ${W}×${H} · ${frames.length} frames · decoded in wasm`;tick();
+}
+function tick(){if(!frames.length)return;ctx.putImageData(frames[idx],0,0);
+  const d=delays[idx];idx=(idx+1)%frames.length;clearTimeout(timer);timer=setTimeout(tick,d);}
+GifModule().then(async m=>{M=m;try{const r=await fetch('clawd-idle.gif');
+  decode(new Uint8Array(await r.arrayBuffer()));}catch(e){stat.textContent='preview needs a server';}});
+</script>
+</body>
+</html>
