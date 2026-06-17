@@ -1,0 +1,10 @@
+{
+  "id": "bongbaeng",
+  "name": "bongbaeng \ud83d\udc06",
+  "kind": "firmware",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-bongbaeng.json",
+  "blurb": "cheetah sentinel \u2014 cheetah_spots",
+  "preview": "preview/gifs/bongbaeng/idle.gif",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-bongbaeng"
+}

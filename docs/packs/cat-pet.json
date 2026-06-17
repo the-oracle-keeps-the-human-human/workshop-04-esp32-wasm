@@ -1,0 +1,9 @@
+{
+  "id": "cat-pet",
+  "name": "cat-pet",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-cat-pet.json",
+  "blurb": "CC0 kitten",
+  "preview": "preview/gifs/cat-pet/idle.gif"
+}

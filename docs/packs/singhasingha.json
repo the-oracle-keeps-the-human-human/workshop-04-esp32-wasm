@@ -1,0 +1,9 @@
+{
+  "id": "singhasingha",
+  "name": "Singhasingha \ud83e\udd81",
+  "kind": "firmware",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-singhasingha.json",
+  "blurb": "sentinel \u2014 roar, guard",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-singhasingha"
+}

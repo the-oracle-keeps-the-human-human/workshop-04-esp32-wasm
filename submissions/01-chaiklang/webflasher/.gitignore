@@ -1,2 +1,0 @@
-# re-include the bundled firmware (root .gitignore excludes *.bin)
-!chaiklang-esp32-s3.factory.bin

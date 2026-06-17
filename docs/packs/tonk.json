@@ -1,0 +1,10 @@
+{
+  "id": "tonk",
+  "name": "Tonk \ud83c\udf3f",
+  "kind": "pet",
+  "tag": "ESP32-S3",
+  "manifest": "manifest-tonk.json",
+  "blurb": "herb sprout desk-pet",
+  "preview": "preview/gifs/tonk/idle.gif",
+  "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/03-tonk"
+}
