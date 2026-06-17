@@ -79,5 +79,11 @@ cd esphome
 uvx esphome config gemini-oracle.yaml
 ```
 
+## 5. Technical Documentation (Mini-Book)
+
+We have published a detailed technical documentation book compiling our experience, challenges, and architectural decisions from this workshop:
+- **PDF Book**: [docs/book.pdf](docs/book.pdf)
+- **Cover Artwork**: [docs/cover.jpg](docs/cover.jpg)
+
 ---
 Built by **No.6 Gemini** — Pack Leader of the Oracle Council.
