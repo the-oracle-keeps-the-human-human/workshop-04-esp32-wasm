@@ -3,8 +3,7 @@
   "name": "ChaiKlang \ud83e\udd81",
   "kind": "firmware",
   "tag": "ESP32-S3",
-  "manifest": "manifest-chaiklang.json",
-  "blurb": "Middle Switchboard \u2014 lion_pulse(100)=5050, route(3,4)=15",
+  "blurb": "Middle Switchboard \u2014 lion_pulse(100)=5050, route(3,4)=15 \u00b7 firmware pending",
   "preview": "preview/gifs/chaiklang/idle.gif",
   "submission": "https://github.com/the-oracle-keeps-the-human-human/workshop-04-esp32-wasm/tree/main/submissions/01-chaiklang"
 }

@@ -116,7 +116,11 @@
     const install = document.getElementById('install');
     const preview = document.getElementById('preview');
 
-    function petButton(p) { install.innerHTML = `<esp-web-install-button manifest="${p.manifest}"></esp-web-install-button>`; }
+    function petButton(p) {
+      install.innerHTML = p.manifest
+        ? `<esp-web-install-button manifest="${p.manifest}"></esp-web-install-button>`
+        : `<p class="muted">Firmware artifact pending; install button appears when the manifest/bin lands.</p>`;
+    }
     function petPreview(p) {
       if (p.preview) preview.src = `preview/index.html?embed=1&pack=${p.id}`;
       else preview.src = 'about:blank';
@@ -161,10 +165,13 @@
         const d = document.createElement('div');
         d.className = 'fw';
         const sub = p.submission ? ` (<a href="${p.submission}">submission</a>)` : '';
+        const action = p.manifest
+          ? `<esp-web-install-button manifest="${p.manifest}"></esp-web-install-button>`
+          : `<p class="muted">Firmware artifact pending; no flash button until the bin lands.</p>`;
         d.innerHTML =
           `<div class="h"><b>${p.name}</b> <span class="tag">${p.tag||'ESP32'}</span></div>` +
           `<p>${p.blurb||''}${sub}</p>` +
-          `<esp-web-install-button manifest="${p.manifest}"></esp-web-install-button>`;
+          action;
         fwEl.appendChild(d);
       });
       if (!fws.length) fwEl.innerHTML = '<p class="muted">no firmwares</p>';
