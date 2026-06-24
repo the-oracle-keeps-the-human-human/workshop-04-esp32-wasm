@@ -528,167 +528,63 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Left Panel: Exploded board layout diagram -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-num">01 // HARDWARE SPECIFICATION</div>
-          <div class="panel-title-en">Exploded Board Layout</div>
-          <div class="panel-title-th">โมเดลแยกส่วนและลายวงจร</div>
-        </div>
-
-        <!-- Front View (IPS Screen) Crop from Blueprint -->
-        <div style="width: 100%; height: 210px; overflow: hidden; position: relative; border: 1px solid var(--ice-blue-low); background: rgba(0,0,0,0.7); margin-bottom: 10px;">
-          <img src="esp32_blueprint.png" style="position: absolute; width: 310%; height: auto; top: -80px; left: -10%;" alt="ESP32 Front View (Screen)">
-          <div style="position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.7); padding: 2px 6px; font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--ice-blue); border: 1px solid var(--ice-blue-low);">FRONT VIEW</div>
-        </div>
-
-        <!-- Rear View (PCB) Crop from Blueprint -->
-        <div style="width: 100%; height: 210px; overflow: hidden; position: relative; border: 1px solid var(--ice-blue-low); background: rgba(0,0,0,0.7); margin-bottom: 15px;">
-          <img src="esp32_blueprint.png" style="position: absolute; width: 220%; top: -60px; left: -55%;" alt="ESP32 Rear View (PCB Layout)">
-          <div style="position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.7); padding: 2px 6px; font-family: 'Share Tech Mono', monospace; font-size: 9px; color: var(--ice-blue); border: 1px solid var(--ice-blue-low);">REAR VIEW (PCB)</div>
-        </div>
-
-        <ul class="spec-list">
-          <li class="spec-item">
-            <span class="spec-label">Development Board</span>
-            <span class="spec-value">JC3248W535C (ESP32-S3)</span>
-            <span class="spec-desc">บอร์ดทดลองอเนกประสงค์พร้อมจอสัมผัส IPS ขนาด 3.5 นิ้วที่ใช้ในชุดเรียนนี้</span>
-          </li>
-          <li class="spec-item">
-            <span class="spec-label">IPS Touch Screen</span>
-            <span class="spec-value">3.5" Capacitive Touch</span>
-            <span class="spec-desc">หน้าจอสีความละเอียด 320x480 พิกเซล ตอบสนองการสัมผัสแบบสัมผัสคู่</span>
-          </li>
-          <li class="spec-item">
-            <span class="spec-label">Micro-MCU & Core</span>
-            <span class="spec-value">ESP32-S3-WROOM-1</span>
-            <span class="spec-desc">ชิปหลัก Xtensa dual-core 32-bit LX7, 8MB PSRAM + 4MB Flash รองรับ Wi-Fi/BLE</span>
-          </li>
-          <li class="spec-item">
-            <span class="spec-label">Hardware Interface</span>
-            <span class="spec-value">Exposed SPI & I2C Bus</span>
-            <span class="spec-desc">ขั้วต่อขยายเซนเซอร์จัดวางผังขาไว้เพื่องานสร้างสรรค์ของเหล่านักพัฒนา</span>
-          </li>
-        </ul>
-        <div class="footer-stamp">SYS-REG: WASM3-v1.0.2</div>
-      </div>
-
-      <!-- Center: Image & Badges & SVG circuit board overlay -->
-      <div class="product-area">
+      <!-- Left Column: Hero visual area (Expanded) -->
+      <div class="product-area" style="flex-grow: 1.2; position: relative;">
         <!-- Real ESP32 board schematic blueprint background watermark -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('esp32_blueprint.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.18; pointer-events: none; z-index: 1;"></div>
-
-        <!-- SVG circuit overlay with pins annotations -->
-        <svg viewBox="0 0 800 800" style="position: absolute; width: 850px; height: 850px; pointer-events: none; z-index: 2; opacity: 0.22;">
-          <!-- Central chip representing ESP32-S3 -->
-          <rect x="340" y="340" width="120" height="120" rx="8" fill="none" stroke="var(--ice-blue)" stroke-width="2" stroke-dasharray="4 2"/>
-          <text x="400" y="395" font-family="Share Tech Mono" font-size="11" fill="var(--ice-blue)" text-anchor="middle" font-weight="bold">ESP32-S3</text>
-          <text x="400" y="415" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue)" text-anchor="middle">WROOM-1</text>
-          
-          <!-- Circuit lines and connection nodes -->
-          <line x1="200" y1="360" x2="340" y2="360" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="200" cy="360" r="3" fill="var(--ice-blue)" />
-          <text x="190" y="363" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="end">GPIO_4 (SPI_SDA)</text>
-          
-          <line x1="200" y1="400" x2="340" y2="400" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="200" cy="400" r="3" fill="var(--ice-blue)" />
-          <text x="190" y="403" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="end">GPIO_5 (SPI_SCL)</text>
-          
-          <line x1="200" y1="440" x2="340" y2="440" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="200" cy="440" r="3" fill="var(--ice-blue)" />
-          <text x="190" y="443" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="end">GPIO_6 (SPI_CS)</text>
-          
-          <line x1="460" y1="360" x2="600" y2="360" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="600" cy="360" r="3" fill="var(--ice-blue)" />
-          <text x="610" y="363" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="start">I2C_SDA (GPIO_18)</text>
-          
-          <line x1="460" y1="400" x2="600" y2="400" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="600" cy="400" r="3" fill="var(--ice-blue)" />
-          <text x="610" y="403" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="start">I2C_SCL (GPIO_19)</text>
-          
-          <line x1="460" y1="440" x2="600" y2="440" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="600" cy="440" r="3" fill="var(--ice-blue)" />
-          <text x="610" y="443" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="start">BUZZER (DAC_1)</text>
-          
-          <!-- Top / Bottom traces -->
-          <line x1="370" y1="240" x2="370" y2="340" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="370" cy="240" r="3" fill="var(--ice-blue)" />
-          <text x="370" y="230" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="middle">3.3V (VCC)</text>
-          
-          <line x1="430" y1="240" x2="430" y2="340" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="430" cy="240" r="3" fill="var(--ice-blue)" />
-          <text x="430" y="230" font-family="Share Tech Mono" font-size="8" fill="var(--ice-blue-mid)" text-anchor="middle">GND</text>
-
-          <line x1="370" y1="460" x2="370" y2="560" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="370" cy="560" r="3" fill="var(--ice-blue)" />
-          
-          <line x1="430" y1="460" x2="430" y2="560" stroke="var(--ice-blue)" stroke-width="1.5" />
-          <circle cx="430" cy="560" r="3" fill="var(--ice-blue)" />
-
-          <!-- Circular radar grids -->
-          <circle cx="400" cy="400" r="240" fill="none" stroke="var(--ice-blue)" stroke-width="0.75" stroke-dasharray="12 6" />
-          <circle cx="400" cy="400" r="320" fill="none" stroke="var(--ice-blue)" stroke-width="0.5" stroke-dasharray="3 5" />
-        </svg>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('esp32_blueprint.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.12; pointer-events: none; z-index: 1;"></div>
 
         <div class="product-badge-diagonal">HACKABLE GEAR</div>
         
-        <div class="product-frame" style="z-index: 10;">
+        <div class="product-frame" style="z-index: 10; width: 500px; height: 680px; margin: 40px auto 10px;">
           <img class="product-image" src="gemini_cover.jpg" alt="No.6 Gemini Airdramon Ethernet Chronicles Book Cover">
         </div>
         
         <!-- Inset box showing the Digimon Edition -->
-        <div class="sub-product-frame" style="z-index: 12;">
+        <div class="sub-product-frame" style="z-index: 12; bottom: 100px; right: 40px;">
           <div class="sub-product-title">AIRDRAMON PIXEL</div>
           <img class="sub-product-image" src="digimon_desk_pet.png" alt="Digimon screen preview">
         </div>
 
-        <div class="product-title-overlay" style="z-index: 10;">
+        <div class="product-title-overlay" style="z-index: 10; bottom: 30px; left: 40px;">
           <div class="product-code">ESP32-S3 PORTABLE WASM RUNTIME</div>
           <h2 class="product-model">ARRA AIRDRAMON-G</h2>
           <div class="product-tagline">CYBER-DRAGON PET RUNNING ON WASM</div>
         </div>
       </div>
 
-      <!-- Right Panel: Happy Case Sandbox + WAT terminal code block -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-num">02 // PORTABLE BRAIN</div>
-          <div class="panel-title-en">Wasm Module</div>
-          <div class="panel-title-th">โมดูลเว็บแอสเซมบลี</div>
-        </div>
-        
-        <ul class="feature-list">
-          <li class="feature-item">
-            <span class="feature-label">Zero-Import Sandbox</span>
-            <span class="feature-value">Clean Sandbox</span>
-            <span class="feature-desc">โมดูล Wasm ปลอดภัย 100% ไม่สามารถ brick เครื่องได้</span>
-          </li>
-          <li class="feature-item">
-            <span class="feature-label">Compact Logic Sizes</span>
-            <span class="feature-value">18,049 Bytes</span>
-            <span class="feature-desc">โมดูล WASM ขนาดจิ๋วพร้อม embedded Airdramon GIF ข้อมูล OTA</span>
-          </li>
-        </ul>
-
-        <!-- AssemblyScript/WAT Code Terminal Mockup for Makers -->
-        <div class="terminal-box">
-          <div class="terminal-header">
-            <span>FILE: gemini.c</span>
-            <span style="color: #00ffcc;">● FREESTANDING C WASM exports</span>
-          </div>
-          <div>#define WASM_EXPORT __attribute__((visibility("default")))</div>
-          <div>WASM_EXPORT int gemini_sum(int a, int b) {</div>
-          <div>&nbsp;&nbsp;return a + b;</div>
-          <div>}</div>
-          <div>WASM_EXPORT int gemini_pack_size() {</div>
-          <div>&nbsp;&nbsp;return 37;</div>
-          <div>}</div>
-          <div>WASM_EXPORT int gemini_skill_check(int score) {</div>
-          <div>&nbsp;&nbsp;return score * 6;</div>
-          <div>}</div>
+      <!-- Right Column: Specs & Checklist (Simplified) -->
+      <div class="panel" style="width: 420px; padding: 40px; justify-content: flex-start; gap: 35px; border-left: 1px solid var(--ice-blue-low);">
+        <div class="panel-header" style="margin-bottom: 10px;">
+          <div class="panel-num">01 // KIT SPECIFICATION</div>
+          <div class="panel-title-en">Airdramon Edition</div>
+          <div class="panel-title-th">ชุดคิทเรียนรู้สมองกลไซเบอร์ดราก้อน</div>
         </div>
 
-        <div class="footer-stamp">WASM REGISTERS: EXPORTED</div>
+        <div style="font-size: 15px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 5px;">
+          เวิร์กชอปเรียนรู้วิธีพัฒนา IoT virtual pet ด้วย WebAssembly และ embedded animation pixels โดยแยกโค้ดตรรกะระบบแบบอิสระ 100%
+        </div>
+
+        <div style="border-top: 1px solid var(--ice-blue-low); padding-top: 25px; display: flex; flex-direction: column; gap: 25px;">
+          <h3 style="font-family: 'Orbitron', sans-serif; font-size: 16px; color: var(--ice-blue); letter-spacing: 1px;">KEY FEATURES & DELIVERABLES</h3>
+          <ul class="spec-list" style="gap: 25px; list-style: none;">
+            <li class="spec-item" style="display: flex; flex-direction: column; gap: 6px;">
+              <span class="spec-label" style="font-size: 14px; font-weight: 700; color: var(--accent-gold); letter-spacing: 0.5px;">✓ CUSTOM ESP32-S3 COMPANION</span>
+              <span class="spec-desc" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">บอร์ดหน้าจอสัมผัส IPS ขนาด 3.5 นิ้ว (320x480) บรรจุในเคสอะคริลิกพรีเมียม</span>
+            </li>
+            <li class="spec-item" style="display: flex; flex-direction: column; gap: 6px;">
+              <span class="spec-label" style="font-size: 14px; font-weight: 700; color: var(--accent-gold); letter-spacing: 0.5px;">✓ WASM3 PORTABLE SANDBOX</span>
+              <span class="spec-desc" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">ระบบรันโค้ด Sandbox ปลอดภัยสูง ป้องกันการ brick ของบอร์ด 100%</span>
+            </li>
+            <li class="spec-item" style="display: flex; flex-direction: column; gap: 6px;">
+              <span class="spec-label" style="font-size: 14px; font-weight: 700; color: var(--accent-gold); letter-spacing: 0.5px;">✓ 7-STATE AIRDRAMON IMAGES</span>
+              <span class="spec-desc" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">แอนิเมชัน Airdramon 7 อารมณ์ (ขยายความละเอียดแบบพิกเซลอาร์ต 96x96)</span>
+            </li>
+            <li class="spec-item" style="display: flex; flex-direction: column; gap: 6px;">
+              <span class="spec-label" style="font-size: 14px; font-weight: 700; color: var(--accent-gold); letter-spacing: 0.5px;">✓ ETHERNET CHRONICLES HANDBOOK</span>
+              <span class="spec-desc" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">แถมฟรีหนังสือคู่มือเจาะลึกการพัฒนาบอร์ด Wasm-Pet (ความหนา 15 บท)</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -736,7 +632,7 @@
       <div class="thai-pitch">
         <h3 class="pitch-header">เวิร์กชอป WebAssembly บนชิป ESP32-S3 โดยพี่นัท (nazt_) x ClubsXai Lab · รุ่นพิเศษ No.6 Gemini (Airdramon Custom)</h3>
         <p class="pitch-body">
-          ปฏิวัติการพัฒนาซอฟต์แวร์ฮาร์ดแวร์ด้วยแนวคิด "Many Bodies, One Soul" โดยแยก Portable Brain (ตรรกะระบบแบบ Wasm) ออกจาก C Host ของอุปกรณ์อย่างสิ้นเชิง เรียนรู้วิธีคอมไพล์ C Freestanding Wasm Module พร้อม statically embedded airdramon.gif ขนาด 17.8KB ให้รันแบบแซนด์บอกซ์และแสดงอารมณ์ Airdramon 7 สถานะสุดน่ารัก
+          ปฏิวัติการพัฒนาซอฟต์แวร์ฮาร์ดแวร์ด้วยแนวคิด "Many Bodies, One Soul" รันตรรกะแบบ Sandbox และแสดงอารมณ์ Airdramon 7 สถานะสุดน่ารัก
         </p>
       </div>
 
